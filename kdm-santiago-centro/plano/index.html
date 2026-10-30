@@ -1,0 +1,26 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>Plano 2D/3D · KDM Santiago Centro · NWS (DEMO)</title>
+<style>*{box-sizing:border-box}body{margin:0;background:#08121f;color:#e7eef8;font-family:Montserrat,Arial,sans-serif}
+header{display:flex;flex-wrap:wrap;gap:12px 24px;align-items:center;padding:14px max(16px,4vw);border-bottom:1px solid #1f3657}.lg{background:#fff;border-radius:8px;padding:6px 10px}.lg img{height:26px;display:block}
+h1{font-size:18px;margin:0}small{color:#8ea3c0}.demo{background:#e8833a;color:#08121f;font-weight:800;padding:3px 10px;border-radius:6px;font-size:12px}
+nav{display:flex;gap:8px;margin-left:auto}button{background:#132541;border:1px solid #1f3657;color:inherit;padding:8px 14px;border-radius:8px;cursor:pointer;font:inherit}button.on{border-color:#1aa3e0;color:#1aa3e0}
+main{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:16px;padding:16px max(16px,4vw)}@media(max-width:900px){main{grid-template-columns:1fr}}
+#v{background:#0e1b2e;border:1px solid #1f3657;border-radius:12px;overflow:hidden;perspective:1200px;min-height:300px}#st{transform-origin:50% 60%;transition:transform .6s;display:block;width:100%;height:auto}.d3 #st{transform:rotateX(52deg) scale(.95)}
+aside{background:#0e1b2e;border:1px solid #1f3657;border-radius:12px;padding:16px}aside h2{font-size:14px;margin:0 0 10px;color:#1aa3e0;text-transform:uppercase;letter-spacing:2px}table{width:100%;border-collapse:collapse;font-size:13px}td,th{padding:6px 4px;border-bottom:1px solid #1f3657;text-align:left}.m{color:#8ea3c0;font-size:12px;margin-top:12px;line-height:1.5}</style></head><body>
+<header><div class="lg"><img src="../logo.png" alt="NWS"></div><div><h1>Plano 2D/3D · Merced 356, Santiago Centro</h1><small>KDM S.A. · PRY-2026-0009 · COT-2026-9878</small></div><span class="demo">DEMO</span><nav><button id="b2" class="on">Plano 2D</button><button id="b3">Vista 3D</button></nav></header>
+<main><div id="v"><svg id="st" viewBox="0 0 800 450" role="img" aria-label="Plano con puntos sobre imagen satelital"><rect width="800" height="450" fill="#0b1f3a"/><image id="im" href="https://camuxwyvvldqlmsmfbju.supabase.co/storage/v1/object/public/cctv-evidencias/levantamientos/base/4a4f330decdf7056ba965510.jpg" x="0" y="0"/><g id="ov"></g></svg></div>
+<aside><h2>Puntos del levantamiento</h2><table><tr><th>#</th><th>Tipo</th><th>Sector</th><th>Cable</th></tr>
+<tr><td>1</td><td>Nodo · rack (GAB-EXT-IP66)</td><td>admin</td><td>—</td></tr><tr><td>1</td><td>Punto de red (RED-PUNTO)</td><td>gerencia</td><td>UTP 40 m</td></tr></table>
+<div class="m">Escala: 4,013 px/m · Lat -33,437592 · Lng -70,642209<br>Total: 2 puntos, 40 m de UTP Cat6 (distancia × 1,3 + 5 m, redondeado a 5 m).<br>Metrajes estimados sobre imagen satelital, a validar en terreno.<br>Documento de prueba (DEMO).</div></aside></main>
+<script>
+var PX=4.013,N={x:673.4,y:80},P={x:576.6,y:77.4},im=document.getElementById('im'),ov=document.getElementById('ov'),svg=document.getElementById('st');
+function draw(){var w=im.naturalWidth||800,h=im.naturalHeight||450;if(w!=800||h!=450){svg.setAttribute('viewBox','0 0 '+w+' '+h);im.setAttribute('width',w);im.setAttribute('height',h)}
+var d=Math.hypot(N.x-P.x,N.y-P.y)/PX,s=Math.max(1,w/800);
+ov.innerHTML='<line x1="'+N.x+'" y1="'+N.y+'" x2="'+P.x+'" y2="'+P.y+'" stroke="#fb923c" stroke-width="'+3*s+'"/>'+
+'<circle cx="'+N.x+'" cy="'+N.y+'" r="'+9*s+'" fill="#fff" stroke="#1aa3e0" stroke-width="'+3*s+'"/><text x="'+(N.x+14*s)+'" y="'+(N.y-12*s)+'" fill="#fff" font-size="'+14*s+'" font-weight="700" stroke="#08121f" stroke-width="'+3*s+'" paint-order="stroke">Rack (admin)</text>'+
+'<circle cx="'+P.x+'" cy="'+P.y+'" r="'+8*s+'" fill="#1aa3e0" stroke="#fff" stroke-width="'+2*s+'"/><text x="'+(P.x-90*s)+'" y="'+(P.y-14*s)+'" fill="#fff" font-size="'+14*s+'" font-weight="700" stroke="#08121f" stroke-width="'+3*s+'" paint-order="stroke">Punto red (gerencia)</text>'+
+'<text x="'+(P.x+10*s)+'" y="'+(P.y+30*s)+'" fill="#fb923c" font-size="'+13*s+'" stroke="#08121f" stroke-width="'+3*s+'" paint-order="stroke">≈'+d.toFixed(0)+' m en planta · 40 m UTP</text>'+
+'<g transform="translate('+(w-60*s)+','+(h-30*s)+')"><line x2="'+PX*10+'" stroke="#fff" stroke-width="'+3*s+'"/><text y="'+-8*s+'" fill="#fff" font-size="'+12*s+'" stroke="#08121f" stroke-width="'+3*s+'" paint-order="stroke">10 m</text></g>'}
+im.addEventListener('load',draw);draw();
+function m(t){document.getElementById('v').className=t?'d3':'';b3.className=t?'on':'';b2.className=t?'':'on'}
+b2.onclick=function(){m(0)};b3.onclick=function(){m(1)};
+</script></body></html>
