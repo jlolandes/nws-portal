@@ -23,3 +23,7 @@ Cada proyecto es una carpeta `<slug>/` con:
 | `contacto` | `{ nombre, cargo, email? }`; con `email` aparece el botón "Aceptar la propuesta" |
 
 No poner precios unitarios del catálogo: solo los montos de la cotización.
+
+## Animación de la propuesta
+
+Cada proyecto con `imagen` y `puntos` muestra el botón **▶ Ver animación** en el inicio: título, imagen del sitio con los puntos apareciendo por tipo, cables, indicadores, qué incluye e inversión (~35 s). Enlace directo que la abre sola: `https://portal.nws.cl/<slug>/?animacion`. No hay que generar nada aparte.
