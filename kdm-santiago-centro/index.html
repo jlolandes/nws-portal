@@ -1,14 +1,57 @@
-<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>KDM S.A. · Santiago Centro · NWS (DEMO)</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;800&family=Public+Sans:wght@400;600&display=swap">
-<style>*{box-sizing:border-box}body{margin:0;font-family:'Public Sans',Arial,sans-serif;background:#f4f6f8;color:#0b1f3a}
-header{background:linear-gradient(90deg,#0b1f3a 40%,rgba(11,31,58,.6)),none;color:#f4f6f8;padding:48px max(16px,6vw)}
-.lg{background:#fff;border-radius:10px;padding:8px 14px;display:inline-block}.lg img{height:34px;display:block}
-header p.k{color:#1aa3e0;font:600 14px Montserrat,sans-serif;letter-spacing:3px;text-transform:uppercase;margin:28px 0 8px}
-h1{font:800 clamp(28px,4vw,48px)/1.1 Montserrat,sans-serif;margin:0 0 10px}header p{color:#bfd3e6;margin:0}
-main{padding:32px max(16px,6vw);display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;max-width:1300px}
-.c{display:flex;flex-direction:column;justify-content:space-between;gap:16px;background:#fff;border:1px solid #dce3ea;border-top:6px solid #1aa3e0;border-radius:12px;padding:22px;text-decoration:none;color:inherit}
-.c:hover{border-color:#1aa3e0}.c h3{font:800 19px Montserrat,sans-serif;margin:0 0 6px}.c p{margin:0;color:#4a5568;line-height:1.45}.c span{font-weight:600;color:#1aa3e0}
-.vs{padding:32px max(16px,6vw) 0;display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px;max-width:1300px}.v{background:#fff;border:1px solid #dce3ea;border-radius:12px;overflow:hidden;text-decoration:none;color:inherit;display:flex;flex-direction:column}.v img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block}.v div{padding:18px 20px}.v h3{font:800 20px Montserrat,sans-serif;margin:0 0 6px}.v p{margin:0 0 10px;color:#4a5568;line-height:1.45}.v span{font-weight:600;color:#1aa3e0}.v:hover{border-color:#1aa3e0}
-footer{padding:8px max(16px,6vw) 40px;color:#6b7885;font-size:13px}</style></head><body>
-<header><div class="lg"><img src="logo.png" alt="NWS"></div><p class="k">Propuesta DEMO · 30-10-2026</p><h1>Punto de red y rack · Santiago Centro</h1><p>KDM S.A. · Merced 356, Santiago · PRY-2026-0009</p></header>
-<main><a class="c" href="plano/"><div><h3>Plano 2D/3D</h3><p>Rack y punto de red sobre la imagen satelital, con escala y metraje.</p></div><span>Abrir →</span></a><a class="c" href="presentacion/"><div><h3>Presentación</h3><p>Situación, solución e inversión en 5 diapositivas.</p></div><span>Abrir →</span></a><a class="c" href="cotizacion.pdf"><div><h3>Cotización COT-2026-9878</h3><p>$724.600 neto · $862.274 con IVA</p></div><span>PDF →</span></a></main><footer>NetWatch Solutions SpA · RUT 77.859.162-6 · Jerry Lolandes, Jefe de Proyecto · www.nws.cl</footer></body></html>
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#0b1f3a">
+<title>KDM S.A. · Santiago Centro · NWS (DEMO)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Public+Sans:wght@400;600&display=swap">
+<link rel="stylesheet" href="../_app/portal.css">
+</head>
+<body>
+<script>
+window.NWS = {
+  demo: true,
+  titulo: 'Punto de red y rack · Santiago Centro',
+  cliente: 'KDM S.A.',
+  sitio: 'Santiago Centro',
+  direccion: 'Merced 356, Santiago',
+  codigo: 'PRY-2026-0009',
+  linea: 'Redes y conectividad',
+  fecha: '30-10-2026',
+  fecha_visita: '30-10-2026',
+  validez: 'hasta el 29-11-2026',
+  logo: 'logo.png',
+  imagen: 'https://camuxwyvvldqlmsmfbju.supabase.co/storage/v1/object/public/cctv-evidencias/levantamientos/base/4a4f330decdf7056ba965510.jpg',
+  atribucion: 'Imagen satelital: Esri World Imagery (Maxar, Earthstar Geographics). Metrajes estimados sobre la imagen, a validar en terreno.',
+  kpis: [
+    { v: 1, l: 'Punto de red Cat6' },
+    { v: '40 m', l: 'Cable UTP' },
+    { v: 1, l: 'Gabinete de red' }
+  ],
+  puntos: [
+    { t: 'nodo', n: 1, e: 'Rack', d: 'rack', x: 673.4, y: 80, s: 'Administración', mod: 'Gabinete exterior IP66' },
+    { t: 'punto_red', n: 1, d: 'Oficina gerencia', x: 576.6, y: 77.4, s: 'Gerencia', c: 'UTP', to: 'rack', m: 40, mod: 'Punto de red Cat6 certificado' }
+  ],
+  alcance: [
+    'Gabinete de red con switch PoE, patch panel y organizador.',
+    'Punto de red Cat6 en la oficina de gerencia, con 40 m de UTP y canalización.',
+    'Certificación, rotulado y prueba del punto.',
+    'Configuración de red y documentación final.'
+  ],
+  cotizaciones: [
+    { nombre: 'Red de datos Merced 356', numero: 'COT-2026-9878', neto: 724600, iva: 137674, total: 862274, pdf: 'cotizacion.pdf' }
+  ],
+  documentos: [
+    { nombre: 'Cotización COT-2026-9878', detalle: '$724.600 neto · $862.274 con IVA · PDF', url: 'cotizacion.pdf', tipo: 'pdf' },
+    { nombre: 'Presentación', detalle: 'Situación, solución e inversión', url: 'presentacion/', tipo: 'slides' },
+    { nombre: 'Plano 2D/3D', detalle: 'Rack y punto de red sobre la imagen satelital', url: 'plano/', tipo: '3d' }
+  ],
+  contacto: { nombre: 'Jerry Lolandes', cargo: 'Jefe de Proyecto' }
+};
+</script>
+<script src="../_app/portal.js"></script>
+</body>
+</html>

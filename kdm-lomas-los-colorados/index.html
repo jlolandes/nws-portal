@@ -1,14 +1,475 @@
-<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>KDM Energía · Lomas Los Colorados · NWS</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;800&family=Public+Sans:wght@400;600&display=swap">
-<style>*{box-sizing:border-box}body{margin:0;font-family:'Public Sans',Arial,sans-serif;background:#f4f6f8;color:#0b1f3a}
-header{background:linear-gradient(90deg,#0b1f3a 40%,rgba(11,31,58,.6)),url(portada.jpg) center/cover;color:#f4f6f8;padding:48px max(16px,6vw)}
-.lg{background:#fff;border-radius:10px;padding:8px 14px;display:inline-block}.lg img{height:34px;display:block}
-header p.k{color:#1aa3e0;font:600 14px Montserrat,sans-serif;letter-spacing:3px;text-transform:uppercase;margin:28px 0 8px}
-h1{font:800 clamp(28px,4vw,48px)/1.1 Montserrat,sans-serif;margin:0 0 10px}header p{color:#bfd3e6;margin:0}
-main{padding:32px max(16px,6vw);display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;max-width:1300px}
-.c{display:flex;flex-direction:column;justify-content:space-between;gap:16px;background:#fff;border:1px solid #dce3ea;border-top:6px solid #1aa3e0;border-radius:12px;padding:22px;text-decoration:none;color:inherit}
-.c:hover{border-color:#1aa3e0}.c h3{font:800 19px Montserrat,sans-serif;margin:0 0 6px}.c p{margin:0;color:#4a5568;line-height:1.45}.c span{font-weight:600;color:#1aa3e0}
-.vs{padding:32px max(16px,6vw) 0;display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:16px;max-width:1300px}.v{background:#fff;border:1px solid #dce3ea;border-radius:12px;overflow:hidden;text-decoration:none;color:inherit;display:flex;flex-direction:column}.v img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block}.v div{padding:18px 20px}.v h3{font:800 20px Montserrat,sans-serif;margin:0 0 6px}.v p{margin:0 0 10px;color:#4a5568;line-height:1.45}.v span{font-weight:600;color:#1aa3e0}.v:hover{border-color:#1aa3e0}
-footer{padding:8px max(16px,6vw) 40px;color:#6b7885;font-size:13px}</style></head><body>
-<header><div class="lg"><img src="logo.png" alt="NWS"></div><p class="k">Propuesta · 27-10-2026</p><h1>Sistema CCTV y normalización del data center</h1><p>KDM Energía S.A. · Relleno Sanitario Lomas Los Colorados, Tiltil</p></header>
-<section class="vs"><a class="v" href="plano/#plano"><img src="v_plano.jpg" alt="Plano 2D"><div><h3>Plano 2D</h3><p>Las 18 cámaras con tipo, campo de visión, UTP, fibra existente, enlaces PTP y nodos sobre la imagen satelital.</p><span>Abrir →</span></div></a><a class="v" href="plano/#vista-3d"><img src="v_3d.jpg" alt="Vista 3D"><div><h3>Vista 3D</h3><p>Recorrido animado por el exterior, la sala de control, la nave de motores y el data center (antes y después).</p><span>Abrir →</span></div></a><a class="v" href="plano/#fotos"><img src="v_fotos.jpg" alt="Registro fotográfico"><div><h3>Registro fotográfico</h3><p>26 fotos del levantamiento del 26-10-2026, ordenadas por sector.</p><span>Abrir →</span></div></a></section><main><a class="c" href="Informe_Levantamiento_CCTV_KDM_LomasLosColorados.pdf"><div><h3>Informe de levantamiento</h3><p>Situación encontrada, solución, cámaras, data center e inversión · 13 páginas</p></div><span>PDF →</span></a><a class="c" href="NWS_Video_Final_KDM_LomasLosColorados.mp4"><div><h3>Video de la propuesta</h3><p>Plano 2D, recorrido 3D y detección de humo · 1:57 min</p></div><span>Ver video →</span></a><a class="c" href="NWS-COT-KDM-2026-03.pdf"><div><h3>Cotización 1 · Sistema CCTV y detección de humo</h3><p>$12.511.530 neto · $14.888.721 con IVA</p></div><span>PDF →</span></a><a class="c" href="NWS-COT-KDM-2026-04.pdf"><div><h3>Cotización 2 · Consolidación de racks</h3><p>$2.133.996 neto · de 3 racks a 2</p></div><span>PDF →</span></a><a class="c" href="NWS-COT-KDM-2026-05.pdf"><div><h3>Cotización 3 · Mantención mensual</h3><p>$330.000 neto/mes · $297.000 con contrato anual</p></div><span>PDF →</span></a><a class="c" href="Plano_CCTV_KDM_Energia_LomasLosColorados.pdf"><div><h3>Lámina CCTV-01</h3><p>Plano de ubicación en formato A3 · Rev. F</p></div><span>PDF →</span></a></main><footer>NetWatch Solutions SpA · RUT 77.859.162-6 · Jerry Lolandes, Jefe de Proyecto · www.nws.cl</footer></body></html>
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#0b1f3a">
+<title>KDM Energía · Lomas Los Colorados · NWS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Public+Sans:wght@400;600&display=swap">
+<link rel="stylesheet" href="../_app/portal.css">
+</head>
+<body>
+<script>
+window.NWS = {
+ "titulo": "CCTV y normalización del data center",
+ "cliente": "KDM Energía S.A.",
+ "sitio": "Lomas Los Colorados",
+ "direccion": "Relleno Sanitario Lomas Los Colorados, Tiltil",
+ "codigo": "PRY-2026-0008",
+ "linea": "CCTV y detección de humo",
+ "fecha": "27-10-2026",
+ "fecha_visita": "26-10-2026",
+ "logo": "logo.png",
+ "imagen": "plano/base.jpg",
+ "atribucion": "Imagen satelital del sitio con escala 9,44 px/m. Posiciones y metrajes del levantamiento del 26-10-2026.",
+ "kpis": [
+  {
+   "v": 18,
+   "l": "Cámaras IP"
+  },
+  {
+   "v": "785 m",
+   "l": "Cable UTP"
+  },
+  {
+   "v": 6,
+   "l": "Detectores de humo"
+  }
+ ],
+ "puntos": [
+  {
+   "t": "camara",
+   "n": 1,
+   "x": 3004.64,
+   "y": 606.92,
+   "s": "Subestación",
+   "c": "UTP",
+   "to": "Sala cám. 1 · S/E",
+   "m": 20,
+   "mod": "Cámara IP bullet Dahua 4MP varifocal motorizada"
+  },
+  {
+   "t": "camara",
+   "n": 2,
+   "x": 3081.52,
+   "y": 883.43,
+   "s": "Subestación",
+   "c": "UTP",
+   "to": "Sala cám. 1 · S/E",
+   "m": 50,
+   "mod": "Cámara IP bullet Dahua 4MP varifocal motorizada"
+  },
+  {
+   "t": "camara",
+   "n": 3,
+   "x": 2982.08,
+   "y": 881.64,
+   "s": "Subestación",
+   "c": "UTP",
+   "to": "Sala cám. 1 · S/E",
+   "m": 45,
+   "mod": "Cámara IP bullet Dahua 4MP varifocal motorizada"
+  },
+  {
+   "t": "camara",
+   "n": 4,
+   "x": 2852.49,
+   "y": 865.85,
+   "s": "Subestación",
+   "c": "UTP",
+   "to": "Sala cám. 1 · S/E",
+   "m": 45,
+   "mod": "Cámara IP bullet Dahua 4MP varifocal motorizada"
+  },
+  {
+   "t": "camara",
+   "n": 5,
+   "x": 2840.51,
+   "y": 767.32,
+   "s": "Subestación",
+   "c": "UTP",
+   "to": "Sala cám. 1 · S/E",
+   "m": 30,
+   "mod": "Cámara IP bullet Dahua 4MP varifocal motorizada"
+  },
+  {
+   "t": "camara",
+   "n": 6,
+   "x": 2789.04,
+   "y": 567.61,
+   "s": "Subestación",
+   "c": "UTP",
+   "to": "Sala cám. 1 · S/E",
+   "m": 25,
+   "mod": "Cámara IP bullet Dahua 4MP 2,8 mm IR50"
+  },
+  {
+   "t": "camara",
+   "n": 7,
+   "x": 2239.02,
+   "y": 840.33,
+   "s": "Nave",
+   "c": "UTP",
+   "to": "Rack 45U data center",
+   "m": 25,
+   "mod": "Cámara IP bullet Dahua 4MP 2,8 mm IR50"
+  },
+  {
+   "t": "camara",
+   "n": 8,
+   "x": 2286.99,
+   "y": 809.51,
+   "s": "Nave",
+   "c": "UTP",
+   "to": "Rack 45U data center",
+   "m": 20,
+   "mod": "Cámara IP panorámica Dahua 2×4MP 180°"
+  },
+  {
+   "t": "camara",
+   "n": 9,
+   "x": 2146.91,
+   "y": 803.54,
+   "s": "Nave",
+   "c": "UTP",
+   "to": "Rack 45U data center",
+   "m": 35,
+   "mod": "Cámara IP bullet Dahua 4MP 2,8 mm IR50"
+  },
+  {
+   "t": "camara",
+   "n": 10,
+   "x": 2038.08,
+   "y": 798.78,
+   "s": "Nave",
+   "c": "UTP",
+   "to": "Rack 45U data center",
+   "m": 50,
+   "mod": "Cámara IP bullet Dahua 4MP 2,8 mm IR50"
+  },
+  {
+   "t": "camara",
+   "n": 11,
+   "x": 1803.14,
+   "y": 798.86,
+   "s": "Nave",
+   "c": "UTP",
+   "to": "Rack 45U data center",
+   "m": 85,
+   "mod": "Cámara IP panorámica Dahua 2×4MP 180°"
+  },
+  {
+   "t": "camara",
+   "n": 12,
+   "x": 1511.72,
+   "y": 791.69,
+   "s": "Nave",
+   "c": "UTP",
+   "to": "Rack 45U data center",
+   "m": 125,
+   "mod": "Cámara IP bullet Dahua 4MP 2,8 mm IR50"
+  },
+  {
+   "t": "camara",
+   "n": 13,
+   "x": 1243.22,
+   "y": 792.47,
+   "s": "Nave",
+   "c": "UTP",
+   "to": "Rack 45U data center",
+   "m": 160,
+   "mod": "Cámara IP bullet Dahua 4MP 2,8 mm IR50"
+  },
+  {
+   "t": "camara",
+   "n": 14,
+   "x": 849.02,
+   "y": 397.84,
+   "s": "Oficinas",
+   "c": "PTP",
+   "to": "Sala cám. 15 · oficinas",
+   "mod": "Cámara IP PTZ Dahua 4MP 25×"
+  },
+  {
+   "t": "camara",
+   "n": 15,
+   "x": 746.7,
+   "y": 261.39,
+   "s": "Oficinas",
+   "c": "UTP",
+   "to": "Sala cám. 15 · oficinas",
+   "m": 20,
+   "mod": "Cámara IP bullet Dahua 4MP 2,8 mm IR50"
+  },
+  {
+   "t": "camara",
+   "n": 16,
+   "x": 466.83,
+   "y": 435.46,
+   "s": "Oficinas",
+   "c": "PTP",
+   "to": "Sala cám. 15 · oficinas",
+   "mod": "Cámara IP bullet Dahua 4MP 2,8 mm IR50"
+  },
+  {
+   "t": "camara",
+   "n": 17,
+   "x": 330.16,
+   "y": 639.71,
+   "s": "Oficinas",
+   "c": "UTP",
+   "to": "Switch cám. 16",
+   "m": 35,
+   "mod": "Cámara IP PTZ Dahua 4MP 25×"
+  },
+  {
+   "t": "camara",
+   "n": 18,
+   "x": 141.46,
+   "y": 394.68,
+   "s": "Oficinas",
+   "c": "PTP",
+   "to": "Switch cám. 16",
+   "mod": "Cámara IP bullet Dahua 4MP 2,8 mm IR50"
+  },
+  {
+   "t": "central",
+   "n": 1,
+   "x": 2305.9,
+   "y": 813.4,
+   "s": "Data center",
+   "d": "Hub 2 data center",
+   "c": "Ethernet",
+   "to": "Rack 45U data center",
+   "mod": "Central de alarma Dahua Airshield Hub 2"
+  },
+  {
+   "t": "detector",
+   "n": 1,
+   "x": 1745.0,
+   "y": 950.0,
+   "s": "Sala eléctrica 1",
+   "c": "Radio",
+   "to": "Hub 2 data center",
+   "mod": "Detector de humo fotoeléctrico inalámbrico"
+  },
+  {
+   "t": "detector",
+   "n": 2,
+   "x": 1835.0,
+   "y": 950.0,
+   "s": "Sala eléctrica 1",
+   "c": "Radio",
+   "to": "Hub 2 data center",
+   "mod": "Detector de humo fotoeléctrico inalámbrico"
+  },
+  {
+   "t": "detector",
+   "n": 3,
+   "x": 1985.0,
+   "y": 950.0,
+   "s": "Sala eléctrica 2",
+   "c": "Radio",
+   "to": "Hub 2 data center",
+   "mod": "Detector de humo fotoeléctrico inalámbrico"
+  },
+  {
+   "t": "detector",
+   "n": 4,
+   "x": 2075.0,
+   "y": 950.0,
+   "s": "Sala eléctrica 2",
+   "c": "Radio",
+   "to": "Hub 2 data center",
+   "mod": "Detector de humo fotoeléctrico inalámbrico"
+  },
+  {
+   "t": "detector",
+   "n": 5,
+   "x": 3150.0,
+   "y": 570.0,
+   "s": "Sala de control S/E",
+   "c": "Radio",
+   "to": "Hub 2 data center",
+   "mod": "Detector de humo fotoeléctrico inalámbrico"
+  },
+  {
+   "t": "detector",
+   "n": 6,
+   "x": 3240.0,
+   "y": 570.0,
+   "s": "Sala de control S/E",
+   "c": "Radio",
+   "to": "Hub 2 data center",
+   "mod": "Detector de humo fotoeléctrico inalámbrico"
+  },
+  {
+   "t": "nodo",
+   "n": 1,
+   "x": 2351.9,
+   "y": 753.4,
+   "s": "Data center",
+   "d": "Rack 45U data center",
+   "e": "Rack"
+  },
+  {
+   "t": "nodo",
+   "n": 2,
+   "x": 2909.6,
+   "y": 616.9,
+   "s": "Subestación",
+   "d": "Sala cám. 1 · S/E",
+   "e": "Sala"
+  },
+  {
+   "t": "nodo",
+   "n": 3,
+   "x": 841.7,
+   "y": 266.4,
+   "s": "Oficinas",
+   "d": "Sala cám. 15 · oficinas",
+   "e": "Sala"
+  },
+  {
+   "t": "nodo",
+   "n": 4,
+   "x": 371.8,
+   "y": 455.5,
+   "s": "Oficinas",
+   "d": "Switch cám. 16",
+   "e": "Switch"
+  },
+  {
+   "t": "sirena",
+   "n": 1,
+   "x": 1790.0,
+   "y": 1000.0,
+   "s": "Sala eléctrica 1",
+   "c": "Radio",
+   "to": "Hub 2 data center",
+   "mod": "Sirena interior inalámbrica"
+  },
+  {
+   "t": "sirena",
+   "n": 2,
+   "x": 2030.0,
+   "y": 1000.0,
+   "s": "Sala eléctrica 2",
+   "c": "Radio",
+   "to": "Hub 2 data center",
+   "mod": "Sirena interior inalámbrica"
+  },
+  {
+   "t": "sirena",
+   "n": 3,
+   "x": 3195.0,
+   "y": 620.0,
+   "s": "Sala de control S/E",
+   "c": "Radio",
+   "to": "Hub 2 data center",
+   "mod": "Sirena interior inalámbrica"
+  }
+ ],
+ "alcance": [
+  "18 cámaras IP Dahua (bullet, varifocales, panorámicas y PTZ) en subestación, nave de motores y oficinas.",
+  "Grabación centralizada en NVR de 32 canales con discos para ~30 días.",
+  "3 enlaces inalámbricos PTP para las cámaras lejanas y fibra existente S/E y oficinas → data center.",
+  "Detección de humo inalámbrica: 6 detectores y 3 sirenas en 3 salas, con Hub 2 en el data center.",
+  "Configuración, VLAN de CCTV, acceso remoto y documentación as-built.",
+  "Opcional: consolidación de racks del data center (de 3 a 2) y mantención mensual."
+ ],
+ "cotizaciones": [
+  {
+   "nombre": "Sistema CCTV y detección de humo",
+   "numero": "NWS-COT-KDM-2026-03",
+   "neto": 12511530,
+   "iva": 2377191,
+   "total": 14888721,
+   "pdf": "NWS-COT-KDM-2026-03.pdf"
+  },
+  {
+   "nombre": "Consolidación de racks",
+   "numero": "NWS-COT-KDM-2026-04",
+   "neto": 2133996,
+   "iva": 405459,
+   "total": 2539455,
+   "pdf": "NWS-COT-KDM-2026-04.pdf",
+   "nota": "De 3 racks a 2 · opcional"
+  },
+  {
+   "nombre": "Mantención mensual",
+   "numero": "NWS-COT-KDM-2026-05",
+   "neto": 330000,
+   "iva": 62700,
+   "total": 392700,
+   "pdf": "NWS-COT-KDM-2026-05.pdf",
+   "mensual": true,
+   "nota": "$297.000 neto/mes con contrato anual"
+  }
+ ],
+ "video": "NWS_Video_Final_KDM_LomasLosColorados.mp4",
+ "video_poster": "portada.jpg",
+ "documentos": [
+  {
+   "nombre": "Plano 2D",
+   "detalle": "Las 18 cámaras con campo de visión, UTP, fibra, PTP y nodos",
+   "url": "plano/#plano",
+   "thumb": "v_plano.jpg",
+   "tipo": "web"
+  },
+  {
+   "nombre": "Vista 3D",
+   "detalle": "Recorrido por el exterior, la sala de control y el data center",
+   "url": "plano/#vista-3d",
+   "thumb": "v_3d.jpg",
+   "tipo": "3d"
+  },
+  {
+   "nombre": "Registro fotográfico",
+   "detalle": "26 fotos del levantamiento, ordenadas por sector",
+   "url": "plano/#fotos",
+   "thumb": "v_fotos.jpg",
+   "tipo": "web"
+  },
+  {
+   "nombre": "Informe de levantamiento",
+   "detalle": "Situación, solución, cámaras, data center e inversión · 13 páginas",
+   "url": "Informe_Levantamiento_CCTV_KDM_LomasLosColorados.pdf",
+   "tipo": "pdf"
+  },
+  {
+   "nombre": "Cotización 1 · CCTV y detección de humo",
+   "detalle": "$12.511.530 neto · $14.888.721 con IVA",
+   "url": "NWS-COT-KDM-2026-03.pdf",
+   "tipo": "pdf"
+  },
+  {
+   "nombre": "Cotización 2 · Consolidación de racks",
+   "detalle": "$2.133.996 neto · de 3 racks a 2",
+   "url": "NWS-COT-KDM-2026-04.pdf",
+   "tipo": "pdf"
+  },
+  {
+   "nombre": "Cotización 3 · Mantención mensual",
+   "detalle": "$330.000 neto/mes · $297.000 con contrato anual",
+   "url": "NWS-COT-KDM-2026-05.pdf",
+   "tipo": "pdf"
+  },
+  {
+   "nombre": "Lámina CCTV-01",
+   "detalle": "Plano de ubicación A3 · Rev. F",
+   "url": "Plano_CCTV_KDM_Energia_LomasLosColorados.pdf",
+   "tipo": "pdf"
+  }
+ ],
+ "contacto": {
+  "nombre": "Jerry Lolandes",
+  "cargo": "Jefe de Proyecto"
+ }
+};
+</script>
+<script src="../_app/portal.js"></script>
+</body>
+</html>
