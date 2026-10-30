@@ -1,0 +1,530 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head><body style="margin:0"><meta charset="utf-8">
+<title>Plano CCTV KDM Energía</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+/* Layout: sala de control — barra de rótulo arriba, visor (plano / 3D / fotos) a la izquierda, panel técnico a la derecha */
+:root{
+  --bg:#08121f; --panel:#0e1b2e; --panel2:#132541; --line:#1f3657; --fg:#e7eef8; --muted:#8ea3c0; --accent:#1aa3e0;
+  --bullet:#60a5fa; --vf:#a3e635; --pan:#fbbf24; --ptz:#f472b6;
+  --utp:#fb923c; --fo:#22d3ee; --ptp:#e879f9; --node:#ffffff;
+  --display:"Montserrat",system-ui,sans-serif; --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  color-scheme:dark;
+}
+[hidden]{display:none!important}
+html,body{height:100%}
+body{background:var(--bg);color:var(--fg);font-family:var(--display);font-size:14px;line-height:1.45;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:14px 24px}
+*{box-sizing:border-box}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.top{display:flex;flex-wrap:wrap;align-items:center;gap:14px 22px;padding-bottom:12px;border-bottom:1px solid var(--line)}
+.logo{background:#fff;border-radius:8px;padding:6px 10px;display:flex}
+.logo img{height:26px;display:block}
+.ttl{flex:1;min-width:240px}
+.ttl h1{margin:0;font-size:clamp(17px,2.2vw,22px);font-weight:800;letter-spacing:-.2px;text-wrap:balance}
+.ttl p{margin:2px 0 0;color:var(--muted);font-size:12.5px}
+.stats{display:flex;flex-wrap:wrap;gap:8px}
+.stat{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:6px 10px;min-width:84px}
+.stat b{display:block;font-family:var(--mono);font-size:16px;font-weight:600}
+.stat span{font-size:10.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.6px}
+.wrap{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:16px;margin-top:14px;align-items:start}
+@media (max-width:1000px){.wrap{grid-template-columns:minmax(0,1fr)}}
+.viewer{min-width:0;background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden;display:flex;flex-direction:column}
+.tabs{display:flex;gap:2px;padding:6px;border-bottom:1px solid var(--line);background:var(--panel2);flex-wrap:wrap}
+.tab{background:none;border:0;padding:8px 14px;border-radius:7px;font-weight:700;font-size:13px;color:var(--muted);cursor:pointer}
+.tab[aria-selected="true"]{background:var(--bg);color:var(--fg);box-shadow:inset 0 -2px 0 var(--accent)}
+.tools{margin-left:auto;display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.btn{background:var(--bg);border:1px solid var(--line);border-radius:7px;padding:6px 10px;font-size:12px;font-weight:600;cursor:pointer}
+.btn:hover{border-color:var(--accent)}
+.btn.on{background:var(--accent);border-color:var(--accent);color:#04111d}
+.stage{position:relative;aspect-ratio:2.35/1;min-height:340px;max-height:80vh;width:100%}
+@media (max-width:640px){.stage{aspect-ratio:auto;height:440px}}
+.pane{position:absolute;inset:0}
+#map2d{width:100%;height:100%;display:block;cursor:grab;touch-action:none;background:#1b1a16}
+#map2d.drag{cursor:grabbing}
+#c3d{width:100%;height:100%;display:block}
+.ov{position:absolute;pointer-events:none}
+.north{right:12px;bottom:12px;background:rgba(8,18,31,.82);border:1px solid var(--line);border-radius:8px;padding:6px 10px;display:flex;align-items:center;gap:6px;font-weight:800}
+.north svg{width:34px;height:16px}
+.scale{left:12px;bottom:12px;background:rgba(8,18,31,.82);border:1px solid var(--line);border-radius:8px;padding:6px 10px;font-family:var(--mono);font-size:11px}
+.scale .bar{height:6px;border:1.5px solid #fff;border-top:0;margin-top:3px;background:linear-gradient(90deg,#fff 50%,transparent 50%)}
+.hint{left:12px;top:12px;background:rgba(8,18,31,.82);border:1px solid var(--line);border-radius:8px;padding:5px 9px;font-size:11.5px;color:var(--muted)}
+.tour{position:absolute;left:12px;top:12px;display:flex;gap:6px;flex-wrap:wrap;max-width:calc(100% - 24px)}
+.tour .btn{background:rgba(8,18,31,.85)}
+.tour .btn.on{background:var(--accent);color:#04111d}
+.bar3d{position:absolute;left:12px;right:12px;top:12px;display:flex;gap:8px;flex-wrap:wrap;align-items:flex-start;pointer-events:none}
+.bar3d>*{pointer-events:auto}
+.seg{display:inline-flex;flex-wrap:wrap;background:rgba(8,18,31,.86);border:1px solid var(--line);border-radius:9px;padding:3px;gap:2px;backdrop-filter:blur(6px)}
+.seg button{background:none;border:0;color:var(--muted);font-weight:700;font-size:12.5px;padding:6px 11px;border-radius:6px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--fg);color:var(--bg)}
+#b-tour{margin-left:auto;background:rgba(8,18,31,.86)}
+#b-tour.on{background:var(--accent);border-color:var(--accent);color:#04111d}
+.views{position:absolute;left:12px;top:62px;display:flex;flex-direction:column;gap:4px}
+.views .btn{background:rgba(8,18,31,.82);font-size:11.5px;padding:5px 9px;text-align:left}
+.views .btn[aria-pressed="true"]{border-color:var(--accent);color:var(--fg);box-shadow:inset 3px 0 0 var(--accent)}
+.dcstate{position:absolute;right:12px;top:62px}
+.inset{position:absolute;right:12px;bottom:12px;margin:0;width:min(230px,30%);background:rgba(8,18,31,.9);border:1px solid var(--line);border-radius:10px;overflow:hidden;cursor:zoom-in}
+.inset img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover}
+.inset figcaption{font-size:10.5px;padding:6px 8px;color:var(--muted);line-height:1.35}
+.fade3d{position:absolute;inset:0;background:#06101c;opacity:0;pointer-events:none;transition:opacity .28s}
+.fade3d.on{opacity:1}
+@media (max-width:640px){.inset{display:none}.views{top:auto;bottom:70px;flex-direction:row;flex-wrap:wrap;right:12px}.dcstate{top:auto;bottom:112px;left:12px;right:auto}}
+.caption3d{position:absolute;left:12px;bottom:14px;right:calc(min(230px,30%) + 24px);background:rgba(8,18,31,.88);border:1px solid var(--line);border-radius:10px;padding:8px 14px;font-size:13px;font-weight:600;text-align:left;pointer-events:none}
+.loading{position:absolute;inset:0;display:grid;place-items:center;color:var(--muted);font-family:var(--mono);font-size:12px}
+.rotulo{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));border-top:1px solid var(--line)}
+.rotulo div{padding:7px 12px;border-right:1px solid var(--line);font-size:12.5px;font-weight:600}
+.rotulo div:last-child{border-right:0}
+.rotulo span{display:block;font-size:9.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.7px;font-weight:700}
+.side{display:flex;flex-direction:column;gap:12px;min-width:0}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+.card h2{margin:0 0 8px;font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);font-weight:800}
+.layers{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.chk{display:flex;align-items:center;gap:7px;font-size:12.5px;cursor:pointer;padding:5px 7px;border-radius:6px;border:1px solid var(--line)}
+.chk input{accent-color:var(--accent)}
+.sw{width:18px;height:0;border-top:3px solid;display:inline-block;flex:none}
+.dot{width:12px;height:12px;border-radius:50%;display:inline-block;flex:none;border:2px solid}
+.legend{display:grid;gap:5px;font-size:12.5px}
+.legend div{display:flex;align-items:center;gap:8px}
+.list{display:grid;grid-template-columns:repeat(6,1fr);gap:5px}
+.cbtn{border:1.5px solid var(--line);background:var(--bg);border-radius:7px;padding:5px 0;font-family:var(--mono);font-weight:600;font-size:12px;cursor:pointer}
+.cbtn[aria-pressed="true"]{background:var(--fg);color:var(--bg)}
+.detail h3{margin:0;font-size:20px;font-weight:800;display:flex;align-items:center;gap:10px}
+.chip{font-size:11px;font-weight:700;padding:3px 8px;border-radius:99px;color:#071220}
+.kv{display:grid;grid-template-columns:96px minmax(0,1fr);gap:4px 10px;margin:10px 0 0;font-size:12.5px}
+.kv dt{color:var(--muted)}
+.kv dd{margin:0;font-family:var(--mono);font-size:12px;word-break:break-word}
+.thumbs{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:10px}
+.thumbs button{padding:0;border:1px solid var(--line);border-radius:6px;overflow:hidden;cursor:zoom-in;aspect-ratio:1;background:var(--bg)}
+.thumbs img{width:100%;height:100%;object-fit:cover;display:block}
+.note{font-size:11.5px;color:var(--muted);margin-top:8px}
+.edit{display:grid;gap:4px;margin-top:10px;padding:10px;border:1px dashed var(--accent);border-radius:8px;font-size:12.5px}
+.edit input{width:100%;accent-color:var(--accent)}
+.pick{display:grid;grid-template-columns:repeat(5,1fr);gap:4px;margin-top:8px;max-height:220px;overflow:auto}
+.pick button{padding:0;border:2px solid var(--line);border-radius:5px;overflow:hidden;aspect-ratio:1;cursor:pointer;background:var(--bg)}
+.pick button[aria-pressed="true"]{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent)}
+.pick img{width:100%;height:100%;object-fit:cover;display:block}
+#gal{overflow:auto;padding:16px}
+.gsec{margin-bottom:18px}
+.gsec h3{margin:0 0 8px;font-size:14px;font-weight:800;display:flex;gap:8px;align-items:baseline}
+.gsec h3 small{font-weight:500;color:var(--muted);font-size:12px}
+.ggrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.gitem{background:var(--bg);border:1px solid var(--line);border-radius:8px;overflow:hidden;cursor:zoom-in;padding:0;text-align:left}
+.gitem img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block}
+.gitem span{display:block;padding:6px 8px;font-size:11.5px;line-height:1.3}
+.lb{position:fixed;inset:0;background:rgba(3,8,15,.93);z-index:50;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:max(16px,env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) max(16px,env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
+.lb img{max-width:100%;max-height:78vh;border-radius:8px}
+.lb p{margin:10px 0 0;font-weight:600;text-align:center;max-width:70ch}
+.lb p small{display:block;color:var(--muted);font-weight:500}
+.lbnav{display:flex;gap:8px;margin-top:10px}
+svg text{font-family:var(--display)}
+@keyframes flow{to{stroke-dashoffset:-40}}
+.flow{animation:flow 1.6s linear infinite}
+@media (prefers-reduced-motion:reduce){.flow{animation:none}}
+</style>
+
+<header class="top">
+  <div class="logo"><img src="logo.png" alt="NWS NetWatch Solutions"></div>
+  <div class="ttl">
+    <h1>Sistema CCTV · Relleno Sanitario Lomas Los Colorados</h1>
+    <p>KDM Energía S.A. · Tiltil · Levantamiento 26-10-2026 · Lámina CCTV-01 Rev. F</p>
+  </div>
+  <div class="stats">
+    <div class="stat"><b>18</b><span>Cámaras</span></div>
+    <div class="stat"><b>~785 m</b><span>UTP Cat6</span></div>
+    <div class="stat"><b>2</b><span>Troncales FO</span></div>
+    <div class="stat"><b>3</b><span>Enlaces PTP</span></div>
+  </div>
+</header>
+
+<div class="wrap">
+  <section class="viewer">
+    <div class="tabs" role="tablist">
+      <button class="tab" role="tab" id="t-plano" aria-selected="true">Plano 2D</button>
+      <button class="tab" role="tab" id="t-3d" aria-selected="false">Vista 3D</button>
+      <button class="tab" role="tab" id="t-fotos" aria-selected="false">Registro fotográfico</button>
+      <div class="tools" id="tools2d">
+        <button class="btn" id="zin" aria-label="Acercar">＋</button>
+        <button class="btn" id="zout" aria-label="Alejar">－</button>
+        <button class="btn" id="zreset">Vista completa</button>
+        <button class="btn" id="b-edit" hidden>Editar cámaras</button>
+      </div>
+    </div>
+    <div class="stage" id="stage">
+      <div class="pane" id="p-plano">
+        <svg id="map2d" viewBox="0 0 3300 1200" preserveAspectRatio="xMidYMid meet" aria-label="Plano de cámaras sobre imagen satelital"></svg>
+        <div class="ov hint">Arrastra para mover · rueda para zoom · toca una cámara o un ícono de foto</div>
+        <div class="ov scale">0 · 25 · 50 m<div class="bar" id="scalebar"></div></div>
+        <div class="ov north"><svg viewBox="0 0 34 16"><polygon points="0,8 18,0 14,8 18,16" fill="#fff"/></svg>N</div>
+      </div>
+      <div class="pane" id="p-3d" hidden>
+        <canvas id="c3d"></canvas>
+        <div class="loading" id="load3d">Cargando vista 3D…</div>
+        <div class="bar3d">
+          <div class="seg" id="scenes" role="group" aria-label="Escena">
+            <button data-scene="ext" aria-pressed="true">Exterior</button>
+            <button data-scene="se" aria-pressed="false">Sala de control S/E</button>
+            <button data-scene="nave" aria-pressed="false">Nave de motores</button>
+            <button data-scene="dc" aria-pressed="false">Data center</button>
+          </div>
+          <button class="btn" id="b-tour">Recorrido animado</button>
+        </div>
+        <div class="views" id="views"></div>
+        <div class="seg dcstate" id="dcstate" hidden role="group" aria-label="Estado del rack">
+          <button data-st="actual" aria-pressed="true">Estado actual</button>
+          <button data-st="propuesta" aria-pressed="false">Propuesta NWS</button>
+        </div>
+        <figure class="inset" id="inset" hidden><img alt=""><figcaption></figcaption></figure>
+        <div class="caption3d" id="cap3d"></div>
+        <div class="fade3d" id="fade3d"></div>
+      </div>
+      <div class="pane" id="p-fotos" hidden><div id="gal" style="height:100%"></div></div>
+    </div>
+    <div class="rotulo">
+      <div><span>Proyecto</span>CCTV y normalización rack 45U</div>
+      <div><span>Cliente</span>KDM Energía S.A.</div>
+      <div><span>Ubicación</span>Lomas Los Colorados, Tiltil</div>
+      <div><span>Lámina</span>CCTV-01 · Rev. F</div>
+      <div><span>Dibujó</span>Jerry Lolandes T.</div>
+      <div><span>Estado</span>Emitido para propuesta</div>
+    </div>
+  </section>
+
+  <aside class="side">
+    <div class="card detail" id="detail" aria-live="polite"></div>
+    <div class="card">
+      <h2>Cámaras</h2>
+      <div class="list" id="camlist"></div>
+    </div>
+    <div class="card">
+      <h2>Capas</h2>
+      <div class="layers">
+        <label class="chk"><input type="checkbox" id="L-fov" checked>Campos de visión</label>
+        <label class="chk"><input type="checkbox" id="L-utp" checked><span class="sw" style="border-color:var(--utp)"></span>UTP Cat6</label>
+        <label class="chk"><input type="checkbox" id="L-fo" checked><span class="sw" style="border-color:var(--fo)"></span>Fibra</label>
+        <label class="chk"><input type="checkbox" id="L-ptp" checked><span class="sw" style="border-color:var(--ptp);border-top-style:dotted"></span>PTP</label>
+        <label class="chk"><input type="checkbox" id="L-humo" checked><span class="sw" style="border-color:#ef4444"></span>Detección de humo</label>
+        <label class="chk"><input type="checkbox" id="L-foto" checked>Fotos</label>
+        <label class="chk"><input type="checkbox" id="L-lbl" checked>Etiquetas</label>
+      </div>
+    </div>
+    <div class="card">
+      <h2>Tipos de cámara</h2>
+      <div class="legend" id="legend"></div>
+      <p class="note">Orientación y alcance de los campos de visión son referenciales; se validan en la instalación.</p>
+    </div>
+  </aside>
+</div>
+
+<div class="lb" id="lb" hidden role="dialog" aria-modal="true" aria-label="Foto">
+  <img id="lbimg" alt="">
+  <p id="lbcap"></p>
+  <div class="lbnav"><button class="btn" id="lbprev">← Anterior</button><button class="btn" id="lbclose">Cerrar</button><button class="btn" id="lbnext">Siguiente →</button></div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+<script src="scene3d.js?v=12"></script>
+<script>
+(()=>{
+const W=3300,H=1200,PX=9.44;
+const REDUCED=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const TYPES={
+  bullet:{label:'Bullet 4MP',model:'Dahua DH-IPC-HFW3441EP-S-S2 · 2,8 mm · IR50',color:'#60a5fa',fov:100,range:30,abbr:'B'},
+  vf:{label:'Varifocal 4MP (pantallas)',model:'Dahua DH-IPC-HFW2441T-ZS · 2,7–13,5 mm mot.',color:'#a3e635',fov:34,range:5,abbr:'VF'},
+  pan:{label:'Panorámica 180° 2×4MP',model:'Dahua DH-IPC-PFW3849SP-A180-E2-AS-PV',color:'#fbbf24',fov:180,range:26,abbr:'180°'},
+  ptz:{label:'PTZ 4MP 25×',model:'Dahua PTZ 4MP 25× IR100 · auto tracking',color:'#f472b6',fov:360,range:60,abbr:'PTZ'}
+};
+const NODES={
+  DC:{x:2352,y:753,name:'Rack 45U · Data center',short:'RACK DC',desc:'NVR 32 canales, switch PoE 16 puertos + SFP. Recibe las troncales de fibra existentes. Aloja la central de detección de humo Hub 2.'},
+  S1:{x:2960,y:632,name:'Sala cámara 1 · Subestación',short:'SALA C1',desc:'Gabinete 6U con switch PoE industrial + SFP y UPS. Llega fibra existente desde el data center.'},
+  S15:{x:756,y:305,name:'Sala cámara 15 · Oficinas',short:'SALA C15',desc:'Gabinete 6U con switch PoE industrial + SFP, UPS y radios PTP de las cámaras 14 y 16.'},
+  SW16:{x:420,y:470,name:'Switch cámara 16',short:'SW C16',desc:'Gabinete exterior IP66 con switch PoE 8 puertos. Recibe la cámara 17 por UTP y la 18 por PTP; sale a la sala C15 por PTP.'}
+};
+// n, x, y, tipo, dirección (° pantalla), sector, nodo, medio, UTP m, montaje, altura m
+const CAMS=[
+ [1,3005,607,'vf',90,'Subestación','S1','UTP',20,'Estructura subestación',3],
+ [2,3082,883,'vf',225,'Subestación','S1','UTP',50,'Estructura subestación',3],
+ [3,2982,882,'vf',270,'Subestación','S1','UTP',45,'Estructura subestación',3],
+ [4,2852,866,'vf',0,'Subestación','S1','UTP',45,'Estructura subestación',3],
+ [5,2841,767,'vf',0,'Subestación','S1','UTP',30,'Estructura subestación',3],
+ [6,2789,568,'bullet',300,'Subestación','S1','UTP',25,'Poste acceso',6],
+ [7,2239,840,'bullet',100,'Nave de motores','DC','UTP',25,'Muro nave',9],
+ [8,2287,810,'pan',270,'Nave de motores','DC','UTP',20,'Muro nave',9],
+ [9,2147,804,'bullet',300,'Nave de motores','DC','UTP',35,'Muro nave',9],
+ [10,2038,799,'bullet',230,'Nave de motores','DC','UTP',50,'Muro nave',9],
+ [11,1803,799,'pan',270,'Nave de motores','DC','UTP',85,'Muro nave',9],
+ [12,1512,792,'bullet',90,'Nave de motores','DC','UTP',125,'Muro nave',9],
+ [13,1243,792,'bullet',200,'Nave de motores','DC','UTP',160,'Muro nave',9],
+ [14,849,398,'ptz',0,'Oficinas y acceso','S15','PTP',5,'Poste planta de gas',7],
+ [15,747,261,'bullet',200,'Oficinas y acceso','S15','UTP',20,'Muro sala',4],
+ [16,467,435,'bullet',150,'Oficinas y acceso','S15','PTP',5,'Poste patio',6],
+ [17,330,640,'ptz',0,'Oficinas y acceso','SW16','UTP',35,'Poste contenedores',7],
+ [18,141,395,'bullet',275,'Oficinas y acceso','SW16','PTP',5,'Poste acceso poniente',6]
+].map(a=>({n:a[0],x:a[1],y:a[2],type:a[3],dir:a[4],sector:a[5],node:a[6],medium:a[7],utp:a[8],mount:a[9],h:a[10],range:TYPES[a[3]].range,photos:[]}));
+const NAVE_Y=742;
+function utpRoute(c){
+  const N=NODES[c.node];
+  if(c.node==='DC') return [[c.x,c.y],[c.x,NAVE_Y],[N.x,NAVE_Y],[N.x,N.y]];
+  if(c.node==='S1') return [[c.x,c.y],[c.x,N.y+(c.y>N.y?40:-30)],[N.x,N.y+(c.y>N.y?40:-30)],[N.x,N.y]];
+  return [[c.x,c.y],[c.x,N.y],[N.x,N.y]];
+}
+const FIBER=[
+ {from:'S1',lab:[2650,606],name:'Fibra existente Sala C1 → Data center',pts:[[2960,632],[2800,640],[2780,700],[2450,700],[2352,700],[2352,753]]},
+ {from:'S15',lab:[960,566],name:'Fibra existente Sala C15 → Data center',pts:[[756,305],[820,305],[820,600],[1080,600],[1100,735],[2300,735],[2352,753]]}
+];
+const PTP=[
+ {a:[849,398],b:[756,305],name:'PTP cámara 14 → Sala C15'},
+ {a:[420,470],b:[756,305],name:'PTP SW C16 (cám. 16) → Sala C15'},
+ {a:[141,395],b:[420,470],name:'PTP cámara 18 → SW C16'}
+];
+const PH=p=>({src:'photos/'+p[0]+'.jpg',thumb:'photos/'+p[0]+'_t.jpg',cap:p[1]});
+const PHOTOS=[
+ {id:'g1',x:2905,y:660,title:'Sala de control subestación',sector:'Subestación',photos:[['bb4ef8f8','Sala de control: armarios Paño HT1, Paño HL y comunicaciones'],['c5092551','Armario de control y protección Paño HL'],['dc5758b0','Armario Paño HT1: controlador GE C90 y protección T60'],['b049c8d6','Cabecera óptica del armario de comunicaciones (fibra existente)']]},
+ {id:'g2',x:3030,y:930,title:'Patio de alta tensión',sector:'Subestación',photos:[['fcea5928','Interruptor Paño HT1 en patio de alta tensión'],['da8e5580','Interruptor 23 kV Paño ET1 (52ET1)'],['154bd9ce','Estructura de media tensión con reconectador junto al cerco'],['5f7dfc76','Recorrido por el cerco perimetral de la subestación']]},
+ {id:'g3',x:2745,y:505,title:'Acceso a subestación',sector:'Subestación',photos:[['da6c327d','Acceso a la subestación y postes de iluminación']]},
+ {id:'g4',x:1640,y:860,title:'Nave de motores',sector:'Nave de motores',photos:[['34de1432','Nave de motores: recorrido con el cliente'],['719b8c58','Motogeneradores GE Jenbacher'],['1bc37bf3','Vista longitudinal de la nave y tableros de control']]},
+ {id:'g5',x:1925,y:860,title:'Salas eléctricas',sector:'Nave de motores',photos:[['79cde879','Sala eléctrica: tableros y escalerilla portaconductores'],['e6605971','Sala eléctrica de tableros de distribución']]},
+ {id:'g6',x:2410,y:700,title:'Data center · rack 45U',sector:'Data center',photos:[['a8f4e373','Data center: rack blanco (izquierda) y rack negro (centro)'],['590fa4ae','Data center visto desde el pasillo'],['46e9bfa1','Rack blanco: cabecera óptica, servidores Dell y UPS'],['4ff5c93a','Rack blanco: cableado sin ordenar (vista posterior)'],['6ca4c9eb','Llegada de ductos y bandeja sobre el rack blanco'],['5d0fa92a','Pasada de cables por la placa superior del rack'],['0c87a197','Costado del rack: patch cords de fibra sueltos en el piso']]},
+ {id:'g7',x:930,y:335,title:'Planta de gas y antorcha',sector:'Oficinas y acceso',photos:[['8dc1e0d9','Poste de iluminación junto a la planta de gas y antorcha']]},
+ {id:'g8',x:610,y:420,title:'Oficinas',sector:'Oficinas y acceso',photos:[['c440656d','Poste frente al edificio de oficinas'],['55a0c284','Poste en el patio de acceso, frente a contenedores']]},
+ {id:'g9',x:160,y:620,title:'Área de contenedores',sector:'Oficinas y acceso',photos:[['c96f72d6','Poste de media tensión y tablero en el área de contenedores']]},
+ {id:'g10',x:60,y:470,title:'Portón poniente',sector:'Oficinas y acceso',photos:[['095612c3','Cámara PTZ existente en poste junto al portón']]}
+].map(g=>({...g,photos:g.photos.map(PH)}));
+const ALLPH=PHOTOS.flatMap(g=>g.photos.map(p=>({...p,group:g.title})));
+
+/* ---------- helpers ---------- */
+const $=s=>document.querySelector(s);
+const NS='http://www.w3.org/2000/svg';
+function el(tag,attrs,parent){const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);if(parent)parent.appendChild(e);return e}
+const rad=d=>d*Math.PI/180;
+function wedge(cx,cy,dir,fov,r){
+  if(fov>=360) return `M${cx-r},${cy}a${r},${r} 0 1,0 ${2*r},0a${r},${r} 0 1,0 ${-2*r},0`;
+  const a0=rad(dir-fov/2),a1=rad(dir+fov/2);
+  const x0=cx+r*Math.cos(a0),y0=cy+r*Math.sin(a0),x1=cx+r*Math.cos(a1),y1=cy+r*Math.sin(a1);
+  return `M${cx},${cy}L${x0},${y0}A${r},${r} 0 ${fov>180?1:0},1 ${x1},${y1}Z`;
+}
+
+/* ---------- 2D plan ---------- */
+const svg=$('#map2d');
+const defs=el('defs',{},svg);
+defs.innerHTML=`<filter id="glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+<filter id="shadow" x="-50%" y="-50%" width="200%" height="200%"><feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#000" flood-opacity=".6"/></filter>
+${Object.entries(TYPES).map(([k,t])=>`<radialGradient id="fg-${k}"><stop offset="0" stop-color="${t.color}" stop-opacity="${k==='ptz'?.16:.45}"/><stop offset="1" stop-color="${t.color}" stop-opacity="${k==='ptz'?.02:.06}"/></radialGradient>`).join('')}`;
+el('image',{href:'base.jpg',x:0,y:0,width:W,height:H},svg);
+el('rect',{x:0,y:0,width:W,height:H,fill:'#06101c',opacity:.28},svg);
+const G={};
+['sector','fov','fo','utp','ptp','humo','nodes','cams','foto','lbl','edit'].forEach(k=>G[k]=el('g',{id:'g-'+k},svg));
+[['OFICINAS Y ACCESO',140,170],['PLANTA DE GAS',870,200],['NAVE DE MOTORES',1380,705],['DATA CENTER',2060,650],['SUBESTACIÓN',2860,520]].forEach(([t,x,y])=>{
+  const tx=el('text',{x,y,fill:'#fff','font-size':44,'font-weight':800,'letter-spacing':6,stroke:'#06101c','stroke-width':10,'paint-order':'stroke',opacity:.92},G.sector);tx.textContent=t;});
+// subestación fence
+el('rect',{x:2820,y:690,width:385,height:320,fill:'none',stroke:'#fff','stroke-width':3,'stroke-dasharray':'14 8',opacity:.55},G.sector);
+CAMS.forEach(c=>{const t=TYPES[c.type];const r=c.range*PX;
+  c.fovEl=el('path',{d:wedge(c.x,c.y,c.dir,t.fov,r),fill:`url(#fg-${c.type})`,stroke:t.color,'stroke-width':c.type==='ptz'?2:3,'stroke-opacity':.85,'stroke-dasharray':c.type==='ptz'?'10 8':'none','data-cam':c.n},G.fov);});
+FIBER.forEach(f=>{const d='M'+f.pts.map(p=>p.join(',')).join('L');
+  el('path',{d,fill:'none',stroke:'#22d3ee','stroke-width':16,opacity:.25,filter:'url(#glow)'},G.fo);
+  el('path',{d,fill:'none',stroke:'#22d3ee','stroke-width':6,'stroke-linejoin':'round'},G.fo);
+  el('path',{d,fill:'none',stroke:'#e0fbff','stroke-width':2.5,'stroke-dasharray':'12 28',class:'flow'},G.fo);
+  const m=f.lab;
+  const lab=el('g',{transform:`translate(${m[0]},${m[1]})`},G.lbl);
+  el('rect',{x:-150,y:-26,width:300,height:44,rx:9,fill:'#06101c',stroke:'#22d3ee','stroke-width':2.5},lab);
+  const tt=el('text',{x:0,y:5,'text-anchor':'middle',fill:'#22d3ee','font-size':24,'font-weight':800},lab);tt.textContent='FIBRA EXISTENTE';});
+CAMS.filter(c=>c.medium==='UTP').forEach(c=>{const d='M'+utpRoute(c).map(p=>p.join(',')).join('L');
+  c.utpEls=[el('path',{d,fill:'none',stroke:'#06101c','stroke-width':9,opacity:.7,'stroke-linejoin':'round'},G.utp),
+  el('path',{d,fill:'none',stroke:'#fb923c','stroke-width':4.5,'stroke-dasharray':'16 8',class:'flow','stroke-linejoin':'round','data-cam':c.n},G.utp)];});
+// SW16 ↔ cam16 local patch
+el('path',{d:`M${NODES.SW16.x},${NODES.SW16.y}L467,435`,stroke:'#fb923c','stroke-width':4.5,fill:'none'},G.utp);
+PTP.forEach(l=>{const [ax,ay]=l.a,[bx,by]=l.b;const mx=(ax+bx)/2,my=(ay+by)/2-Math.hypot(bx-ax,by-ay)*.25;
+  const d=`M${ax},${ay}Q${mx},${my} ${bx},${by}`;
+  el('path',{d,fill:'none',stroke:'#e879f9','stroke-width':14,opacity:.22,filter:'url(#glow)'},G.ptp);
+  el('path',{d,fill:'none',stroke:'#e879f9','stroke-width':4.5,'stroke-dasharray':'2 12','stroke-linecap':'round',class:'flow'},G.ptp);
+  [[ax,ay],[bx,by]].forEach(([x,y])=>{const g=el('g',{transform:`translate(${x},${y})`},G.ptp);
+    el('path',{d:'M-14,-30 Q0,-44 14,-30 M-8,-24 Q0,-32 8,-24',fill:'none',stroke:'#e879f9','stroke-width':3.5,'stroke-linecap':'round'},g);});
+  const lt=el('text',{x:mx,y:(ay+by)/2-Math.hypot(bx-ax,by-ay)*.13,'text-anchor':'middle',fill:'#f5d0fe','font-size':24,'font-weight':800,stroke:'#06101c','stroke-width':7,'paint-order':'stroke'},G.lbl);lt.textContent='PTP 5 GHz';});
+Object.entries(NODES).forEach(([k,n])=>{const g=el('g',{transform:`translate(${n.x},${n.y})`,style:'cursor:pointer',filter:'url(#shadow)','data-node':k,tabindex:0,role:'button','aria-label':n.name},G.nodes);
+  el('rect',{x:-30,y:-30,width:60,height:60,rx:9,fill:k==='DC'?'#1aa3e0':'#fff',stroke:'#06101c','stroke-width':4},g);
+  for(let i=0;i<3;i++) el('rect',{x:-15,y:-16+i*11,width:30,height:6,rx:1.5,fill:k==='DC'?'#06101c':'#132541'},g);
+  const lg=el('g',{transform:'translate(34,-14)'},G.lbl);lg.setAttribute('transform',`translate(${n.x+34},${n.y-14})`);
+  const r=el('rect',{x:0,y:-26,width:n.short.length*20+28,height:44,rx:9,fill:'#06101c',stroke:k==='DC'?'#1aa3e0':'#fff','stroke-width':2.5},lg);
+  const t=el('text',{x:14,y:5,fill:'#fff','font-size':26,'font-weight':800,'letter-spacing':1},lg);t.textContent=n.short;
+  g.addEventListener('click',e=>{e.stopPropagation();showNode(k)});
+  g.addEventListener('keydown',e=>{if(e.key==='Enter')showNode(k)});});
+CAMS.forEach(c=>{const t=TYPES[c.type];
+  const g=c.gEl=el('g',{transform:`translate(${c.x},${c.y})`,style:'cursor:pointer','data-cam':c.n,tabindex:0,role:'button','aria-label':'Cámara '+c.n,filter:'url(#shadow)'},G.cams);
+  el('circle',{r:54,fill:t.color,opacity:0,class:'sel'},g);
+  el('circle',{r:34,fill:'#06101c',stroke:t.color,'stroke-width':7},g);
+  const tx=el('text',{y:11,'text-anchor':'middle',fill:'#fff','font-size':31,'font-weight':800},g);tx.textContent=c.n;
+  const b=c.badgeEl=el('g',{class:'tbadge'},G.lbl);b.setAttribute('transform',`translate(${c.x},${c.y+54})`);
+  const w=t.abbr.length*15+20;el('rect',{x:-w/2,y:-16,width:w,height:30,rx:7,fill:t.color},b);
+  const bt=el('text',{y:6,'text-anchor':'middle',fill:'#06101c','font-size':20,'font-weight':800},b);bt.textContent=t.abbr;
+  g.addEventListener('click',e=>{e.stopPropagation();selectCam(c.n)});
+  g.addEventListener('keydown',e=>{if(e.key==='Enter')selectCam(c.n)});});
+PHOTOS.forEach(gp=>{const g=el('g',{transform:`translate(${gp.x},${gp.y})`,style:'cursor:zoom-in',tabindex:0,role:'button','aria-label':'Fotos: '+gp.title,filter:'url(#shadow)'},G.foto);
+  el('rect',{x:-24,y:-19,width:48,height:38,rx:8,fill:'#fff'},g);
+  el('rect',{x:-15,y:-10,width:30,height:22,rx:3,fill:'none',stroke:'#06101c','stroke-width':3.5},g);
+  el('circle',{cx:0,cy:1,r:6,fill:'none',stroke:'#06101c','stroke-width':3.5},g);
+  el('rect',{x:-7,y:-15,width:12,height:6,rx:2,fill:'#06101c'},g);
+  const cnt=el('g',{transform:'translate(22,-18)'},g);el('circle',{r:12,fill:'#1aa3e0'},cnt);
+  const ct=el('text',{y:6,'text-anchor':'middle','font-size':16,'font-weight':800,fill:'#06101c'},cnt);ct.textContent=gp.photos.length;
+  const open=()=>openLB(ALLPH.findIndex(p=>p.src===gp.photos[0].src));
+  g.addEventListener('click',e=>{e.stopPropagation();open()});g.addEventListener('keydown',e=>{if(e.key==='Enter')open()});});
+// scale bar: 50 m
+function updScale(){const r=svg.getBoundingClientRect();const vb=svg.viewBox.baseVal;const s=Math.min(r.width/vb.width,r.height/vb.height);$('#scalebar').style.width=(50*PX*s)+'px'}
+// pan/zoom
+let editMode=false;
+let vb={x:0,y:0,w:W,h:H};
+function setVB(){vb.w=Math.min(W,Math.max(260,vb.w));vb.h=vb.w*H/W;vb.x=Math.min(W-vb.w,Math.max(0,vb.x));vb.y=Math.min(H-vb.h,Math.max(0,vb.y));svg.setAttribute('viewBox',`${vb.x} ${vb.y} ${vb.w} ${vb.h}`);updScale();if(editMode)drawHandle()}
+function zoomAt(f,cx,cy){const nw=Math.min(W,Math.max(260,vb.w*f));const k=nw/vb.w;vb.x=cx-(cx-vb.x)*k;vb.y=cy-(cy-vb.y)*k;vb.w=nw;setVB()}
+function svgPt(e){const r=svg.getBoundingClientRect();const s=Math.min(r.width/vb.w,r.height/vb.h);const ox=(r.width-vb.w*s)/2,oy=(r.height-vb.h*s)/2;return[vb.x+(e.clientX-r.left-ox)/s,vb.y+(e.clientY-r.top-oy)/s]}
+svg.addEventListener('wheel',e=>{e.preventDefault();const [x,y]=svgPt(e);zoomAt(e.deltaY>0?1.15:1/1.15,x,y)},{passive:false});
+let drag=null;
+let edrag=null;
+svg.addEventListener('pointerdown',e=>{
+  if(editMode&&current){const hd=e.target.closest('[data-edit]');const cg=e.target.closest('g[data-cam]');
+    if(hd||(cg&&+cg.dataset.cam===current)){e.preventDefault();edrag={c:CAMS.find(c=>c.n===current),mode:hd?'aim':'move',moved:false};svg.setPointerCapture(e.pointerId);return}}
+  if(e.target.closest('[role=button]'))return;drag={x:e.clientX,y:e.clientY,vx:vb.x,vy:vb.y};svg.setPointerCapture(e.pointerId);svg.classList.add('drag')});
+svg.addEventListener('pointermove',e=>{if(edrag){const c=edrag.c;const [x,y]=svgPt(e);edrag.moved=true;
+    if(edrag.mode==='aim'){c.dir=Math.round((Math.atan2(y-c.y,x-c.x)*180/Math.PI+360)%360);c.range=Math.max(2,Math.min(TYPES[c.type].fov>=360?150:90,Math.round(Math.hypot(x-c.x,y-c.y)/PX)))}
+    else{c.x=Math.round(Math.max(0,Math.min(W,x)));c.y=Math.round(Math.max(0,Math.min(H,y)))}
+    redrawCam(c);syncSliders(c);return}
+  if(!drag)return;const r=svg.getBoundingClientRect();const s=Math.min(r.width/vb.w,r.height/vb.h);vb.x=drag.vx-(e.clientX-drag.x)/s;vb.y=drag.vy-(e.clientY-drag.y)/s;setVB()});
+svg.addEventListener('pointerup',()=>{if(edrag){const c=edrag.c,m=edrag.moved;edrag=null;if(m){save(c);selectCam(c.n,false,true)}return}drag=null;svg.classList.remove('drag')});
+$('#zin').onclick=()=>zoomAt(1/1.4,vb.x+vb.w/2,vb.y+vb.h/2);
+$('#zout').onclick=()=>zoomAt(1.4,vb.x+vb.w/2,vb.y+vb.h/2);
+$('#zreset').onclick=()=>{vb={x:0,y:0,w:W,h:H};setVB()};
+$('#b-edit').onclick=()=>setEdit(!editMode);
+new ResizeObserver(updScale).observe(svg);
+
+/*HUMO2D*/
+const HUMO=[{x:1790,y:990,name:'Sala eléctrica 1',foto:'79cde879',fn:13,cap:'tableros y escalerilla portaconductores',lbl:'HUMO · SALA ELÉC. 1'},{x:2030,y:990,name:'Sala eléctrica 2',foto:'e6605971',fn:14,cap:'tableros de distribución',lbl:'HUMO · SALA ELÉC. 2'},{x:3195,y:610,name:'Sala de control S/E',foto:'bb4ef8f8',fn:1,cap:'armarios Paño HT1, Paño HL y comunicaciones',lbl:'HUMO · CONTROL S/E'}];
+{const DCn=NODES.DC;const hub=[DCn.x-46,DCn.y+52];
+ HUMO.forEach((h,i)=>{const mx=(h.x+hub[0])/2,my=Math.min(h.y,hub[1])-60;
+  el('path',{d:`M${h.x},${h.y}Q${mx},${my} ${hub[0]},${hub[1]}`,fill:'none',stroke:'#ef4444','stroke-width':3.5,'stroke-dasharray':'2 10','stroke-linecap':'round',class:'flow',opacity:.9},G.humo);
+  const g=el('g',{transform:`translate(${h.x},${h.y})`,style:'cursor:pointer',tabindex:0,role:'button','aria-label':'Detección de humo · '+h.name,filter:'url(#shadow)'},G.humo);
+  const pr=el('circle',{r:30,fill:'none',stroke:'#ef4444','stroke-width':4},g);pr.innerHTML='<animate attributeName="r" values="28;56" dur="1.6s" repeatCount="indefinite"/><animate attributeName="opacity" values=".9;0" dur="1.6s" repeatCount="indefinite"/>';
+  el('circle',{r:26,fill:'#fff',stroke:'#ef4444','stroke-width':6},g);el('circle',{r:12,fill:'none',stroke:'#cbd5e1','stroke-width':3},g);el('circle',{r:6,fill:'#ef4444'},g);
+  const b=el('g',{transform:'translate(24,-22)'},g);el('rect',{x:-4,y:-14,width:40,height:26,rx:7,fill:'#ef4444'},b);const bt=el('text',{x:16,y:6,'text-anchor':'middle','font-size':18,'font-weight':800,fill:'#fff'},b);bt.textContent='×2';
+  const lt=el('text',{x:h.x,y:h.y+56,'text-anchor':'middle',fill:'#fecaca','font-size':20,'font-weight':800,stroke:'#06101c','stroke-width':6,'paint-order':'stroke'},G.lbl);lt.textContent=h.lbl;
+  g.addEventListener('click',e=>{e.stopPropagation();showHumo(i)});g.addEventListener('keydown',e=>{if(e.key==='Enter')showHumo(i)});});
+ const hg=el('g',{transform:`translate(${hub[0]},${hub[1]})`,filter:'url(#shadow)',style:'cursor:pointer',tabindex:0,role:'button','aria-label':'Central de detección de humo Hub 2'},G.humo);
+ el('rect',{x:-26,y:-18,width:52,height:36,rx:9,fill:'#ef4444',stroke:'#06101c','stroke-width':3},hg);const ht=el('text',{y:7,'text-anchor':'middle','font-size':17,'font-weight':800,fill:'#fff'},hg);ht.textContent='HUB';
+ hg.addEventListener('click',e=>{e.stopPropagation();showHumo(-1)});}
+function showHumo(i){const base='<p class="note" style="color:var(--fg);font-size:13px">Alerta temprana con verificación por video: no reemplaza un sistema de detección de incendio certificado.</p>';
+  if(i<0){$('#detail').innerHTML=`<h2>Detección de humo</h2><h3>Central Hub 2 · data center</h3><dl class="kv"><dt>Modelo</dt><dd>Dahua DHI-ARC3800H-FW2</dd><dt>Conexión</dt><dd>Red CCTV (Ethernet) + 4G de respaldo</dd><dt>Aviso</dt><dd>App DMSS y sirenas; el NVR graba las cámaras asociadas</dd><dt>Detectores</dt><dd>6 (2 por sala: 2 salas eléctricas y sala de control S/E)</dd></dl>`+base;return}
+  const h=HUMO[i],ph=PBYID[h.foto];$('#detail').innerHTML=`<h2>Detección de humo</h2><h3>${h.name}</h3><dl class="kv"><dt>Detectores</dt><dd>2 × Dahua DHI-HY-SA21A-W2 (fotoeléctricos, inalámbricos)</dd><dt>Sirena</dt><dd>1 × Dahua DHI-ARA12-W2</dd><dt>Central</dt><dd>Hub 2 en el rack del data center</dd><dt>Foto</dt><dd>Foto ${h.fn} · ${h.cap}</dd></dl>`+(ph?thumbs([ph]):'')+base}
+/* ---------- side panel ---------- */
+$('#legend').innerHTML=Object.values(TYPES).map(t=>`<div><span class="dot" style="border-color:${t.color};background:${t.color}33"></span><b>${t.label}</b>&nbsp;<span style="color:var(--muted)">· ${CAMS.filter(c=>TYPES[c.type]===t).length}</span></div>`).join('')+
+ `<div><span class="dot" style="border-color:#ef4444;background:#ef444433"></span><b>Detector de humo</b>&nbsp;<span style="color:var(--muted)">· 6 en 3 salas</span></div><div><span class="sw" style="border-color:var(--fo)"></span>Fibra óptica existente (troncal)</div><div><span class="sw" style="border-color:var(--utp);border-top-style:dashed"></span>UTP Cat6 exterior</div><div><span class="sw" style="border-color:var(--ptp);border-top-style:dotted"></span>Enlace PTP 5 GHz</div>`;
+$('#camlist').innerHTML=CAMS.map(c=>`<button class="cbtn" data-n="${c.n}" aria-pressed="false" style="border-color:${TYPES[c.type].color}">${String(c.n).padStart(2,'0')}</button>`).join('');
+$('#camlist').addEventListener('click',e=>{const b=e.target.closest('[data-n]');if(b)selectCam(+b.dataset.n)});
+function photosForSector(s){return PHOTOS.filter(g=>g.sector===s||(s==='Nave de motores'&&g.sector==='Data center')).flatMap(g=>g.photos)}
+function thumbs(list){return `<div class="thumbs">${list.slice(0,6).map(p=>`<button data-src="${p.src}" aria-label="${p.cap}"><img src="${p.thumb}" alt="${p.cap}" loading="lazy"></button>`).join('')}</div>`}
+let current=null,canWrite=false,db=null;
+const PBYID=Object.fromEntries(ALLPH.map(p=>[p.src.split('/')[1].replace('.jpg',''),p]));
+const pid=p=>p.src.split('/')[1].replace('.jpg','');
+function redrawCam(c){const t=TYPES[c.type];c.fovEl.setAttribute('d',wedge(c.x,c.y,c.dir,t.fov,c.range*PX));
+  c.gEl.setAttribute('transform',`translate(${c.x},${c.y})`);c.badgeEl.setAttribute('transform',`translate(${c.x},${c.y+54})`);
+  if(c.utpEls){const d='M'+utpRoute(c).map(p=>p.join(',')).join('L');c.utpEls.forEach(p=>p.setAttribute('d',d))}
+  if(window.__cam3d)window.__cam3d(c);if(editMode&&current===c.n)drawHandle()}
+const redrawFov=redrawCam;
+function drawHandle(){G.edit.innerHTML='';if(!editMode||!current)return;const c=CAMS.find(c=>c.n===current);const omni=TYPES[c.type].fov>=360;
+  const k=Math.max(1,vb.w/1400);const r=c.range*PX,a=omni?0:rad(c.dir),hx=c.x+r*Math.cos(a),hy=c.y+r*Math.sin(a);
+  el('circle',{cx:c.x,cy:c.y,r:48*k,fill:'none',stroke:'#fff','stroke-width':4*k,'stroke-dasharray':`${10*k} ${7*k}`},G.edit);
+  el('line',{x1:c.x,y1:c.y,x2:hx,y2:hy,stroke:'#fff','stroke-width':3*k,'stroke-dasharray':`${8*k} ${6*k}`},G.edit);
+  const h=el('g',{'data-edit':'aim',style:'cursor:grab'},G.edit);
+  el('circle',{cx:hx,cy:hy,r:30*k,fill:'#ffffff',stroke:TYPES[c.type].color,'stroke-width':8*k},h);
+  el('path',{d:`M${hx-12*k},${hy}L${hx+12*k},${hy}M${hx},${hy-12*k}L${hx},${hy+12*k}`,stroke:'#06101c','stroke-width':4*k},h);
+  const t=el('text',{x:hx,y:hy-42*k,'text-anchor':'middle',fill:'#fff','font-size':24*k,'font-weight':800,stroke:'#06101c','stroke-width':6*k,'paint-order':'stroke'},G.edit);t.textContent=omni?'Alcance':'Girar / alcance';}
+function syncSliders(c){const d=$('#s-dir'),r=$('#s-rng');if(d){d.value=c.dir;$('#v-dir').textContent=c.dir+'°'}if(r){r.value=c.range;$('#v-rng').textContent=c.range+' m'}}
+let saveT=null;
+function save(c){$('#savestate')&&($('#savestate').textContent=db&&canWrite?'Guardando…':'Cambio solo en esta vista (no se guarda)');if(!db||!canWrite)return;clearTimeout(saveT);
+  saveT=setTimeout(async()=>{try{await db.doc('cams/c'+c.n).set({dir:c.dir,range:c.range,x:c.x,y:c.y,photos:c.photos});$('#savestate')&&($('#savestate').textContent='Guardado para todos los que ven el plano')}catch(e){$('#savestate')&&($('#savestate').textContent='No se pudo guardar ('+(e&&e.code||'error')+')')}},400)}
+function thumbsList(list,empty){return list.length?`<div class="thumbs">${list.map(p=>`<button data-src="${p.src}" aria-label="${p.cap}"><img src="${p.thumb}" alt="${p.cap}" loading="lazy"></button>`).join('')}</div>`:`<p class="note">${empty}</p>`}
+let picker=false;
+function selectCam(n,from3d,keepView){
+  const c=CAMS.find(c=>c.n===n);const t=TYPES[c.type];const N=NODES[c.node];current=n;
+  const conn=c.medium==='PTP'?`Enlace PTP 5 GHz → ${N.short}`:`UTP Cat6 exterior → ${N.short}`;
+  const own=c.photos.map(id=>PBYID[id]).filter(Boolean);
+  $('#detail').innerHTML=`<h2>Cámara seleccionada</h2><h3>Cámara ${String(n).padStart(2,'0')} <span class="chip" style="background:${t.color}">${t.label}</span></h3>
+  <dl class="kv"><dt>Modelo</dt><dd>${t.model}</dd><dt>Sector</dt><dd>${c.sector}</dd><dt>Montaje</dt><dd>${c.mount} · ${c.h} m</dd><dt>Conexión</dt><dd>${conn}</dd>
+  <dt>${c.medium==='PTP'?'Patch local':'UTP estimado'}</dt><dd>~${c.utp} m${c.medium==='UTP'&&c.utp>90?' · extensor PoE':''}</dd><dt>Cobertura</dt><dd>${t.fov>=360?'360° · PTZ':t.fov+'°'} · orientación ${c.dir}° · alcance ${c.range} m</dd></dl>
+  ${n<=5?'<p class="note">Enfocada a la pantalla del equipo a ≤ 2 m; IR desactivado para evitar reflejos en el vidrio.</p>':''}
+  ${editMode&&t.fov<360?`<div class="edit"><label for="s-dir">Orientación <b id="v-dir">${c.dir}°</b></label><input type="range" id="s-dir" min="0" max="359" value="${c.dir}">
+   <label for="s-rng">Alcance <b id="v-rng">${c.range} m</b></label><input type="range" id="s-rng" min="2" max="90" value="${c.range}"><p class="note" id="savestate">En el plano: arrastra la cámara para moverla y el punto blanco para girarla o cambiar el alcance.</p></div>`:''}
+  ${editMode&&t.fov>=360?`<p class="note" id="savestate">La PTZ cubre 360°; solo se ajusta el alcance.</p><div class="edit"><label for="s-rng">Alcance <b id="v-rng">${c.range} m</b></label><input type="range" id="s-rng" min="10" max="150" value="${c.range}"></div>`:''}
+  <h2 style="margin-top:12px">Fotos de esta cámara</h2>${thumbsList(own,'Aún no hay fotos asignadas a esta cámara.'+(canWrite?' Usa «Asignar fotos».':''))}
+  ${canWrite?`<button class="btn" id="b-pick" style="margin-top:8px">${picker?'Listo':'Asignar fotos'}</button>`:''}
+  ${picker&&canWrite?`<div class="pick">${ALLPH.map(p=>{const on=c.photos.includes(pid(p));return `<button data-pid="${pid(p)}" aria-pressed="${on}" title="${p.cap}"><img src="${p.thumb}" alt="${p.cap}" loading="lazy"></button>`}).join('')}</div>`:''}
+  <h2 style="margin-top:12px">Fotos del sector</h2>${thumbsList(photosForSector(c.sector).slice(0,6),'Sin fotos del sector.')}`;
+  const sd=$('#s-dir'),sr=$('#s-rng');
+  if(sd)sd.oninput=()=>{c.dir=+sd.value;$('#v-dir').textContent=c.dir+'°';redrawFov(c)};
+  if(sr)sr.oninput=()=>{c.range=+sr.value;$('#v-rng').textContent=c.range+' m';redrawFov(c)};
+  if(sd)sd.onchange=()=>save(c); if(sr)sr.onchange=()=>save(c);
+  const bp=$('#b-pick');if(bp)bp.onclick=()=>{picker=!picker;selectCam(n,true)};
+  $('#detail').querySelectorAll('.pick [data-pid]').forEach(b=>b.onclick=()=>{const id=b.dataset.pid;c.photos=c.photos.includes(id)?c.photos.filter(x=>x!==id):[...c.photos,id];b.setAttribute('aria-pressed',c.photos.includes(id));save(c);
+    const box=$('#detail').querySelectorAll('.thumbs')[0];});
+  document.querySelectorAll('.cbtn').forEach(b=>b.setAttribute('aria-pressed',+b.dataset.n===n));
+  G.cams.querySelectorAll('g[data-cam]').forEach(g=>g.querySelector('.sel').setAttribute('opacity',+g.dataset.cam===n?.35:0));
+  G.fov.querySelectorAll('path').forEach(p=>p.setAttribute('opacity',+p.dataset.cam===n?1:.55));
+  drawHandle();
+  if(window.__sel3d) window.__sel3d(n,from3d);
+}
+function setEdit(on){editMode=on;const b=$('#b-edit');b.classList.toggle('on',on);b.textContent=on?'Terminar edición':'Editar cámaras';if(current)selectCam(current,true);else drawHandle()}
+(async()=>{try{if(!window.claude||!claude.use)return;
+  const [d,u]=await Promise.all([claude.use('db'),claude.use('user')]);db=d;
+  let ok=null;if(u){try{ok=(await u.isOwner())||(await u.canEdit())}catch(e){ok=null}}
+  canWrite=!!db&&ok!==false;
+  $('#b-edit').hidden=false;if(current)selectCam(current,true)
+  if(db){db.collection('cams').onSnapshot(snap=>{let changed=false;snap.docs.forEach(doc=>{const n=+doc.id.slice(1);const c=CAMS.find(c=>c.n===n);const v=doc.data();if(!c||!v)return;
+      if(typeof v.dir==='number'&&v.dir!==c.dir){c.dir=v.dir;changed=true}if(typeof v.range==='number'&&v.range!==c.range){c.range=v.range;changed=true}
+      if(typeof v.x==='number'&&typeof v.y==='number'&&(v.x!==c.x||v.y!==c.y)){c.x=v.x;c.y=v.y;changed=true}
+      if(Array.isArray(v.photos)&&v.photos.join()!==c.photos.join()){c.photos=v.photos.filter(x=>typeof x==='string'&&PBYID[x]);changed=true}
+      if(changed)redrawFov(c)});
+    if(changed&&current&&!document.activeElement?.matches?.('input[type=range]'))selectCam(current,true)},()=>{})}
+}catch(e){}})();
+function showNode(k){const N=NODES[k];const cams=CAMS.filter(c=>c.node===k).map(c=>c.n);
+  $('#detail').innerHTML=`<h2>Nodo de red</h2><h3>${N.name}</h3><p class="note" style="color:var(--fg);font-size:13px">${N.desc}</p>
+  <dl class="kv"><dt>Cámaras</dt><dd>${cams.length?cams.join(', '):'—'}</dd><dt>Enlace</dt><dd>${k==='DC'?'Troncales FO existentes desde Sala C1 y Sala C15':k==='SW16'?'PTP 5 GHz → Sala C15':'Fibra existente → Rack DC'}</dd></dl>
+  ${thumbs(k==='DC'?PHOTOS.find(g=>g.id==='g6').photos:k==='S1'?PHOTOS.find(g=>g.id==='g1').photos:photosForSector('Oficinas y acceso'))}`;}
+$('#detail').addEventListener('click',e=>{const b=e.target.closest('[data-src]');if(b)openLB(ALLPH.findIndex(p=>p.src===b.dataset.src))});
+// layers
+const LAY={fov:['fov'],utp:['utp'],fo:['fo'],ptp:['ptp'],humo:['humo'],foto:['foto'],lbl:['lbl']};
+Object.keys(LAY).forEach(k=>{$('#L-'+k).addEventListener('change',e=>{LAY[k].forEach(g=>G[g].style.display=e.target.checked?'':'none');if(window.__layer3d)window.__layer3d(k,e.target.checked)})});
+
+/* ---------- gallery & lightbox ---------- */
+const secs=['Subestación','Nave de motores','Data center','Oficinas y acceso'];
+$('#gal').innerHTML=secs.map(s=>{const gs=PHOTOS.filter(g=>g.sector===s);const n=gs.reduce((a,g)=>a+g.photos.length,0);
+  return `<div class="gsec"><h3>${s}<small>${n} fotos</small></h3><div class="ggrid">${gs.flatMap(g=>g.photos).map(p=>`<button class="gitem" data-src="${p.src}"><img src="${p.thumb}" alt="${p.cap}" loading="lazy"><span>${p.cap}</span></button>`).join('')}</div></div>`}).join('')+
+  '<p class="note">Fotografías del levantamiento en terreno del 26-10-2026. La ubicación de cada toma en el plano es aproximada.</p>';
+$('#gal').addEventListener('click',e=>{const b=e.target.closest('[data-src]');if(b)openLB(ALLPH.findIndex(p=>p.src===b.dataset.src))});
+let li=0;const lb=$('#lb');
+function openLB(i){if(i<0)return;li=i;const p=ALLPH[i];$('#lbimg').src=p.src;$('#lbimg').alt=p.cap;$('#lbcap').innerHTML=`${p.cap}<small>${p.group} · ${i+1} de ${ALLPH.length}</small>`;lb.hidden=false;$('#lbclose').focus()}
+$('#lbclose').onclick=()=>lb.hidden=true;
+$('#lbprev').onclick=()=>openLB((li-1+ALLPH.length)%ALLPH.length);
+$('#lbnext').onclick=()=>openLB((li+1)%ALLPH.length);
+lb.addEventListener('click',e=>{if(e.target===lb)lb.hidden=true});
+addEventListener('keydown',e=>{if(lb.hidden)return;if(e.key==='Escape')lb.hidden=true;if(e.key==='ArrowRight')$('#lbnext').click();if(e.key==='ArrowLeft')$('#lbprev').click()});
+
+/* ---------- tabs ---------- */
+const tabs={plano:$('#t-plano'),'3d':$('#t-3d'),fotos:$('#t-fotos')};
+function show(k){Object.entries(tabs).forEach(([n,b])=>{b.setAttribute('aria-selected',n===k);$('#p-'+n).hidden=n!==k});$('#tools2d').style.display=k==='plano'?'':'none';
+  if(k==='3d'){try{init3d()}catch(err){const l=$('#load3d');l.hidden=false;l.textContent='Error 3D: '+(err&&err.message||err)}window.__run3d&&window.__run3d(true)}else window.__run3d&&window.__run3d(false);
+  if(k==='plano')updScale();
+  try{history.replaceState(null,'','#'+(k==='plano'?'plano':k==='3d'?'vista-3d':'fotos'))}catch(e){}}
+Object.entries(tabs).forEach(([k,b])=>b.onclick=()=>show(k));
+
+/* ---------- 3D ---------- */
+let inited=false;
+function init3d(){if(inited)return;inited=true;
+  if(!window.THREE||!window.NWS3D){$('#load3d').textContent='No se pudo cargar el motor 3D.';return}
+  window.PLANO={W,H,PX,TYPES,NODES,CAMS,FIBER,PTP,PHOTOS,ALLPH,utpRoute,selectCam:(n,f)=>selectCam(n,f),openLB:i=>openLB(i)};
+  window.NWS3D.init();if(current)window.__sel3d&&window.__sel3d(current,true)}
+
+/* ---------- start ---------- */
+const OV={7:{dir:346,range:16,x:2239,y:840},8:{dir:271,range:19,x:2223,y:893},9:{dir:31,range:16,x:2147,y:804},10:{dir:266,range:16,x:2055,y:886},11:{dir:270,range:20,x:1782,y:892},12:{dir:255,range:13,x:1515,y:859},13:{dir:299,range:15,x:1198,y:863},14:{dir:4,range:18,x:849,y:398},15:{dir:2,range:10,x:747,y:261},16:{dir:185,range:17,x:467,y:435},17:{dir:46,range:16,x:330,y:640},18:{dir:220,range:18,x:141,y:395}};CAMS.forEach(c=>{const o=OV[c.n];if(o){Object.assign(c,o);redrawCam(c)}});
+
+selectCam(8);
+const h=location.hash;show(h.indexOf('#vista-3d')===0?'3d':h==='#fotos'?'fotos':'plano');
+})();
+</script>
+</body></html>
