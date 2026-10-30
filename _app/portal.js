@@ -17,6 +17,7 @@
     telefono: ['Teléfono', '#0EA5E9'], consola: ['Consola', '#14B8A6'], central: ['Central / hub', '#B91C1C'],
     nodo: ['Nodo', '#14275C'], otro: ['Otro equipo', '#64748B']
   };
+  var PLURAL = { camara: 'cámaras', detector: 'detectores de humo', sirena: 'sirenas', punto_red: 'puntos de red', ap: 'access points', bocina: 'bocinas', telefono: 'teléfonos', consola: 'consolas', central: 'centrales', nodo: 'nodos de red', otro: 'otros equipos' };
   var ETQ = { detector: 'D', sirena: 'S', punto_red: 'P', ap: 'AP', bocina: 'B', telefono: 'T', consola: 'C' };
   var etiqueta = function (p) { return p.e || (p.t === 'nodo' ? 'N' + (p.n || '') : p.t === 'camara' ? p.n : p.t === 'central' ? 'HUB' : (ETQ[p.t] || '·') + (p.n == null ? '' : p.n)); };
   var COLOR_CX = function (c) { return c === 'PTP' ? '#FF4D6D' : c === 'Radio' ? '#EF4444' : c === 'Audio 100 V' ? '#F59E0B' : /Fibra/.test(c || '') ? '#FACC15' : '#22D3EE'; };
@@ -87,7 +88,8 @@
       '<div class="hero"><div class="bgimg" style="background-image:url(\'' + esc(D.portada || D.imagen || '') + '\')"></div><div class="pins" id="pins"></div><div class="shade"></div>' +
         '<div class="in"><span class="k">' + esc((D.demo ? 'Propuesta DEMO' : 'Propuesta') + (D.fecha ? ' · ' + D.fecha : '')) + '</span>' +
         '<h1>' + esc(D.titulo || D.sitio) + '</h1><p>' + esc([D.cliente, D.direccion].filter(Boolean).join(' · ')) + '</p>' +
-        '<div class="chips">' + [D.linea, D.codigo, principal && principal.numero].filter(Boolean).map(function (c) { return '<span class="chip">' + esc(c) + '</span>'; }).join('') + '</div></div></div>' +
+        '<div class="chips">' + [D.linea, D.codigo, principal && principal.numero].filter(Boolean).map(function (c) { return '<span class="chip">' + esc(c) + '</span>'; }).join('') + '</div>' +
+        (D.imagen && puntos.length ? '<button class="play press" id="btn-anim">' + IC.play + 'Ver animación</button>' : '') + '</div></div>' +
       '<div class="kpis">' + (D.kpis || []).slice(0, 3).map(function (k, i) { return '<div class="kpi rv" style="transition-delay:' + (i * 90) + 'ms"><b data-k="' + i + '">' + esc(k.v) + '</b><span>' + esc(k.l) + '</span></div>'; }).join('') + '</div>' +
       (principal ? '<div class="sec rv"><div class="big"><small>Inversión del proyecto</small><div class="n tab-num" id="h-neto">$0</div><p>neto · <span id="h-total"></span> con IVA</p>' +
         '<a class="cta press" href="#inversion">Ver inversión y cuotas ' + IC.arrow + '</a></div></div>' : '') +
@@ -310,4 +312,84 @@
   window.addEventListener('load', function () { setTimeout(function () { $('#sp').classList.add('off'); }, quieto ? 0 : 650); });
   setTimeout(function () { $('#sp').classList.add('off'); }, 2500);
   ir();
+
+  // ---------- Animación de la propuesta (pantalla completa, ~30 s) ----------
+  // Título → imagen del sitio con los puntos apareciendo por tipo y los cables dibujándose → indicadores
+  // → qué incluye → inversión. Usa los mismos datos de la página; nada se genera aparte.
+  function animacion() {
+    var ov = document.createElement('div'); ov.className = 'anim'; ov.setAttribute('role', 'dialog');
+    var tipos = {}; puntos.forEach(function (p) { (tipos[p.t] = tipos[p.t] || []).push(p); });
+    var grupos = Object.keys(tipos).sort(function (a, b) { return (a === 'nodo' || a === 'central') - (b === 'nodo' || b === 'central'); });
+    var c = principal;
+    ov.innerHTML =
+      '<div class="a-stage"><img class="a-img" alt=""><svg class="a-svg"></svg><div class="a-mks"></div></div><div class="a-shade"></div>' +
+      '<div class="a-txt"></div>' +
+      '<div class="a-bar"><i></i></div><button class="a-x" aria-label="Cerrar">✕</button>';
+    document.body.appendChild(ov); vib(12);
+    var txt = $('.a-txt', ov), stage = $('.a-stage', ov), img = $('.a-img', ov), svg = $('.a-svg', ov), mks = $('.a-mks', ov), bar = $('.a-bar i', ov);
+    var timers = [], fin = false;
+    var luego = function (ms, fn) { timers.push(setTimeout(function () { if (!fin) fn(); }, ms)); };
+    var cerrar = function () { fin = true; timers.forEach(clearTimeout); ov.classList.add('out'); setTimeout(function () { ov.remove(); }, 400); };
+    $('.a-x', ov).onclick = cerrar;
+    var escena = function (html, cls) { txt.className = 'a-txt ' + (cls || ''); txt.innerHTML = html; void txt.offsetWidth; txt.classList.add('in'); };
+    var T = 0; var paso = function (dur, fn) { luego(T, fn); T += dur; };
+    var W = innerWidth, H = innerHeight;
+    img.onload = function () {
+      var nw = img.naturalWidth, nh = img.naturalHeight;
+      var cx = puntos.reduce(function (a, p) { return a + p.x; }, 0) / puntos.length, cy = puntos.reduce(function (a, p) { return a + p.y; }, 0) / puntos.length;
+      var minX = Math.min.apply(null, puntos.map(function (p) { return p.x; })), maxX = Math.max.apply(null, puntos.map(function (p) { return p.x; }));
+      var minY = Math.min.apply(null, puntos.map(function (p) { return p.y; })), maxY = Math.max.apply(null, puntos.map(function (p) { return p.y; }));
+      // Escala: que los puntos quepan a lo ancho si se puede; si no, al menos medio alto de pantalla y un paneo de lado a lado.
+      var sPts = Math.min((W * .84) / Math.max(1, maxX - minX), (H * .5) / Math.max(1, maxY - minY));
+      var s = Math.max(sPts, (H * .55) / nh, W / nw);
+      s = Math.min(s, (H / nh) * 4);
+      stage.style.width = nw + 'px'; stage.style.height = nh + 'px';
+      var ancho = nw * s, alto = nh * s;
+      var ty = alto <= H ? H * .44 - alto / 2 : Math.min(0, Math.max(H - alto, H * .44 - cy * s));
+      var clampX = function (x) { return ancho <= W ? (W - ancho) / 2 : Math.min(0, Math.max(W - ancho, x)); };
+      var visible = W / s, cabe = (maxX - minX) <= visible * .9;
+      var txA = clampX(W / 2 - (cabe ? cx : minX + visible * .42) * s);
+      var txB = clampX(W / 2 - (cabe ? cx : maxX - visible * .42) * s);
+      stage.style.setProperty('--t0', 'translate(' + (W / 2 - ancho * .7 / 2) + 'px,' + (H / 2 - alto * .7 / 2) + 'px) scale(' + (s * .7) + ')');
+      stage.style.setProperty('--t1', 'translate(' + txA + 'px,' + ty + 'px) scale(' + s + ')');
+      stage.style.setProperty('--t2', 'translate(' + txB + 'px,' + ty + 'px) scale(' + s + ')');
+      svg.setAttribute('viewBox', '0 0 ' + nw + ' ' + nh); svg.setAttribute('width', nw); svg.setAttribute('height', nh);
+      var k = 1 / s;
+      mks.innerHTML = puntos.map(function (p, i) { var tp = TIPO[p.t] || TIPO.otro; return '<span class="a-mk" data-t="' + p.t + '" style="left:' + p.x + 'px;top:' + p.y + 'px;background:' + tp[1] + ';--k:' + k + ';color:' + tp[1] + '">' + esc(etiqueta(p)) + '</span>'; }).join('');
+      svg.innerHTML = puntos.filter(function (p) { return p.to && nodos[p.to] && nodos[p.to].x != null; }).map(function (p) {
+        var n = nodos[p.to], len = Math.hypot(n.x - p.x, n.y - p.y);
+        return '<line data-t="' + p.t + '" x1="' + n.x + '" y1="' + n.y + '" x2="' + p.x + '" y2="' + p.y + '" stroke="' + COLOR_CX(p.c) + '" stroke-width="' + (2.2 * k) + '" style="--len:' + len.toFixed(0) + '"/>';
+      }).join('');
+      arrancar();
+    };
+    img.onerror = function () { arrancar(); };
+    img.src = D.imagen;
+    function arrancar() {
+      var total = 0;
+      paso(3600, function () { escena('<img class="a-logo" src="' + esc(logo) + '" alt="NWS"><small>' + esc(D.demo ? 'Propuesta DEMO' : 'Propuesta') + '</small><h2>' + esc(D.titulo || D.sitio) + '</h2><p>' + esc([D.cliente, D.direccion].filter(Boolean).join(' · ')) + '</p>', 'centro'); });
+      paso(900, function () { ov.classList.add('mapa'); escena(''); luego(4200, function () { ov.classList.add('pan'); }); });
+      grupos.forEach(function (t) {
+        paso(2300, function () {
+          var tp = TIPO[t] || TIPO.otro, n = tipos[t].length;
+          $$('.a-mk[data-t="' + t + '"]', mks).forEach(function (m, i) { setTimeout(function () { m.classList.add('on'); }, i * Math.min(90, 1400 / n)); });
+          escena('<b class="a-n" style="color:' + tp[1] + '">' + n + '</b><span>' + esc(n === 1 ? tp[0].toLowerCase() : (PLURAL[t] || tp[0].toLowerCase())) + '</span>', 'abajo');
+          vib(8);
+        });
+      });
+      paso(2600, function () { $$('line', svg).forEach(function (l, i) { setTimeout(function () { l.classList.add('on'); }, i * 40); }); escena('<span>Todo conectado a sus nodos</span>', 'abajo'); });
+      paso(3800, function () {
+        ov.classList.add('oscuro');
+        escena('<div class="a-kpis">' + (D.kpis || []).slice(0, 3).map(function (k2) { return '<div><b>' + esc(k2.v) + '</b><span>' + esc(k2.l) + '</span></div>'; }).join('') + '</div>', 'centro');
+      });
+      if ((D.alcance || []).length) paso(5200, function () { escena('<small>Qué incluye</small><ul>' + D.alcance.slice(0, 5).map(function (a, i) { return '<li style="animation-delay:' + (i * 280) + 'ms">' + esc(a) + '</li>'; }).join('') + '</ul>', 'centro izq'); });
+      if (c) paso(5200, function () {
+        escena('<small>Inversión del proyecto</small><b class="a-total" id="a-total">$0</b><p>neto · ' + clp(c.total || c.neto * 1.19) + ' con IVA</p>' + (c.mensual ? '' : '<p class="a-cuotas">o ' + clp((c.total || c.neto * 1.19) / 12) + ' en 12 cuotas sin interés</p>'), 'centro');
+        contar($('#a-total', ov), c.neto, clp, 1600);
+      });
+      paso(4200, function () { escena('<img class="a-logo" src="' + esc(logo) + '" alt="NWS"><h2>Gracias</h2><p>Revisa el plano, la inversión y los documentos en esta página.</p><button class="cta press" id="a-fin">Ver la propuesta</button>', 'centro'); $('#a-fin', ov).onclick = cerrar; });
+      total = T; bar.style.transition = 'width ' + total + 'ms linear'; requestAnimationFrame(function () { bar.style.width = '100%'; });
+    }
+  }
+  var btnAnim = $('#btn-anim'); if (btnAnim) btnAnim.onclick = animacion;
+  if (/[?&#]animacion/.test(location.href)) setTimeout(animacion, 900);
 })();
