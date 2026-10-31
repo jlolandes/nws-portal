@@ -46,6 +46,14 @@ h2{margin:30px 4px 12px;font-size:12px;letter-spacing:.14em;text-transform:upper
 .srv i svg{width:21px;height:21px}
 .srv b{display:block;font-size:14px;font-weight:700;line-height:1.25}
 .srv small{display:block;margin-top:4px;color:var(--sub);font-size:12px;line-height:1.35}
+.pils{display:flex;flex-direction:column;gap:10px}
+.pil{display:flex;gap:14px;align-items:flex-start;padding:18px 16px;border-radius:22px;border:1px solid var(--line);background:var(--glass)}
+.pil i{flex:none;display:grid;place-items:center;width:44px;height:44px;border-radius:14px;background:linear-gradient(135deg,rgba(6,182,212,.22),rgba(37,99,235,.22));color:#67e8f9}
+.pil i svg{width:23px;height:23px}
+.pil b{display:block;font-size:17px;font-weight:800;letter-spacing:-.2px}
+.pil p{margin-top:3px;color:#c8d6ec;font-size:13.5px;line-height:1.45}
+.pil ul{list-style:none;padding:0;margin-top:9px;display:flex;flex-wrap:wrap;gap:6px}
+.pil li{font-size:11.5px;font-weight:600;color:#9fd9ec;padding:4px 9px;border-radius:999px;background:rgba(6,182,212,.1);border:1px solid rgba(6,182,212,.22)}
 .pasos{border-radius:22px;border:1px solid var(--line);background:var(--glass);padding:6px 16px}
 .paso{display:flex;gap:14px;padding:13px 0;border-bottom:1px solid var(--line)}
 .paso:last-child{border:0}
@@ -79,7 +87,7 @@ footer a{color:var(--sub);text-decoration:none}
     <h1>Jerry Lolandes</h1>
     <p class="cargo">Gerente General</p>
     <p class="emp">NetWatch Solutions · NWS</p>
-    <p class="frase">Diseñamos, instalamos y mantenemos la infraestructura tecnológica de plantas e instalaciones industriales: cámaras, redes y conectividad que no fallan.</p>
+    <p class="frase">Prestamos servicios de tecnología según la necesidad de cada operación: asesoramos, diseñamos, implementamos y damos soporte continuo.</p>
   </section>
 
   <a class="btn in" style="animation-delay:.1s" href="jerry-lolandes-nws.vcf" download>
@@ -94,22 +102,19 @@ footer a{color:var(--sub);text-decoration:none}
     <a href="https://www.nws.cl" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"/></svg>Web</a>
   </nav>
 
-  <h2 class="in" style="animation-delay:.2s">Qué hacemos</h2>
-  <div class="srv in" style="animation-delay:.22s">
-    <div><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h13l3 4-3 4H3z"/><circle cx="9" cy="11" r="2"/><path d="M6 15v5M3 20h6"/></svg></i><b>CCTV y videovigilancia</b><small>Cámaras IP, grabación, monitoreo y lectura de patentes.</small></div>
-    <div><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="6" rx="1.5"/><rect x="2" y="15" width="20" height="6" rx="1.5"/><path d="M6 6h.01M6 18h.01M12 9v6"/></svg></i><b>Redes y fibra óptica</b><small>Cableado certificado, racks y switches.</small></div>
-    <div><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.6a10 10 0 0 1 14 0M8.5 16.1a5 5 0 0 1 7 0M2 9a15 15 0 0 1 20 0"/><path d="M12 20h.01"/></svg></i><b>Enlaces y conectividad</b><small>Radioenlaces, Internet y acceso remoto en faena.</small></div>
-    <div><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M19 5a10 10 0 0 1 0 14"/></svg></i><b>Voceo e intercom IP</b><small>Comunicación SIP entre salas de control y planta.</small></div>
-    <div><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></i><b>Soporte TI y Microsoft 365</b><small>Correo, usuarios, equipos y migraciones.</small></div>
-    <div><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.4-.6-.6-2.4z"/></svg></i><b>Mantención con contrato</b><small>Preventiva y correctiva, con tiempos de respuesta.</small></div>
+  <h2 class="in" style="animation-delay:.2s">Qué resolvemos</h2>
+  <div class="pils in" style="animation-delay:.22s">
+    <div class="pil"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg></i><div><b>Seguridad</b><p>Visibilidad y control de lo que pasa en tu operación, de día y de noche.</p><ul><li>Videovigilancia</li><li>Monitoreo</li><li>Lectura de patentes</li></ul></div></div>
+    <div class="pil"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="2.5"/><circle cx="5" cy="19" r="2.5"/><circle cx="19" cy="19" r="2.5"/><path d="M12 7.5v4M12 11.5 6.5 17M12 11.5l5.5 5.5"/></svg></i><div><b>Conectividad</b><p>Tu operación conectada y comunicada, incluso en los puntos más alejados.</p><ul><li>Redes y fibra</li><li>Enlaces</li><li>Voceo IP</li></ul></div></div>
+    <div class="pil"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 4v5h-5"/><path d="M12 8v4l3 2"/></svg></i><div><b>Continuidad operacional</b><p>Tecnología que sigue funcionando, con soporte cuando lo necesitas.</p><ul><li>Soporte TI</li><li>Microsoft 365</li><li>Mantención</li></ul></div></div>
   </div>
 
-  <h2 class="in" style="animation-delay:.26s">Cómo trabajamos</h2>
+  <h2 class="in" style="animation-delay:.26s">Cómo te acompañamos</h2>
   <div class="pasos in" style="animation-delay:.28s">
-    <div class="paso"><em>1</em><div><b>Visita en terreno</b><p>Recorremos la instalación y marcamos cada punto en el plano.</p></div></div>
-    <div class="paso"><em>2</em><div><b>Propuesta clara</b><p>Cotización, plano y presentación del proyecto en pocas horas.</p></div></div>
-    <div class="paso"><em>3</em><div><b>Instalación y puesta en marcha</b><p>Trabajo certificado y entrega documentada.</p></div></div>
-    <div class="paso"><em>4</em><div><b>Mantención y soporte</b><p>Acompañamos la operación con contratos mensuales.</p></div></div>
+    <div class="paso"><em>1</em><div><b>Asesoría</b><p>Entendemos tu necesidad en terreno antes de proponer.</p></div></div>
+    <div class="paso"><em>2</em><div><b>Diseño</b><p>La solución adecuada, con plano y presupuesto claros.</p></div></div>
+    <div class="paso"><em>3</em><div><b>Implementación</b><p>Trabajo certificado y todo documentado.</p></div></div>
+    <div class="paso"><em>4</em><div><b>Soporte continuo</b><p>Mantención, mejoras y nuevas etapas cuando las necesites.</p></div></div>
   </div>
 
   <h2 class="in" style="animation-delay:.3s">Comparte este contacto</h2>
