@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Firma de correo · Jerry Lolandes · NWS</title>
+<style>
+body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:#eef2f7;color:#0f172a}
+.wrap{max-width:720px;margin:0 auto;padding:24px 16px 40px}
+h1{font-size:22px;margin:0 0 4px}
+.sub{color:#64748b;margin:0 0 18px;font-size:14px}
+.box{background:#fff;border:1px solid #dbe3ee;border-radius:16px;padding:22px;overflow-x:auto}
+.btn{display:inline-flex;align-items:center;gap:8px;margin-top:16px;padding:13px 18px;border:0;border-radius:12px;background:linear-gradient(135deg,#06b6d4,#2563eb);color:#fff;font:700 15px Inter,system-ui,sans-serif;cursor:pointer}
+.ok{margin-left:10px;color:#059669;font-weight:600;font-size:14px;opacity:0;transition:.2s}
+.ok.on{opacity:1}
+h2{font-size:15px;margin:28px 0 8px}
+ol{margin:0;padding-left:20px;color:#334155;font-size:14px;line-height:1.6}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Firma de correo</h1>
+  <p class="sub">Toca «Copiar firma» y pégala en la configuración de tu correo.</p>
+
+  <div class="box" id="firma"><table cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse;font-family:Arial,Helvetica,sans-serif;color:#0f172a">
+  <tr>
+    <td style="padding:0 18px 0 0;vertical-align:middle;border-right:2px solid #06b6d4">
+      <a href="https://www.nws.cl" style="text-decoration:none"><img src="https://portal.nws.cl/jerry/firma-logo.png" width="150" height="34" alt="NWS · Infraestructura Tecnológica Especializada" style="display:block;border:0;width:150px;height:34px"></a>
+    </td>
+    <td style="padding:0 0 0 18px;vertical-align:middle;font-size:13px;line-height:19px">
+      <div style="font-size:16px;line-height:21px;font-weight:bold;color:#0f172a">Jerry Lolandes</div>
+      <div style="color:#2563eb;font-weight:bold">Gerente General · NetWatch Solutions SpA</div>
+      <div style="padding-top:6px;color:#334155">Cel. <a href="tel:+56993275874" style="color:#334155;text-decoration:none">+56 9 9327 5874</a> &nbsp;|&nbsp; <a href="mailto:jlolandes@nws.cl" style="color:#334155;text-decoration:none">jlolandes@nws.cl</a></div>
+      <div style="color:#334155"><a href="https://www.nws.cl" style="color:#2563eb;text-decoration:none;font-weight:bold">www.nws.cl</a> &nbsp;|&nbsp; Huechuraba, Santiago</div>
+      <div style="padding-top:6px;font-size:11px;color:#64748b">CCTV · Redes y fibra óptica · Conectividad · Voceo IP · Soporte TI</div>
+      <div style="padding-top:4px;font-size:11px"><a href="https://portal.nws.cl/jerry/" style="color:#0891b2;text-decoration:none;font-weight:bold">Ver mi tarjeta digital →</a></div>
+    </td>
+  </tr>
+</table></div>
+
+  <button class="btn" id="copiar">Copiar firma</button><span class="ok" id="ok">Copiada ✓</span>
+
+  <h2>Gmail (en el computador)</h2>
+  <ol>
+    <li>Abre Gmail → ⚙️ → «Ver toda la configuración».</li>
+    <li>En «General», baja hasta «Firma» → «Crear nueva» y ponle «NWS».</li>
+    <li>Pega la firma (Ctrl+V o ⌘V) y elige «NWS» como predeterminada para correos nuevos y respuestas.</li>
+    <li>Baja al final y toca «Guardar cambios».</li>
+  </ol>
+  <h2>Outlook / Microsoft 365</h2>
+  <ol>
+    <li>⚙️ Configuración → «Cuenta» → «Firmas».</li>
+    <li>«Nueva firma», ponle «NWS» y pega.</li>
+    <li>Elígela para mensajes nuevos y respuestas, y guarda.</li>
+  </ol>
+  <h2>iPhone (app Mail)</h2>
+  <ol>
+    <li>Abre esta página en el iPhone, toca «Copiar firma».</li>
+    <li>Ajustes → Apps → Mail → Firma → pega.</li>
+  </ol>
+</div>
+<script>
+document.getElementById('copiar').onclick = async () => {
+  const el = document.getElementById('firma');
+  const html = el.innerHTML, texto = el.innerText;
+  try {
+    await navigator.clipboard.write([new ClipboardItem({ 'text/html': new Blob([html], { type: 'text/html' }), 'text/plain': new Blob([texto], { type: 'text/plain' }) })]);
+  } catch (e) {
+    const r = document.createRange(); r.selectNodeContents(el); const s = getSelection(); s.removeAllRanges(); s.addRange(r); document.execCommand('copy'); s.removeAllRanges();
+  }
+  const ok = document.getElementById('ok'); ok.classList.add('on'); setTimeout(() => ok.classList.remove('on'), 2000);
+};
+</script>
+</body>
+</html>

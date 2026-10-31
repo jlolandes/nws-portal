@@ -1,0 +1,12 @@
+BEGIN:VCARD
+VERSION:3.0
+N:Lolandes;Jerry;;;
+FN:Jerry Lolandes
+ORG:NetWatch Solutions SpA (NWS)
+TITLE:Gerente General
+TEL;TYPE=CELL,VOICE:+56993275874
+EMAIL;TYPE=WORK,INTERNET:jlolandes@nws.cl
+URL:https://www.nws.cl
+ADR;TYPE=WORK:;;;Huechuraba;Región Metropolitana;;Chile
+NOTE:CCTV y videovigilancia · Redes y fibra óptica · Enlaces y conectividad · Voceo IP · Soporte TI y Microsoft 365 · Mantención con contrato
+END:VCARD
