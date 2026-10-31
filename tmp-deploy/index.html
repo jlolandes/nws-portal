@@ -1,0 +1,547 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="canonical" href="https://nws.cl/">
+<link rel="icon" href="/tarjeta/logo-oscuro.svg" type="image/svg+xml">
+<meta name="theme-color" content="#070d1c">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_CL">
+<meta property="og:site_name" content="NWS · NetWatch Solutions">
+<meta property="og:title" content="Infraestructura tecnológica para operaciones que no pueden detenerse">
+<meta property="og:description" content="Seguridad, conectividad y continuidad operacional para empresas e industria en Chile. Asesoría, diseño, implementación y soporte.">
+<meta property="og:url" content="https://nws.cl/">
+<meta property="og:image" content="https://nws.cl/og-nws.png">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"LocalBusiness","name":"NWS · NetWatch Solutions","url":"https://nws.cl/","image":"https://nws.cl/og-nws.png","telephone":"+56993275874","email":"contacto@nws.cl","address":{"@type":"PostalAddress","addressLocality":"Huechuraba","addressRegion":"Región Metropolitana","addressCountry":"CL"},"areaServed":"CL","openingHours":"Mo-Fr 09:00-18:00","sameAs":["https://www.instagram.com/nwsolutions_/"],"description":"Cámaras de seguridad, redes, fibra óptica, enlaces, internet satelital y soporte TI para empresas e industria en Chile."}</script>
+<title>NWS · NetWatch Solutions | Cámaras de seguridad, redes y soporte TI para empresas</title>
+<meta name="description" content="Cámaras de seguridad (CCTV), redes, fibra óptica, radioenlaces y soporte TI para empresas e industria en Chile. Instalación y mantención con contrato. Cotiza con NWS · NetWatch Solutions.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+/* Layout: una sola página oscura de marca; héroe con diagrama de red de planta, luego bandas que alternan noche y azul profundo. */
+:root{
+  --noche:#070d1c; --banda:#0b1630; --vidrio:rgba(20,34,64,.62); --linea:rgba(148,178,220,.15);
+  --texto:#eef4ff; --suave:#a9bbd6; --tenue:#7f93b3; --cian:#22d3ee; --azul:#2563eb; --verde:#25d366;
+  --grad:linear-gradient(135deg,#06b6d4,#2563eb);
+  --f-txt:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;background:var(--noche)}
+body{margin:0;background:var(--noche);color:var(--texto);font-family:var(--f-txt);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:rgba(7,13,28,.92)}
+a{color:inherit}
+.w{max-width:1160px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+h1,h2,h3{margin:0;text-wrap:balance;letter-spacing:-.02em}
+p{margin:0}
+.ojo{font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--cian)}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:14px 22px;border-radius:14px;font-weight:700;font-size:15px;text-decoration:none;border:0;cursor:pointer;font-family:inherit;transition:transform .15s,box-shadow .15s}
+.btn:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--cian);outline-offset:3px}
+.btn.prim{background:var(--grad);color:#fff;box-shadow:0 10px 30px rgba(37,99,235,.35)}
+.btn.prim:hover{transform:translateY(-1px)}
+.btn.sec{background:rgba(255,255,255,.06);color:var(--texto);border:1px solid var(--linea)}
+.btn svg{width:18px;height:18px;flex:none}
+
+/* Encabezado */
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:rgba(7,13,28,.82);backdrop-filter:blur(14px);border-bottom:1px solid var(--linea)}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:16px;height:64px}
+.marca{display:flex;align-items:center;gap:10px;text-decoration:none}
+.marca svg{height:26px;width:auto}
+.marca b{font-weight:900;font-size:21px;letter-spacing:-.03em}
+.marca span{font-size:13px;color:var(--suave);font-weight:500}
+.menu{display:flex;align-items:center;gap:26px;font-size:14px;font-weight:600;color:var(--suave)}
+.menu a{text-decoration:none}
+.menu a:hover{color:var(--texto)}
+.menu .btn{padding:10px 16px;font-size:14px}
+@media (max-width:860px){.menu a:not(.btn){display:none}.marca span{display:none}}
+
+/* Héroe */
+.heroe{position:relative;overflow:hidden;background:radial-gradient(90% 80% at 15% 0%,#173a78 0%,rgba(11,22,48,.6) 45%,var(--noche) 80%)}
+.heroe .w{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:32px 56px;align-items:end;align-items:center;padding-block:72px 64px}
+.heroe h1{font-size:clamp(34px,5.2vw,60px);font-weight:800;line-height:1.05;margin-top:18px}
+.heroe h1 em{font-style:normal;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.heroe .lead{margin-top:20px;font-size:18px;color:var(--suave);max-width:34em}
+.acciones{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+.datos{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;margin-top:0;background:var(--linea);border:1px solid var(--linea);border-radius:16px;overflow:hidden}
+.datos div{background:rgba(9,18,40,.85);padding:16px 14px}
+.datos b{display:block;font-size:28px;font-weight:800;letter-spacing:-.02em}
+.datos span{font-size:12.5px;color:var(--tenue);line-height:1.35;display:block;margin-top:2px}
+.diagrama{position:relative;border:1px solid var(--linea);border-radius:22px;background:rgba(9,18,40,.6);padding:18px}
+.diagrama svg{display:block;width:100%;height:auto}
+.diagrama .pie{display:flex;justify-content:space-between;font-family:var(--f-mono);font-size:11px;color:var(--tenue);margin-top:8px}
+.flujo{stroke-dasharray:4 10;animation:flujo 1.6s linear infinite}
+@keyframes flujo{to{stroke-dashoffset:-28}}
+.pulso{animation:pulso 2.4s ease-in-out infinite}
+@keyframes pulso{50%{opacity:.35}}
+.cc{position:relative;margin:0;grid-column:1/-1;border:1px solid var(--linea);border-radius:22px;background:linear-gradient(180deg,rgba(14,29,61,.85),rgba(7,13,28,.9));padding:14px;box-shadow:0 30px 80px -30px rgba(6,182,212,.35),inset 0 1px 0 rgba(255,255,255,.04);min-width:0}
+.cc::before{content:"";position:absolute;inset:-1px;border-radius:22px;padding:1px;background:linear-gradient(120deg,rgba(34,211,238,.6),transparent 35%,transparent 65%,rgba(37,99,235,.6));-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
+.cc-top{display:flex;align-items:center;justify-content:space-between;gap:10px;font-family:var(--f-mono);font-size:11px;color:var(--tenue);padding:2px 4px 10px}
+.vivo{display:inline-flex;align-items:center;gap:7px;color:#4ade80;font-weight:500;text-transform:uppercase;letter-spacing:.08em}
+.vivo i{width:8px;height:8px;border-radius:50%;background:#4ade80;box-shadow:0 0 0 0 rgba(74,222,128,.6);animation:latido 1.6s infinite}
+.reloj{color:var(--suave)}
+.cc svg{display:block;width:100%;height:auto;border-radius:14px;background:#081227}
+.cc-kpi{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:10px}
+.cc-kpi div{border:1px solid var(--linea);border-radius:12px;padding:10px 12px;background:rgba(255,255,255,.02)}
+.cc-kpi b{display:block;font-size:22px;font-weight:800;line-height:1.1;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;font-variant-numeric:tabular-nums}
+.cc-kpi small{font-size:11.5px;color:var(--tenue)}
+.cc-log{display:flex;align-items:center;gap:10px;margin-top:8px;padding:9px 12px;border-radius:12px;background:rgba(34,211,238,.06);border:1px solid rgba(34,211,238,.18);font-family:var(--f-mono);font-size:12px;color:#9fe7f5;min-height:38px}
+.cc-log i{flex:none;width:6px;height:6px;border-radius:50%;background:#22d3ee}
+.cc-log span{transition:opacity .35s,transform .35s}
+.cc-log span.sale{opacity:0;transform:translateY(-6px)}
+.barre{animation:barre 5.5s ease-in-out infinite alternate}
+.dato path{stroke-dasharray:10 34;animation:viaja 2.2s linear infinite}
+.onda{transform-box:fill-box;transform-origin:center;animation:onda 3s ease-out infinite}
+.arco{stroke-width:2;animation:pulso 1.4s ease-in-out infinite}
+.late{transform-box:fill-box;transform-origin:center;animation:late 2.4s ease-in-out infinite}
+.lpr{opacity:0;animation:lpr 9s linear infinite}
+@keyframes barre{from{transform:rotate(-28deg)}to{transform:rotate(28deg)}}
+@keyframes viaja{to{stroke-dashoffset:-44}}
+@keyframes onda{0%{transform:scale(1);opacity:.9}100%{transform:scale(5);opacity:0}}
+@keyframes late{50%{transform:scale(1.25);opacity:.6}}
+@keyframes latido{70%{box-shadow:0 0 0 8px rgba(74,222,128,0)}100%{box-shadow:0 0 0 0 rgba(74,222,128,0)}}
+@keyframes lpr{0%,44%{opacity:0}47%,68%{opacity:1}72%,100%{opacity:0}}
+.plano .sec{font:800 8.5px Inter,system-ui,sans-serif;letter-spacing:.14em;fill:#fff;paint-order:stroke;stroke:#000;stroke-opacity:.55;stroke-width:2.2px}
+.plano .chip text{font:700 6px Inter,system-ui,sans-serif}
+.plano .fibra{fill:none;stroke:#22d3ee;stroke-opacity:.75;stroke-width:1.8}
+.plano .paquete{fill:none;stroke:#67e8f9;stroke-width:2.2;stroke-linecap:round;stroke-dasharray:6 40;animation:viaja2 2.4s linear infinite}
+.plano .ptp{fill:none;stroke:#ec4899;stroke-width:1.4;stroke-dasharray:3 4;animation:viaja 1.6s linear infinite}
+.plano .rack{fill:#0b1630;stroke:#67e8f9;stroke-width:1.2}.plano .rack.dc{fill:#22d3ee}
+.plano .cv{fill:url(#cono);opacity:0;animation:cvin .5s ease forwards}
+.plano .cv.on{opacity:1!important;fill:#22d3ee;fill-opacity:.35}
+.plano .cam{opacity:0;animation:camin .35s ease forwards}
+.plano .cam text{font:800 5.6px Inter,system-ui,sans-serif;fill:#eef4ff}
+.plano .cam.on circle{fill:#22d3ee;stroke:#fff}.plano .cam.on text{fill:#04121f}
+.plano .anillo{animation:pulso 1s ease-in-out infinite}
+.plano .onda2{transform-box:fill-box;transform-origin:center;animation:onda 1.6s ease-out infinite}
+.ley{display:flex;flex-wrap:wrap;gap:6px 14px;margin-top:8px;padding:0 4px;font-size:11px;color:var(--tenue)}
+.ley span{display:inline-flex;align-items:center;gap:6px}
+.ley i{width:9px;height:9px;border-radius:50%;border:2px solid var(--c);background:#0b1630}
+.ley b{display:inline-block;width:16px;height:0;border-top:2px solid #22d3ee}.ley b.lp{border-top:2px dashed #ec4899}
+@keyframes viaja2{to{stroke-dashoffset:-46}}
+@keyframes cvin{to{opacity:.32}}
+@keyframes camin{from{opacity:0;transform:translateY(-3px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.plano .cv,.plano .cam{animation:none;opacity:1}.plano .cv{opacity:.32}.plano .paquete,.plano .ptp,.plano .anillo,.plano .onda2{animation:none}}
+.revela{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease}
+.revela.ve{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.barre,.dato path,.onda,.arco,.late,.lpr,.vivo i{animation:none}.lpr{opacity:1}.revela{opacity:1;transform:none;transition:none}}
+@media (prefers-reduced-motion:reduce){.flujo,.pulso{animation:none}html{scroll-behavior:auto}}
+@media (max-width:900px){.cc{margin:0}.heroe .w{grid-template-columns:minmax(0,1fr);padding-block:48px 40px}.datos{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* Secciones */
+section.s{padding-block:88px}
+.partners{background:var(--banda);border-block:1px solid var(--linea);padding-block:30px}
+.partners .w{display:grid;gap:18px;justify-items:center}
+.partners p{font-family:var(--f-mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--tenue)}
+.partners .logos{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:10px;width:100%;min-width:0}
+.pt{padding:14px 14px 12px;border-radius:14px;border:1px solid var(--linea);background:var(--vidrio);display:grid;gap:3px;text-align:center}
+.pt b{font-size:18px;font-weight:800;letter-spacing:-.3px;color:var(--texto)}
+.pt span{font-size:11.5px;color:var(--tenue)}
+@media (max-width:1000px){.partners .logos{grid-template-columns:repeat(4,minmax(0,1fr))}}@media (max-width:520px){.partners .logos{grid-template-columns:repeat(2,minmax(0,1fr))}}
+section.alt{background:var(--banda)}
+.cab{display:grid;gap:12px;max-width:44em;margin-bottom:44px}
+.cab h2{font-size:clamp(28px,3.6vw,40px);font-weight:800;line-height:1.12}
+.cab p{color:var(--suave);font-size:17px}
+
+.sectores{display:flex;flex-wrap:wrap;gap:10px 28px;padding-block:26px;border-bottom:1px solid var(--linea);font-size:14px;color:var(--suave)}
+.sectores b{color:var(--texto);font-weight:600}
+
+/* Pilares */
+.pilares{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.pilar{display:flex;flex-direction:column;gap:16px;padding:28px;border-radius:22px;border:1px solid var(--linea);background:var(--vidrio)}
+.pilar i{display:grid;place-items:center;width:48px;height:48px;border-radius:14px;background:linear-gradient(135deg,rgba(6,182,212,.2),rgba(37,99,235,.2));color:#67e8f9}
+.pilar i svg{width:24px;height:24px}
+.pilar h3{font-size:24px;font-weight:800}
+.pilar>p{color:var(--suave)}
+.pilar ul{list-style:none;padding:0;margin:0;display:grid;gap:12px;border-top:1px solid var(--linea);padding-top:16px}
+.pilar li{display:grid;gap:2px}
+.pilar li b{font-size:15px;font-weight:700}
+.pilar li span{font-size:14px;color:var(--tenue);line-height:1.5}
+@media (max-width:900px){.pilares{grid-template-columns:minmax(0,1fr)}}
+
+/* Proceso */
+.pasos{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;counter-reset:p;border:1px solid var(--linea);border-radius:22px;overflow:hidden}
+.paso{padding:28px 24px;display:grid;gap:10px;align-content:start;border-right:1px solid var(--linea);background:rgba(9,18,40,.5)}
+.paso:last-child{border-right:0}
+.paso em{font-style:normal;font-family:var(--f-mono);font-size:13px;color:var(--cian)}
+.paso h3{font-size:20px;font-weight:800}
+.paso p{font-size:14.5px;color:var(--suave)}
+@media (max-width:900px){.pasos{grid-template-columns:minmax(0,1fr)}.paso{border-right:0;border-bottom:1px solid var(--linea)}.paso:last-child{border-bottom:0}}
+.destacado{margin-top:24px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px 24px;padding:24px 28px;border-radius:20px;background:linear-gradient(135deg,rgba(14,116,144,.35),rgba(29,78,216,.35));border:1px solid rgba(34,211,238,.25)}
+.destacado b{font-size:20px;font-weight:800;display:block}
+.destacado span{color:var(--suave);font-size:15px}
+
+/* Entregables */
+.entregas{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--linea);border:1px solid var(--linea);border-radius:22px;overflow:hidden}
+.entregas div{background:var(--banda);padding:24px;display:grid;gap:6px;align-content:start}
+.entregas b{font-size:16px;font-weight:700}
+.entregas span{font-size:14px;color:var(--tenue)}
+@media (max-width:900px){.entregas{grid-template-columns:minmax(0,1fr)}}
+
+/* Experiencia */
+.casos{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.caso{padding:26px;border-radius:22px;border:1px solid var(--linea);background:var(--vidrio);display:grid;gap:12px;align-content:start}
+.caso small{font-family:var(--f-mono);font-size:11.5px;color:var(--cian);letter-spacing:.04em}
+.caso h3{font-size:19px;font-weight:800;line-height:1.3}
+.caso p{font-size:14.5px;color:var(--suave)}
+.caso ul{margin:0;padding:12px 0 0;list-style:none;border-top:1px solid var(--linea);display:grid;gap:8px}
+.caso li{font-size:14px;color:var(--texto);padding-left:22px;position:relative}
+.caso li::before{content:"";position:absolute;left:0;top:.55em;width:10px;height:10px;border-radius:3px;background:var(--grad)}
+.nota{margin-top:18px;font-size:13px;color:var(--tenue)}
+.normas{margin-top:36px;display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;font-size:14px;color:var(--suave)}
+.normas code{font-family:var(--f-mono);font-size:12.5px;padding:5px 10px;border-radius:8px;border:1px solid var(--linea);color:var(--texto);background:rgba(255,255,255,.04)}
+.respaldo{margin-top:36px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:20px}
+.perfil{padding:28px;border-radius:22px;background:linear-gradient(135deg,rgba(6,182,212,.14),rgba(37,99,235,.14));border:1px solid var(--linea);display:grid;gap:10px;align-content:start}
+.perfil small{font-family:var(--f-mono);font-size:11.5px;color:var(--cian);letter-spacing:.04em}
+.perfil h3{font-size:20px;font-weight:800;line-height:1.3}
+.perfil p{font-size:14.5px;color:var(--suave)}
+.sellos{display:grid;gap:18px;align-content:start;padding:8px 0}
+.sellos span{display:block;font-size:13px;color:var(--tenue);margin-bottom:8px}
+.sellos p{display:flex;flex-wrap:wrap;gap:8px}
+.sellos code{font-family:var(--f-mono);font-size:12.5px;padding:5px 10px;border-radius:8px;border:1px solid var(--linea);color:var(--texto);background:rgba(255,255,255,.04)}
+@media (max-width:900px){.casos,.respaldo{grid-template-columns:minmax(0,1fr)}}
+
+.faq{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.faq details{border:1px solid var(--linea);border-radius:16px;background:rgba(9,18,40,.5);padding:0 20px}
+.faq summary{cursor:pointer;list-style:none;padding:18px 0;font-weight:700;font-size:16px;display:flex;justify-content:space-between;gap:12px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";color:var(--cian);font-weight:800;font-size:20px;line-height:1}
+.faq details[open] summary::after{content:"–"}
+.faq details p{padding-bottom:18px;color:var(--suave);font-size:15px}
+@media (max-width:900px){.faq{grid-template-columns:minmax(0,1fr)}}
+
+/* Contacto */
+.contacto{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:28px;align-items:start}
+form{display:grid;gap:14px;padding:28px;border-radius:22px;border:1px solid var(--linea);background:var(--vidrio)}
+.fila{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+label{display:grid;gap:6px;font-size:13px;font-weight:600;color:var(--suave)}
+input,select,textarea{width:100%;font:inherit;font-size:15px;color:var(--texto);background:rgba(7,13,28,.7);border:1px solid var(--linea);border-radius:12px;padding:12px 14px}
+textarea{min-height:120px;resize:vertical}
+.aviso{font-size:13px;color:var(--tenue)}
+.envio{font-size:14px;color:var(--suave)}
+.envio a{color:var(--cian)}
+.datosc{display:grid;gap:14px}
+.dc{padding:20px 22px;border-radius:18px;border:1px solid var(--linea);background:rgba(9,18,40,.5);display:grid;gap:4px}
+.dc small{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--tenue)}
+.dc b{font-size:17px;font-weight:700;user-select:all}
+.dc span{font-size:14px;color:var(--suave)}
+@media (max-width:900px){.contacto{grid-template-columns:minmax(0,1fr)}.fila{grid-template-columns:minmax(0,1fr)}}
+
+footer{border-top:1px solid var(--linea);padding-block:36px calc(36px + env(safe-area-inset-bottom,0px))}
+.pie{display:flex;flex-wrap:wrap;justify-content:space-between;gap:20px;font-size:13.5px;color:var(--tenue)}
+.pie nav{display:flex;flex-wrap:wrap;gap:8px 20px}
+.pie a{text-decoration:none}
+.pie a:hover{color:var(--texto)}
+
+.wa{position:fixed;right:max(18px,calc(env(safe-area-inset-right,0px) + 12px));bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:30;display:flex;align-items:center;gap:8px;padding:13px 18px 13px 14px;border-radius:999px;background:var(--verde);color:#062a14;font-weight:800;font-size:15px;text-decoration:none;box-shadow:0 10px 30px rgba(0,0,0,.35)}
+.wa svg{width:22px;height:22px}
+@media (max-width:520px){.wa span{display:none}.wa{padding:14px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="w nav">
+    <a class="marca" href="#inicio" aria-label="NetWatch Solutions, inicio">
+      <svg viewBox="0 0 110 100" aria-hidden="true"><defs><linearGradient id="gm" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#06B6D4"/><stop offset="1" stop-color="#2563EB"/></linearGradient></defs><path d="M10 90 L35 20 L50 20 L25 90 Z" fill="url(#gm)"/><path d="M35 90 L60 20 L75 20 L50 90 Z" fill="url(#gm)" opacity=".85"/><path d="M60 90 L85 20 L100 20 L75 90 Z" fill="url(#gm)" opacity=".7"/></svg>
+      <b>NWS</b><span>NetWatch Solutions</span>
+    </a>
+    <nav class="menu" aria-label="Secciones">
+      <a href="#soluciones">Soluciones</a>
+      <a href="#como">Cómo trabajamos</a>
+      <a href="#experiencia">Experiencia</a>
+      <a href="#preguntas">Preguntas</a>
+      <a href="#contacto">Contacto</a>
+      <a class="btn prim" href="#contacto">Cotizar</a>
+    </nav>
+  </div>
+</header>
+
+<main id="inicio">
+  <section class="heroe">
+    <div class="w">
+      <div>
+        <p class="ojo">Seguridad · Conectividad · Continuidad operacional</p>
+        <h1>Infraestructura tecnológica para operaciones que <em>no pueden detenerse</em></h1>
+        <p class="lead">Diseñamos, implementamos y damos soporte a las redes, cámaras y comunicaciones de plantas industriales y empresas en Chile.</p>
+        <div class="acciones">
+          <a class="btn prim" href="#contacto">Cotizar proyecto</a>
+          <a class="btn sec" href="https://wa.me/56993275874?text=Hola%20NWS%2C%20quiero%20coordinar%20una%20evaluaci%C3%B3n%20t%C3%A9cnica." target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1-.2-.1-1-.4-1.9-1.2-.7-.6-1.2-1.4-1.3-1.6-.1-.2 0-.4.1-.5l.4-.4.2-.4v-.4l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 1.9s.8 2.2.9 2.3c.1.2 1.6 2.5 3.9 3.5.5.2 1 .4 1.3.5.6.2 1.1.2 1.5.1.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2l-.5-.2z"/></svg>
+            Escribir por WhatsApp
+          </a>
+        </div>
+      </div>
+      <div class="datos">
+          <div><b>16 años</b><span>de experiencia en telecomunicaciones y redes</span></div>
+          <div><b>+300</b><span>usuarios con soporte TI a nivel nacional</span></div>
+          <div><b>+100</b><span>equipos CCTV bajo nuestra mantención</span></div>
+          <div><b>24/7</b><span>soporte para clientes con contrato</span></div>
+        </div>
+      <figure class="cc" aria-label="Ilustración: plano CCTV de un recinto con 100 cámaras, fibra y enlaces monitoreados en vivo">
+        <div class="cc-top"><span class="vivo"><i></i>En línea</span><span>Plano CCTV · 100 cámaras</span><span class="reloj" id="reloj">--:--:--</span></div>
+        <svg viewBox="0 0 640 400" role="img" aria-hidden="true" class="plano"><defs>
+<filter id="ruido" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency=".85" numOctaves="2" seed="4"/><feColorMatrix values="0 0 0 0 .5  0 0 0 0 .48  0 0 0 0 .42  0 0 0 .55 0"/></filter>
+<filter id="manchas" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency=".012" numOctaves="3" seed="9"/><feColorMatrix values="0 0 0 0 .32  0 0 0 0 .28  0 0 0 0 .2  0 0 0 .5 -.05"/></filter>
+<filter id="sombra" x="-10%" y="-10%" width="130%" height="140%"><feDropShadow dx="5" dy="6" stdDeviation="2.5" flood-color="#000" flood-opacity=".55"/></filter>
+<filter id="copa"><feGaussianBlur stdDeviation=".6"/></filter>
+<pattern id="calamina" width="4" height="4" patternUnits="userSpaceOnUse"><rect width="4" height="4" fill="none"/><path d="M0 0V4" stroke="#000" stroke-opacity=".18" stroke-width="1"/></pattern>
+<pattern id="estac" width="14" height="30" patternUnits="userSpaceOnUse"><path d="M0 0V30" stroke="#d8dde4" stroke-opacity=".55" stroke-width=".8"/></pattern>
+<radialGradient id="cono" cx="0" cy="0.5" r="1"><stop offset="0" stop-color="#22d3ee" stop-opacity=".6"/><stop offset="1" stop-color="#22d3ee" stop-opacity="0"/></radialGradient>
+<linearGradient id="techo" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".18"/><stop offset=".5" stop-color="#fff" stop-opacity="0"/><stop offset=".5" stop-color="#000" stop-opacity=".12"/><stop offset="1" stop-color="#000" stop-opacity=".2"/></linearGradient>
+</defs><rect width="640" height="400" fill="#4a463c"/><rect width="640" height="400" filter="url(#manchas)"/><rect width="640" height="400" filter="url(#ruido)" opacity=".35"/><path d="M0 392 H640" stroke="#2c2d30" stroke-width="22"/><path d="M0 392 H640" stroke="#d6c46a" stroke-opacity=".6" stroke-width="1" stroke-dasharray="12 10"/><path d="M572 392 V352" stroke="#2f3034" stroke-width="26"/><path d="M150 96 H600 V360 H150 Z" fill="#33353a"/><path d="M20 216 H210 V360 H20 Z" fill="#383a3f"/><rect width="640" height="400" filter="url(#ruido)" opacity=".18"/><rect x="240" y="262" width="196" height="64" fill="url(#estac)"/><path d="M240 262 H436 M240 326 H436" stroke="#d8dde4" stroke-opacity=".5" stroke-width=".8"/><path d="M470 344 h-26 m6 -4 l-6 4 6 4" stroke="#e8e8e8" stroke-opacity=".5" fill="none" stroke-width="1.2"/><g filter="url(#sombra)"><rect x="246" y="266" width="10" height="40" rx="1" fill="#9aa3ad"/><rect x="247" y="308" width="8" height="12" rx="2" fill="#2f6b4a"/></g><g filter="url(#sombra)"><rect x="274" y="266" width="10" height="40" rx="1" fill="#9aa3ad"/><rect x="275" y="308" width="8" height="12" rx="2" fill="#8c2f2f"/></g><g filter="url(#sombra)"><rect x="302" y="266" width="10" height="40" rx="1" fill="#b8bec7"/><rect x="303" y="308" width="8" height="12" rx="2" fill="#2f6b4a"/></g><g filter="url(#sombra)"><rect x="358" y="266" width="10" height="40" rx="1" fill="#b8bec7"/><rect x="359" y="308" width="8" height="12" rx="2" fill="#3b5b8c"/></g><g filter="url(#sombra)"><rect x="386" y="266" width="10" height="40" rx="1" fill="#9aa3ad"/><rect x="387" y="308" width="8" height="12" rx="2" fill="#e3e5e8"/></g><g filter="url(#sombra)"><rect x="414" y="266" width="10" height="40" rx="1" fill="#b8bec7"/><rect x="415" y="308" width="8" height="12" rx="2" fill="#3b5b8c"/></g><rect x="34" y="318" width="36" height="12" fill="#6b6f75" filter="url(#sombra)"/><rect x="34" y="318" width="36" height="12" fill="url(#calamina)"/><rect x="74" y="318" width="36" height="12" fill="#8b3a2f" filter="url(#sombra)"/><rect x="74" y="318" width="36" height="12" fill="url(#calamina)"/><rect x="114" y="318" width="36" height="12" fill="#6b6f75" filter="url(#sombra)"/><rect x="114" y="318" width="36" height="12" fill="url(#calamina)"/><rect x="154" y="318" width="36" height="12" fill="#8b6f2f" filter="url(#sombra)"/><rect x="154" y="318" width="36" height="12" fill="url(#calamina)"/><rect x="34" y="333" width="36" height="12" fill="#8b6f2f" filter="url(#sombra)"/><rect x="34" y="333" width="36" height="12" fill="url(#calamina)"/><rect x="74" y="333" width="36" height="12" fill="#6b6f75" filter="url(#sombra)"/><rect x="74" y="333" width="36" height="12" fill="url(#calamina)"/><rect x="114" y="333" width="36" height="12" fill="#2f5a8b" filter="url(#sombra)"/><rect x="114" y="333" width="36" height="12" fill="url(#calamina)"/><rect x="154" y="333" width="36" height="12" fill="#6b6f75" filter="url(#sombra)"/><rect x="154" y="333" width="36" height="12" fill="url(#calamina)"/><rect x="34" y="348" width="36" height="12" fill="#8b3a2f" filter="url(#sombra)"/><rect x="34" y="348" width="36" height="12" fill="url(#calamina)"/><rect x="74" y="348" width="36" height="12" fill="#6b6f75" filter="url(#sombra)"/><rect x="74" y="348" width="36" height="12" fill="url(#calamina)"/><rect x="114" y="348" width="36" height="12" fill="#8b3a2f" filter="url(#sombra)"/><rect x="114" y="348" width="36" height="12" fill="url(#calamina)"/><rect x="154" y="348" width="36" height="12" fill="#8b3a2f" filter="url(#sombra)"/><rect x="154" y="348" width="36" height="12" fill="url(#calamina)"/><g filter="url(#sombra)"><rect x="190" y="112" width="250" height="108" fill="#8f969e"/></g><rect x="190" y="112" width="250" height="108" fill="url(#calamina)"/><rect x="190" y="112" width="250" height="108" fill="url(#techo)"/><path d="M190 166.0 H440" stroke="#fff" stroke-opacity=".25" stroke-width=".8"/><rect x="210" y="130" width="14" height="8" fill="#9fd3e6" fill-opacity=".35"/><rect x="210" y="194" width="14" height="8" fill="#9fd3e6" fill-opacity=".35"/><rect x="256" y="130" width="14" height="8" fill="#9fd3e6" fill-opacity=".35"/><rect x="256" y="194" width="14" height="8" fill="#9fd3e6" fill-opacity=".35"/><rect x="302" y="130" width="14" height="8" fill="#9fd3e6" fill-opacity=".35"/><rect x="302" y="194" width="14" height="8" fill="#9fd3e6" fill-opacity=".35"/><rect x="348" y="130" width="14" height="8" fill="#9fd3e6" fill-opacity=".35"/><rect x="348" y="194" width="14" height="8" fill="#9fd3e6" fill-opacity=".35"/><rect x="394" y="130" width="14" height="8" fill="#9fd3e6" fill-opacity=".35"/><rect x="394" y="194" width="14" height="8" fill="#9fd3e6" fill-opacity=".35"/><g filter="url(#sombra)"><rect x="36" y="232" width="156" height="72" fill="#8e7458"/></g><rect x="36" y="232" width="156" height="72" fill="url(#calamina)"/><rect x="36" y="232" width="156" height="72" fill="url(#techo)"/><path d="M36 268.0 H192" stroke="#fff" stroke-opacity=".25" stroke-width=".8"/><g filter="url(#sombra)"><rect x="470" y="40" width="124" height="64" fill="#c4c8cd"/></g><rect x="470" y="40" width="124" height="64" fill="url(#calamina)"/><rect x="470" y="40" width="124" height="64" fill="url(#techo)"/><path d="M470 72.0 H594" stroke="#fff" stroke-opacity=".25" stroke-width=".8"/><rect x="482" y="50" width="8" height="6" fill="#6b7480"/><rect x="510" y="50" width="8" height="6" fill="#6b7480"/><rect x="538" y="50" width="8" height="6" fill="#6b7480"/><rect x="566" y="50" width="8" height="6" fill="#6b7480"/><g filter="url(#sombra)"><rect x="476" y="160" width="110" height="74" fill="#7c8691"/></g><rect x="476" y="160" width="110" height="74" fill="url(#calamina)"/><rect x="476" y="160" width="110" height="74" fill="url(#techo)"/><path d="M476 197.0 H586" stroke="#fff" stroke-opacity=".25" stroke-width=".8"/><g filter="url(#sombra)"><rect x="52" y="104" width="84" height="50" fill="#5d6874"/></g><rect x="52" y="104" width="84" height="50" fill="url(#calamina)"/><rect x="52" y="104" width="84" height="50" fill="url(#techo)"/><path d="M52 129.0 H136" stroke="#fff" stroke-opacity=".25" stroke-width=".8"/><g filter="url(#sombra)"><rect x="540" y="318" width="40" height="22" fill="#d0d3d7"/></g><rect x="540" y="318" width="40" height="22" fill="url(#calamina)"/><rect x="540" y="318" width="40" height="22" fill="url(#techo)"/><path d="M540 329.0 H580" stroke="#fff" stroke-opacity=".25" stroke-width=".8"/><path d="M548 344 H600" stroke="#f2c94c" stroke-width="2" stroke-dasharray="4 3"/><circle cx="26.427833365518595" cy="21.277389835206108" r="7.7988542548585515" fill="#000" opacity=".35"/><circle cx="24.427833365518595" cy="18.277389835206108" r="7.7988542548585515" fill="#2f4a2a" filter="url(#copa)"/><circle cx="22.08817708906103" cy="15.937733558748542" r="4.289369840172204" fill="#4c6b3a" opacity=".7"/><circle cx="75.33730087851892" cy="17.957760115289588" r="7.772878330404172" fill="#000" opacity=".35"/><circle cx="73.33730087851892" cy="14.957760115289588" r="7.772878330404172" fill="#2f4a2a" filter="url(#copa)"/><circle cx="71.00543737939766" cy="12.625896616168337" r="4.275083081722295" fill="#4c6b3a" opacity=".7"/><circle cx="108.3438565301112" cy="17.401873825801538" r="6.882454711938794" fill="#000" opacity=".35"/><circle cx="106.3438565301112" cy="14.401873825801538" r="6.882454711938794" fill="#2f4a2a" filter="url(#copa)"/><circle cx="104.27912011652955" cy="12.3371374122199" r="3.785350091566337" fill="#4c6b3a" opacity=".7"/><circle cx="146.0551252659365" cy="16.509932568251934" r="7.964404917020266" fill="#000" opacity=".35"/><circle cx="144.0551252659365" cy="13.509932568251932" r="7.964404917020266" fill="#2f4a2a" filter="url(#copa)"/><circle cx="141.66580379083044" cy="11.120611093145852" r="4.380422704361147" fill="#4c6b3a" opacity=".7"/><circle cx="190.88134485462214" cy="19.307606413767857" r="8.795055668954898" fill="#000" opacity=".35"/><circle cx="188.88134485462214" cy="16.307606413767857" r="8.795055668954898" fill="#2f4a2a" filter="url(#copa)"/><circle cx="186.24282815393568" cy="13.669089713081387" r="4.837280617925194" fill="#4c6b3a" opacity=".7"/><circle cx="226.99844172964777" cy="17.52396845736849" r="8.273970147140307" fill="#000" opacity=".35"/><circle cx="224.99844172964777" cy="14.523968457368488" r="8.273970147140307" fill="#2f4a2a" filter="url(#copa)"/><circle cx="222.51625068550567" cy="12.041777413226395" r="4.55068358092717" fill="#4c6b3a" opacity=".7"/><circle cx="272.1546156962848" cy="16.178511473695494" r="7.689426781973717" fill="#000" opacity=".35"/><circle cx="270.1546156962848" cy="13.178511473695494" r="7.689426781973717" fill="#2f4a2a" filter="url(#copa)"/><circle cx="267.8477876616927" cy="10.871683439103379" r="4.229184730085545" fill="#4c6b3a" opacity=".7"/><circle cx="307.29512298706766" cy="16.646818630989653" r="6.872708679434215" fill="#000" opacity=".35"/><circle cx="305.29512298706766" cy="13.646818630989653" r="6.872708679434215" fill="#2f4a2a" filter="url(#copa)"/><circle cx="303.2333103832374" cy="11.58500602715939" r="3.7799897736888184" fill="#4c6b3a" opacity=".7"/><circle cx="346.8019180856385" cy="16.101342835157055" r="8.054692424845955" fill="#000" opacity=".35"/><circle cx="344.8019180856385" cy="13.101342835157055" r="8.054692424845955" fill="#2f4a2a" filter="url(#copa)"/><circle cx="342.3855103581847" cy="10.684935107703268" r="4.430080833665276" fill="#4c6b3a" opacity=".7"/><circle cx="388.5620201417551" cy="21.562252890032767" r="6.156967777088" fill="#000" opacity=".35"/><circle cx="386.5620201417551" cy="18.562252890032767" r="6.156967777088" fill="#2f4a2a" filter="url(#copa)"/><circle cx="384.7149298086287" cy="16.715162556906368" r="3.3863322773984" fill="#4c6b3a" opacity=".7"/><circle cx="430.50555851879943" cy="20.25339485991408" r="7.259374202930294" fill="#000" opacity=".35"/><circle cx="428.50555851879943" cy="17.25339485991408" r="7.259374202930294" fill="#2f4a2a" filter="url(#copa)"/><circle cx="426.32774625792035" cy="15.075582599034993" r="3.992655811611662" fill="#4c6b3a" opacity=".7"/><circle cx="472.7949009504427" cy="17.190940802328775" r="8.024727507005085" fill="#000" opacity=".35"/><circle cx="470.7949009504427" cy="14.190940802328774" r="8.024727507005085" fill="#2f4a2a" filter="url(#copa)"/><circle cx="468.38748269834116" cy="11.783522550227248" r="4.4136001288527975" fill="#4c6b3a" opacity=".7"/><circle cx="510.04271403734185" cy="17.867257773842766" r="6.045448533387695" fill="#000" opacity=".35"/><circle cx="508.04271403734185" cy="14.867257773842764" r="6.045448533387695" fill="#2f4a2a" filter="url(#copa)"/><circle cx="506.22907947732557" cy="13.053623213826455" r="3.3249966933632327" fill="#4c6b3a" opacity=".7"/><circle cx="550.9206110320723" cy="21.537086223870144" r="6.403789406561582" fill="#000" opacity=".35"/><circle cx="548.9206110320723" cy="18.537086223870144" r="6.403789406561582" fill="#2f4a2a" filter="url(#copa)"/><circle cx="546.9994742101038" cy="16.61594940190167" r="3.5220841736088704" fill="#4c6b3a" opacity=".7"/><circle cx="594.4841923506003" cy="16.065730082685953" r="7.3948195382286945" fill="#000" opacity=".35"/><circle cx="592.4841923506003" cy="13.06573008268595" r="7.3948195382286945" fill="#2f4a2a" filter="url(#copa)"/><circle cx="590.2657464891317" cy="10.847284221217343" r="4.067150746025782" fill="#4c6b3a" opacity=".7"/><circle cx="15.92093975146166" cy="63" r="7.04623232541893" fill="#000" opacity=".35"/><circle cx="13.92093975146166" cy="60" r="7.04623232541893" fill="#2f4a2a" filter="url(#copa)"/><circle cx="11.80707005383598" cy="57.88613030237432" r="3.875427778980412" fill="#4c6b3a" opacity=".7"/><circle cx="14.1303128055077" cy="95" r="6.526596319467226" fill="#000" opacity=".35"/><circle cx="12.1303128055077" cy="92" r="6.526596319467226" fill="#2f4a2a" filter="url(#copa)"/><circle cx="10.172333909667532" cy="90.04202110415983" r="3.5896279757069744" fill="#4c6b3a" opacity=".7"/><circle cx="18.911688435013332" cy="127" r="7.308565992064038" fill="#000" opacity=".35"/><circle cx="16.911688435013332" cy="124" r="7.308565992064038" fill="#2f4a2a" filter="url(#copa)"/><circle cx="14.719118637394121" cy="121.80743020238079" r="4.019711295635221" fill="#4c6b3a" opacity=".7"/><circle cx="15.515382974313875" cy="159" r="6.151255364339977" fill="#000" opacity=".35"/><circle cx="13.515382974313875" cy="156" r="6.151255364339977" fill="#2f4a2a" filter="url(#copa)"/><circle cx="11.670006365011881" cy="154.15462339069802" r="3.3831904503869876" fill="#4c6b3a" opacity=".7"/><circle cx="15.369120229218407" cy="191" r="7.970156741429843" fill="#000" opacity=".35"/><circle cx="13.369120229218407" cy="188" r="7.970156741429843" fill="#2f4a2a" filter="url(#copa)"/><circle cx="10.978073206789453" cy="185.60895297757105" r="4.383586207786414" fill="#4c6b3a" opacity=".7"/><circle cx="611.0028254510371" cy="73" r="7.593001826947832" fill="#000" opacity=".35"/><circle cx="609.0028254510371" cy="70" r="7.593001826947832" fill="#2f4a2a" filter="url(#copa)"/><circle cx="606.7249249029527" cy="67.72209945191565" r="4.176151004821308" fill="#4c6b3a" opacity=".7"/><circle cx="616.84914236382" cy="133" r="6.778221882227327" fill="#000" opacity=".35"/><circle cx="614.84914236382" cy="130" r="6.778221882227327" fill="#2f4a2a" filter="url(#copa)"/><circle cx="612.8156757991518" cy="127.9665334353318" r="3.72802203522503" fill="#4c6b3a" opacity=".7"/><circle cx="616.9874223121195" cy="193" r="5.058892128110905" fill="#000" opacity=".35"/><circle cx="614.9874223121195" cy="190" r="5.058892128110905" fill="#2f4a2a" filter="url(#copa)"/><circle cx="613.4697546736862" cy="188.48233236156673" r="2.782390670460998" fill="#4c6b3a" opacity=".7"/><circle cx="612.123844164354" cy="253" r="7.9875071612233715" fill="#000" opacity=".35"/><circle cx="610.123844164354" cy="250" r="7.9875071612233715" fill="#2f4a2a" filter="url(#copa)"/><circle cx="607.7275920159869" cy="247.603747851633" r="4.393128938672855" fill="#4c6b3a" opacity=".7"/><path d="M24 30 H618 V376 H24 Z" fill="none" stroke="#e8edf2" stroke-opacity=".55" stroke-width="1" stroke-dasharray="3 3"/><rect width="640" height="400" fill="#0a1a3a" opacity=".38"/><path d="M94 129 H204 V166 H315" class="fibra"/><path d="M94 129 H104 V268 H114" class="fibra"/><path d="M315 166 H326 V342 H338" class="fibra"/><path d="M315 166 H423 V197 H531" class="fibra"/><path d="M531 197 H546 V329 H560" class="fibra"/><path d="M94 129 H204 V166 H315" class="paquete" style="animation-delay:-0.00s"/><path d="M94 129 H104 V268 H114" class="paquete" style="animation-delay:-0.45s"/><path d="M315 166 H326 V342 H338" class="paquete" style="animation-delay:-0.90s"/><path d="M315 166 H423 V197 H531" class="paquete" style="animation-delay:-1.35s"/><path d="M531 197 H546 V329 H560" class="paquete" style="animation-delay:-1.80s"/><path d="M315 166 L532 72" class="ptp"/><g class="chip"><rect x="358" y="140" width="44" height="11" rx="2" fill="#0b1630" stroke="#ec4899" stroke-width=".6"/><text x="380" y="147.8" text-anchor="middle" fill="#f9a8d4">PTP 5 GHz</text></g><rect x="88" y="123" width="12" height="12" rx="2" class="rack dc"/><path d="M91 127h6M91 129h6M91 131h6" stroke="#04121f" stroke-width=".9"/><g class="chip"><rect x="102" y="123.5" width="40.199999999999996" height="11" rx="2" fill="#0b1630" stroke="#cbd5e1" stroke-width=".4"/><text x="106" y="131.2" fill="#fff">RACK DC</text></g><rect x="309" y="160" width="12" height="12" rx="2" class="rack"/><path d="M312 164h6M312 166h6M312 168h6" stroke="#67e8f9" stroke-width=".9"/><g class="chip"><rect x="323" y="160.5" width="49.4" height="11" rx="2" fill="#0b1630" stroke="#cbd5e1" stroke-width=".4"/><text x="327" y="168.2" fill="#fff">RACK NAVE</text></g><rect x="108" y="262" width="12" height="12" rx="2" class="rack"/><path d="M111 266h6M111 268h6M111 270h6" stroke="#67e8f9" stroke-width=".9"/><g class="chip"><rect x="122" y="262.5" width="54.0" height="11" rx="2" fill="#0b1630" stroke="#cbd5e1" stroke-width=".4"/><text x="126" y="270.2" fill="#fff">SW BODEGAS</text></g><rect x="526" y="66" width="12" height="12" rx="2" class="rack"/><path d="M529 70h6M529 72h6M529 74h6" stroke="#67e8f9" stroke-width=".9"/><g class="chip"><rect x="540" y="66.5" width="58.599999999999994" height="11" rx="2" fill="#0b1630" stroke="#cbd5e1" stroke-width=".4"/><text x="544" y="74.2" fill="#fff">SW OFICINAS</text></g><rect x="332" y="336" width="12" height="12" rx="2" class="rack"/><path d="M335 340h6M335 342h6M335 344h6" stroke="#67e8f9" stroke-width=".9"/><g class="chip"><rect x="346" y="336.5" width="44.8" height="11" rx="2" fill="#0b1630" stroke="#cbd5e1" stroke-width=".4"/><text x="350" y="344.2" fill="#fff">SW PATIO</text></g><rect x="525" y="191" width="12" height="12" rx="2" class="rack"/><path d="M528 195h6M528 197h6M528 199h6" stroke="#67e8f9" stroke-width=".9"/><g class="chip"><rect x="539" y="191.5" width="49.4" height="11" rx="2" fill="#0b1630" stroke="#cbd5e1" stroke-width=".4"/><text x="543" y="199.2" fill="#fff">SW TALLER</text></g><rect x="554" y="323" width="12" height="12" rx="2" class="rack"/><path d="M557 327h6M557 329h6M557 331h6" stroke="#67e8f9" stroke-width=".9"/><g class="chip"><rect x="568" y="323.5" width="49.4" height="11" rx="2" fill="#0b1630" stroke="#cbd5e1" stroke-width=".4"/><text x="572" y="331.2" fill="#fff">SW ACCESO</text></g><text x="58" y="116" class="sec">DATA CENTER</text><text x="198" y="126" class="sec">NAVE PRINCIPAL</text><text x="44" y="246" class="sec">BODEGAS</text><text x="478" y="54" class="sec">OFICINAS</text><text x="484" y="174" class="sec">TALLER</text><text x="300" y="276" class="sec">PATIO DE CARGA</text><text x="498" y="336" class="sec">ACCESO</text><text x="36" y="366" class="sec">ACOPIO</text><g><path id="k1" d="M206.3 105.0 L188.3 76.2 A34 34 0 0 1 224.3 76.2 Z" class="cv" style="animation-delay:0ms"/><path id="k2" d="M238.8 105.0 L220.8 76.2 A34 34 0 0 1 256.8 76.2 Z" class="cv" style="animation-delay:22ms"/><path id="k3" d="M271.4 105.0 L253.3 76.2 A34 34 0 0 1 289.4 76.2 Z" class="cv" style="animation-delay:44ms"/><path id="k4" d="M303.9 105.0 L285.9 76.2 A34 34 0 0 1 321.9 76.2 Z" class="cv" style="animation-delay:66ms"/><path id="k5" d="M336.5 105.0 L318.4 76.2 A34 34 0 0 1 354.5 76.2 Z" class="cv" style="animation-delay:88ms"/><path id="k6" d="M369.0 105.0 L351.0 76.2 A34 34 0 0 1 387.0 76.2 Z" class="cv" style="animation-delay:110ms"/><path id="k7" d="M401.5 105.0 L383.5 76.2 A34 34 0 0 1 419.6 76.2 Z" class="cv" style="animation-delay:132ms"/><path id="k8" d="M434.1 105.0 L414.8 87.6 A26 26 0 0 1 453.4 87.6 Z" class="cv" style="animation-delay:154ms"/><path id="k9" d="M447.0 138.6 L486.5 119.3 A44 44 0 0 1 486.5 157.9 Z" class="cv" style="animation-delay:176ms"/><path id="k10" d="M447.0 171.2 L486.5 151.9 A44 44 0 0 1 486.5 190.5 Z" class="cv" style="animation-delay:198ms"/><path id="k11" d="M447.0 203.7 L486.5 184.4 A44 44 0 0 1 486.5 223.0 Z" class="cv" style="animation-delay:220ms"/><path id="k12" d="M423.7 227.0 L441.7 255.8 A34 34 0 0 1 405.7 255.8 Z" class="cv" style="animation-delay:242ms"/><path id="k13" d="M391.2 227.0 L409.2 255.8 A34 34 0 0 1 373.2 255.8 Z" class="cv" style="animation-delay:264ms"/><path id="k14" d="M358.6 227.0 L376.7 255.8 A34 34 0 0 1 340.6 255.8 Z" class="cv" style="animation-delay:286ms"/><path id="k15" d="M326.1 227.0 L345.4 244.4 A26 26 0 0 1 306.8 244.4 Z" class="cv" style="animation-delay:308ms"/><path id="k16" d="M293.5 227.0 L312.9 244.4 A26 26 0 0 1 274.2 244.4 Z" class="cv" style="animation-delay:330ms"/><circle id="k17" cx="261.0" cy="227.0" r="30" class="cv" style="animation-delay:352ms"/><circle id="k18" cx="228.5" cy="227.0" r="30" class="cv" style="animation-delay:374ms"/><path id="k19" d="M195.9 227.0 L215.2 244.4 A26 26 0 0 1 176.6 244.4 Z" class="cv" style="animation-delay:396ms"/><path id="k20" d="M183.0 193.4 L165.6 212.7 A26 26 0 0 1 165.6 174.0 Z" class="cv" style="animation-delay:418ms"/><path id="k21" d="M183.0 160.8 L165.6 180.1 A26 26 0 0 1 165.6 141.5 Z" class="cv" style="animation-delay:440ms"/><path id="k22" d="M183.0 128.3 L154.2 146.3 A34 34 0 0 1 154.2 110.3 Z" class="cv" style="animation-delay:462ms"/><path id="k23" d="M58.8 225.0 L40.8 196.2 A34 34 0 0 1 76.8 196.2 Z" class="cv" style="animation-delay:484ms"/><path id="k24" d="M104.4 225.0 L86.4 196.2 A34 34 0 0 1 122.4 196.2 Z" class="cv" style="animation-delay:506ms"/><path id="k25" d="M150.0 225.0 L132.0 196.2 A34 34 0 0 1 168.0 196.2 Z" class="cv" style="animation-delay:528ms"/><path id="k26" d="M199.0 235.6 L227.8 217.6 A34 34 0 0 1 227.8 253.6 Z" class="cv" style="animation-delay:550ms"/><path id="k27" d="M199.0 281.2 L227.8 263.2 A34 34 0 0 1 227.8 299.2 Z" class="cv" style="animation-delay:572ms"/><path id="k28" d="M169.2 311.0 L188.5 328.4 A26 26 0 0 1 149.9 328.4 Z" class="cv" style="animation-delay:594ms"/><path id="k29" d="M123.6 311.0 L141.6 339.8 A34 34 0 0 1 105.6 339.8 Z" class="cv" style="animation-delay:616ms"/><path id="k30" d="M78.0 311.0 L96.0 339.8 A34 34 0 0 1 60.0 339.8 Z" class="cv" style="animation-delay:638ms"/><path id="k31" d="M29.0 300.4 L11.6 319.7 A26 26 0 0 1 11.6 281.1 Z" class="cv" style="animation-delay:660ms"/><path id="k32" d="M29.0 254.8 L0.2 272.8 A34 34 0 0 1 0.2 236.8 Z" class="cv" style="animation-delay:682ms"/><path id="k33" d="M493.5 33.0 L474.2 15.6 A26 26 0 0 1 512.8 15.6 Z" class="cv" style="animation-delay:704ms"/><circle id="k34" cx="540.5" cy="33.0" r="30" class="cv" style="animation-delay:726ms"/><path id="k35" d="M587.5 33.0 L568.2 15.6 A26 26 0 0 1 606.8 15.6 Z" class="cv" style="animation-delay:748ms"/><path id="k36" d="M601.0 80.5 L629.8 62.5 A34 34 0 0 1 629.8 98.5 Z" class="cv" style="animation-delay:770ms"/><path id="k37" d="M570.5 111.0 L588.5 139.8 A34 34 0 0 1 552.5 139.8 Z" class="cv" style="animation-delay:792ms"/><path id="k38" d="M523.5 111.0 L541.5 139.8 A34 34 0 0 1 505.5 139.8 Z" class="cv" style="animation-delay:814ms"/><circle id="k39" cx="476.5" cy="111.0" r="30" class="cv" style="animation-delay:836ms"/><path id="k40" d="M463.0 63.5 L423.5 82.8 A44 44 0 0 1 423.5 44.2 Z" class="cv" style="animation-delay:858ms"/><path id="k41" d="M499.0 153.0 L479.7 113.5 A44 44 0 0 1 518.3 113.5 Z" class="cv" style="animation-delay:880ms"/><path id="k42" d="M545.0 153.0 L525.7 135.6 A26 26 0 0 1 564.3 135.6 Z" class="cv" style="animation-delay:902ms"/><path id="k43" d="M593.0 165.0 L621.8 147.0 A34 34 0 0 1 621.8 183.0 Z" class="cv" style="animation-delay:924ms"/><path id="k44" d="M593.0 211.0 L621.8 193.0 A34 34 0 0 1 621.8 229.0 Z" class="cv" style="animation-delay:946ms"/><path id="k45" d="M563.0 241.0 L582.3 258.4 A26 26 0 0 1 543.7 258.4 Z" class="cv" style="animation-delay:968ms"/><path id="k46" d="M517.0 241.0 L536.3 258.4 A26 26 0 0 1 497.7 258.4 Z" class="cv" style="animation-delay:990ms"/><path id="k47" d="M469.0 229.0 L440.2 247.0 A34 34 0 0 1 440.2 211.0 Z" class="cv" style="animation-delay:1012ms"/><circle id="k48" cx="469.0" cy="183.0" r="30" class="cv" style="animation-delay:1034ms"/><path id="k49" d="M85.5 97.0 L67.5 68.2 A34 34 0 0 1 103.5 68.2 Z" class="cv" style="animation-delay:1056ms"/><circle id="k50" cx="143.0" cy="120.5" r="30" class="cv" style="animation-delay:1078ms"/><path id="k51" d="M102.5 161.0 L120.5 189.8 A34 34 0 0 1 84.5 189.8 Z" class="cv" style="animation-delay:1100ms"/><path id="k52" d="M45.0 137.5 L16.2 155.5 A34 34 0 0 1 16.2 119.5 Z" class="cv" style="animation-delay:1122ms"/><path id="k53" d="M530.0 312.0 L512.0 283.2 A34 34 0 0 1 548.0 283.2 Z" class="cv" style="animation-delay:1144ms"/><path id="k54" d="M600.0 312.0 L582.0 283.2 A34 34 0 0 1 618.0 283.2 Z" class="cv" style="animation-delay:1166ms"/><path id="k55" d="M530.0 352.0 L548.0 380.8 A34 34 0 0 1 512.0 380.8 Z" class="cv" style="animation-delay:1188ms"/><path id="k56" d="M604.0 352.0 L623.3 391.5 A44 44 0 0 1 584.7 391.5 Z" class="cv" style="animation-delay:1210ms"/><path id="k57" d="M572.0 372.0 L591.3 411.5 A44 44 0 0 1 552.7 411.5 Z" class="cv" style="animation-delay:1232ms"/><path id="k58" d="M566.0 300.0 L548.0 271.2 A34 34 0 0 1 584.0 271.2 Z" class="cv" style="animation-delay:1254ms"/><path id="k59" d="M240.0 250.0 L258.0 278.8 A34 34 0 0 1 222.0 278.8 Z" class="cv" style="animation-delay:1276ms"/><path id="k60" d="M261.5 334.0 L242.2 294.5 A44 44 0 0 1 280.8 294.5 Z" class="cv" style="animation-delay:1298ms"/><path id="k61" d="M283.0 250.0 L302.3 267.4 A26 26 0 0 1 263.7 267.4 Z" class="cv" style="animation-delay:1320ms"/><path id="k62" d="M304.5 334.0 L285.2 316.6 A26 26 0 0 1 323.8 316.6 Z" class="cv" style="animation-delay:1342ms"/><path id="k63" d="M326.0 250.0 L344.0 278.8 A34 34 0 0 1 308.0 278.8 Z" class="cv" style="animation-delay:1364ms"/><path id="k64" d="M347.5 334.0 L329.5 305.2 A34 34 0 0 1 365.5 305.2 Z" class="cv" style="animation-delay:1386ms"/><path id="k65" d="M369.0 250.0 L387.0 278.8 A34 34 0 0 1 351.0 278.8 Z" class="cv" style="animation-delay:1408ms"/><path id="k66" d="M390.5 334.0 L372.5 305.2 A34 34 0 0 1 408.5 305.2 Z" class="cv" style="animation-delay:1430ms"/><circle id="k67" cx="412.0" cy="250.0" r="30" class="cv" style="animation-delay:1452ms"/><path id="k68" d="M433.5 334.0 L415.5 305.2 A34 34 0 0 1 451.5 305.2 Z" class="cv" style="animation-delay:1474ms"/><path id="k69" d="M30.0 312.0 L48.0 340.8 A34 34 0 0 1 12.0 340.8 Z" class="cv" style="animation-delay:1496ms"/><path id="k70" d="M74.0 312.0 L92.0 340.8 A34 34 0 0 1 56.0 340.8 Z" class="cv" style="animation-delay:1518ms"/><path id="k71" d="M118.0 312.0 L136.0 340.8 A34 34 0 0 1 100.0 340.8 Z" class="cv" style="animation-delay:1540ms"/><circle id="k72" cx="162.0" cy="312.0" r="30" class="cv" style="animation-delay:1562ms"/><path id="k73" d="M48.8 30.0 L66.9 58.8 A34 34 0 0 1 30.8 58.8 Z" class="cv" style="animation-delay:1584ms"/><path id="k74" d="M116.0 30.0 L135.3 47.4 A26 26 0 0 1 96.7 47.4 Z" class="cv" style="animation-delay:1606ms"/><path id="k75" d="M183.1 30.0 L201.1 58.8 A34 34 0 0 1 165.1 58.8 Z" class="cv" style="animation-delay:1628ms"/><path id="k76" d="M250.3 30.0 L269.6 47.4 A26 26 0 0 1 230.9 47.4 Z" class="cv" style="animation-delay:1650ms"/><path id="k77" d="M317.4 30.0 L336.7 69.5 A44 44 0 0 1 298.1 69.5 Z" class="cv" style="animation-delay:1672ms"/><path id="k78" d="M384.6 30.0 L402.6 58.8 A34 34 0 0 1 366.5 58.8 Z" class="cv" style="animation-delay:1694ms"/><path id="k79" d="M451.7 30.0 L471.0 47.4 A26 26 0 0 1 432.4 47.4 Z" class="cv" style="animation-delay:1716ms"/><path id="k80" d="M518.8 30.0 L538.1 69.5 A44 44 0 0 1 499.6 69.5 Z" class="cv" style="animation-delay:1738ms"/><path id="k81" d="M586.0 30.0 L604.0 58.8 A34 34 0 0 1 568.0 58.8 Z" class="cv" style="animation-delay:1760ms"/><path id="k82" d="M618.0 65.1 L600.6 84.5 A26 26 0 0 1 600.6 45.8 Z" class="cv" style="animation-delay:1782ms"/><path id="k83" d="M618.0 132.3 L589.2 150.3 A34 34 0 0 1 589.2 114.3 Z" class="cv" style="animation-delay:1804ms"/><path id="k84" d="M618.0 199.4 L589.2 217.4 A34 34 0 0 1 589.2 181.4 Z" class="cv" style="animation-delay:1826ms"/><circle id="k85" cx="618.0" cy="266.6" r="30" class="cv" style="animation-delay:1848ms"/><path id="k86" d="M618.0 333.7 L589.2 351.7 A34 34 0 0 1 589.2 315.7 Z" class="cv" style="animation-delay:1870ms"/><path id="k87" d="M593.2 376.0 L575.1 347.2 A34 34 0 0 1 611.2 347.2 Z" class="cv" style="animation-delay:1892ms"/><path id="k88" d="M526.0 376.0 L508.0 347.2 A34 34 0 0 1 544.0 347.2 Z" class="cv" style="animation-delay:1914ms"/><path id="k89" d="M458.9 376.0 L440.9 347.2 A34 34 0 0 1 476.9 347.2 Z" class="cv" style="animation-delay:1936ms"/><path id="k90" d="M391.7 376.0 L372.4 358.6 A26 26 0 0 1 411.1 358.6 Z" class="cv" style="animation-delay:1958ms"/><path id="k91" d="M324.6 376.0 L306.6 347.2 A34 34 0 0 1 342.6 347.2 Z" class="cv" style="animation-delay:1980ms"/><path id="k92" d="M257.4 376.0 L239.4 347.2 A34 34 0 0 1 275.5 347.2 Z" class="cv" style="animation-delay:2002ms"/><path id="k93" d="M190.3 376.0 L172.3 347.2 A34 34 0 0 1 208.3 347.2 Z" class="cv" style="animation-delay:2024ms"/><path id="k94" d="M123.2 376.0 L105.1 347.2 A34 34 0 0 1 141.2 347.2 Z" class="cv" style="animation-delay:2046ms"/><path id="k95" d="M56.0 376.0 L38.0 347.2 A34 34 0 0 1 74.0 347.2 Z" class="cv" style="animation-delay:2068ms"/><path id="k96" d="M24.0 340.9 L52.8 322.9 A34 34 0 0 1 52.8 358.9 Z" class="cv" style="animation-delay:2090ms"/><path id="k97" d="M24.0 273.7 L52.8 255.7 A34 34 0 0 1 52.8 291.7 Z" class="cv" style="animation-delay:2112ms"/><path id="k98" d="M24.0 206.6 L41.4 187.3 A26 26 0 0 1 41.4 225.9 Z" class="cv" style="animation-delay:2134ms"/><circle id="k99" cx="24.0" cy="139.4" r="30" class="cv" style="animation-delay:2156ms"/><path id="k100" d="M24.0 72.3 L41.4 53.0 A26 26 0 0 1 41.4 91.6 Z" class="cv" style="animation-delay:2178ms"/></g><g class="cams"><g class="cam" id="m1" style="animation-delay:0ms"><circle cx="206.3" cy="105.0" r="5.6" fill="#0b1630" stroke="#3b82f6" stroke-width="1.8"/><text x="206.3" y="106.9" text-anchor="middle">1</text></g><g class="cam" id="m2" style="animation-delay:22ms"><circle cx="238.8" cy="105.0" r="5.6" fill="#0b1630" stroke="#3b82f6" stroke-width="1.8"/><text x="238.8" y="106.9" text-anchor="middle">2</text></g><g class="cam" id="m3" style="animation-delay:44ms"><circle cx="271.4" cy="105.0" r="5.6" fill="#0b1630" stroke="#3b82f6" stroke-width="1.8"/><text x="271.4" y="106.9" text-anchor="middle">3</text></g><g class="cam" id="m4" style="animation-delay:66ms"><circle cx="303.9" cy="105.0" r="5.6" fill="#0b1630" stroke="#3b82f6" stroke-width="1.8"/><text x="303.9" y="106.9" text-anchor="middle">4</text></g><g class="cam" id="m5" style="animation-delay:88ms"><circle cx="336.5" cy="105.0" r="5.6" fill="#0b1630" stroke="#3b82f6" stroke-width="1.8"/><text x="336.5" y="106.9" text-anchor="middle">5</text></g><g class="cam" id="m6" style="animation-delay:110ms"><circle cx="369.0" cy="105.0" r="5.6" fill="#0b1630" stroke="#3b82f6" stroke-width="1.8"/><text x="369.0" y="106.9" text-anchor="middle">6</text></g><g class="cam" id="m7" style="animation-delay:132ms"><circle cx="401.5" cy="105.0" r="5.6" fill="#0b1630" stroke="#3b82f6" stroke-width="1.8"/><text x="401.5" y="106.9" text-anchor="middle">7</text></g><g class="cam" id="m8" style="animation-delay:154ms"><circle cx="434.1" cy="105.0" r="5.6" fill="#0b1630" stroke="#22d3ee" stroke-width="1.8"/><text x="434.1" y="106.9" text-anchor="middle">8</text></g><g class="cam" id="m9" style="animation-delay:176ms"><circle cx="447.0" cy="138.6" r="5.6" fill="#0b1630" stroke="#84cc16" stroke-width="1.8"/><text x="447.0" y="140.5" text-anchor="middle">9</text></g><g class="cam" id="m10" style="animation-delay:198ms"><circle cx="447.0" cy="171.2" r="5.6" fill="#0b1630" stroke="#84cc16" stroke-width="1.8"/><text x="447.0" y="173.1" text-anchor="middle">10</text></g><g class="cam" id="m11" style="animation-delay:220ms"><circle cx="447.0" cy="203.7" r="5.6" fill="#0b1630" stroke="#84cc16" stroke-width="1.8"/><text x="447.0" y="205.6" text-anchor="middle">11</text></g><g class="cam" id="m12" style="animation-delay:242ms"><circle cx="423.7" cy="227.0" r="5.6" fill="#0b1630" stroke="#3b82f6" stroke-width="1.8"/><text x="423.7" y="228.9" text-anchor="middle">12</text></g><g class="cam" id="m13" style="animation-delay:264ms"><circle cx="391.2" cy="227.0" r="5.6" fill="#0b1630" stroke="#3b82f6" stroke-width="1.8"/><text x="391.2" y="228.9" text-anchor="middle">13</text></g><g class="cam" id="m14" style="animation-delay:286ms"><circle cx="358.6" cy="227.0" r="5.6" fill="#0b1630" stroke="#3b82f6" stroke-width="1.8"/><text x="358.6" y="228.9" text-anchor="middle">14</text></g><g class="cam" id="m15" style="animation-delay:308ms"><circle cx="326.1" cy="227.0" r="5.6" fill="#0b1630" stroke="#22d3ee" stroke-width="1.8"/><text x="326.1" y="228.9" text-anchor="middle">15</text></g><g class="cam" id="m16" style="animation-delay:330ms"><circle cx="293.5" cy="227.0" r="5.6" fill="#0b1630" stroke="#22d3ee" stroke-width="1.8"/><text x="293.5" y="228.9" text-anchor="middle">16</text></g><g class="cam" id="m17" style="animation-delay:352ms"><circle cx="261.0" cy="227.0" r="5.6" fill="#0b1630" stroke="#ec4899" stroke-width="1.8"/><text x="261.0" y="228.9" text-anchor="middle">17</text></g><g class="cam" id="m18" style="animation-delay:374ms"><circle cx="228.5" cy="227.0" r="5.6" fill="#0b1630" stroke="#ec4899" stroke-width="1.8"/><text x="228.5" y="228.9" text-anchor="middle">18</text></g><g class="cam" id="m19" style="animation-delay:396ms"><circle cx="195.9" cy="227.0" r="5.6" fill="#0b1630" stroke="#22d3ee" stroke-width="1.8"/><text x="195.9" y="228.9" text-anchor="middle">19</text></g><g class="cam" id="m20" style="animation-delay:418ms"><circle cx="183.0" cy="193.4" r="5.6" fill="#0b1630" stroke="#22d3ee" stroke-width="1.8"/><text x="183.0" y="195.3" text-anchor="middle">20</text></g><g class="cam" id="m21" style="animation-delay:440ms"><circle cx="183.0" cy="160.8" r="5.6" fill="#0b1630" stroke="#22d3ee" stroke-width="1.8"/><text x="183.0" y="162.7" text-anchor="middle">21</text></g><g class="cam" id="m22" style="animation-delay:462ms"><circle cx="183.0" cy="128.3" r="5.6" fill="#0b1630" stroke="#3b82f6" stroke-width="1.8"/><text x="183.0" y="130.2" text-anchor="middle">22</text></g><g class="cam" id="m23" style="animation-delay:484ms"><circle cx="58.8" cy="225.0" r="5.6" fill="#0b1630" stroke="#3b82f6" stroke-width="1.8"/><text x="58.8" y="226.9" text-anchor="middle">23</text></g><g class="cam" id="m24" style="animation-delay:506ms"><circle cx="104.4" cy="225.0" r="5.6" fill="#0b1630" stroke="#3b82f6" stroke-width="1.8"/><text x="104.4" y="226.9" text-anchor="middle">24</text></g><g class="cam" id="m25" style="animation-delay:528ms"><circle cx="150.0" cy="225.0" r="5.6" fill="#0b1630" stroke="#3b82f6" stroke-width="1.8"/><text x="150.0" y="226.9" text-anchor="middle">25</text></g><g class="cam" id="m26" style="animation-delay:550ms"><circle cx="199.0" cy="235.6" r="5.6" fill="#0b1630" stroke="#3b82f6" stroke-width="1.8"/><text x="199.0" y="237.5" text-anchor="middle">26</text></g><g class="cam" id="m27" style="animation-delay:572ms"><circle cx="199.0" cy="281.2" r="5.6" fill="#0b1630" stroke="#3b82f6" stroke-width="1.8"/><text x="199.0" y="283.1" text-anchor="middle">27</text></g><g class="cam" id="m28" style="animation-delay:594ms"><circle cx="169.2" cy="311.0" r="5.6" fill="#0b1630" stroke="#22d3ee" stroke-width="1.8"/><text x="169.2" y="312.9" text-anchor="middle">28</text></g><g class="cam" id="m29" style="animation-delay:616ms"><circle cx="123.6" cy="311.0" r="5.6" fill="#0b1630" stroke="#3b82f6" stroke-width="1.8"/><text x="123.6" y="312.9" text-anchor="middle">29</text></g><g class="cam" id="m30" style="animation-delay:638ms"><circle cx="78.0" cy="311.0" r="5.6" fill="#0b1630" stroke="#3b82f6" stroke-width="1.8"/><text x="78.0" y="312.9" text-anchor="middle">30</text></g><g class="cam" id="m31" style="animation-delay:660ms"><circle cx="29.0" cy="300.4" r="5.6" fill="#0b1630" stroke="#22d3ee" stroke-width="1.8"/><text x="29.0" y="302.3" text-anchor="middle">31</text></g><g class="cam" id="m32" style="animation-delay:682ms"><circle cx="29.0" cy="254.8" r="5.6" fill="#0b1630" stroke="#3b82f6" stroke-width="1.8"/><text x="29.0" y="256.7" text-anchor="middle">32</text></g><g class="cam" id="m33" style="animation-delay:704ms"><circle cx="493.5" cy="33.0" r="5.6" fill="#0b1630" stroke="#22d3ee" stroke-width="1.8"/><text x="493.5" y="34.9" text-anchor="middle">33</text></g><g class="cam" id="m34" style="animation-delay:726ms"><circle cx="540.5" cy="33.0" r="5.6" fill="#0b1630" stroke="#ec4899" stroke-width="1.8"/><text x="540.5" y="34.9" text-anchor="middle">34</text></g><g class="cam" id="m35" style="animation-delay:748ms"><circle cx="587.5" cy="33.0" r="5.6" fill="#0b1630" stroke="#22d3ee" stroke-width="1.8"/><text x="587.5" y="34.9" text-anchor="middle">35</text></g><g class="cam" id="m36" style="animation-delay:770ms"><circle cx="601.0" cy="80.5" r="5.6" fill="#0b1630" stroke="#3b82f6" stroke-width="1.8"/><text x="601.0" y="82.4" text-anchor="middle">36</text></g><g class="cam" id="m37" style="animation-delay:792ms"><circle cx="570.5" cy="111.0" r="5.6" fill="#0b1630" stroke="#3b82f6" stroke-width="1.8"/><text x="570.5" y="112.9" text-anchor="middle">37</text></g><g class="cam" id="m38" style="animation-delay:814ms"><circle cx="523.5" cy="111.0" r="5.6" fill="#0b1630" stroke="#3b82f6" stroke-width="1.8"/><text x="523.5" y="112.9" text-anchor="middle">38</text></g><g class="cam" id="m39" style="animation-delay:836ms"><circle cx="476.5" cy="111.0" r="5.6" fill="#0b1630" stroke="#ec4899" stroke-width="1.8"/><text x="476.5" y="112.9" text-anchor="middle">39</text></g><g class="cam" id="m40" style="animation-delay:858ms"><circle cx="463.0" cy="63.5" r="5.6" fill="#0b1630" stroke="#84cc16" stroke-width="1.8"/><text x="463.0" y="65.4" text-anchor="middle">40</text></g><g class="cam" id="m41" style="animation-delay:880ms"><circle cx="499.0" cy="153.0" r="5.6" fill="#0b1630" stroke="#84cc16" stroke-width="1.8"/><text x="499.0" y="154.9" text-anchor="middle">41</text></g><g class="cam" id="m42" style="animation-delay:902ms"><circle cx="545.0" cy="153.0" r="5.6" fill="#0b1630" stroke="#22d3ee" stroke-width="1.8"/><text x="545.0" y="154.9" text-anchor="middle">42</text></g><g class="cam" id="m43" style="animation-delay:924ms"><circle cx="593.0" cy="165.0" r="5.6" fill="#0b1630" stroke="#3b82f6" stroke-width="1.8"/><text x="593.0" y="166.9" text-anchor="middle">43</text></g><g class="cam" id="m44" style="animation-delay:946ms"><circle cx="593.0" cy="211.0" r="5.6" fill="#0b1630" stroke="#3b82f6" stroke-width="1.8"/><text x="593.0" y="212.9" text-anchor="middle">44</text></g><g class="cam" id="m45" style="animation-delay:968ms"><circle cx="563.0" cy="241.0" r="5.6" fill="#0b1630" stroke="#22d3ee" stroke-width="1.8"/><text x="563.0" y="242.9" text-anchor="middle">45</text></g><g class="cam" id="m46" style="animation-delay:990ms"><circle cx="517.0" cy="241.0" r="5.6" fill="#0b1630" stroke="#22d3ee" stroke-width="1.8"/><text x="517.0" y="242.9" text-anchor="middle">46</text></g><g class="cam" id="m47" style="animation-delay:1012ms"><circle cx="469.0" cy="229.0" r="5.6" fill="#0b1630" stroke="#3b82f6" stroke-width="1.8"/><text x="469.0" y="230.9" text-anchor="middle">47</text></g><g class="cam" id="m48" style="animation-delay:1034ms"><circle cx="469.0" cy="183.0" r="5.6" fill="#0b1630" stroke="#ec4899" stroke-width="1.8"/><text x="469.0" y="184.9" text-anchor="middle">48</text></g><g class="cam" id="m49" style="animation-delay:1056ms"><circle cx="85.5" cy="97.0" r="5.6" fill="#0b1630" stroke="#3b82f6" stroke-width="1.8"/><text x="85.5" y="98.9" text-anchor="middle">49</text></g><g class="cam" id="m50" style="animation-delay:1078ms"><circle cx="143.0" cy="120.5" r="5.6" fill="#0b1630" stroke="#ec4899" stroke-width="1.8"/><text x="143.0" y="122.4" text-anchor="middle">50</text></g><g class="cam" id="m51" style="animation-delay:1100ms"><circle cx="102.5" cy="161.0" r="5.6" fill="#0b1630" stroke="#3b82f6" stroke-width="1.8"/><text x="102.5" y="162.9" text-anchor="middle">51</text></g><g class="cam" id="m52" style="animation-delay:1122ms"><circle cx="45.0" cy="137.5" r="5.6" fill="#0b1630" stroke="#3b82f6" stroke-width="1.8"/><text x="45.0" y="139.4" text-anchor="middle">52</text></g><g class="cam" id="m53" style="animation-delay:1144ms"><circle cx="530.0" cy="312.0" r="5.6" fill="#0b1630" stroke="#3b82f6" stroke-width="1.8"/><text x="530.0" y="313.9" text-anchor="middle">53</text></g><g class="cam" id="m54" style="animation-delay:1166ms"><circle cx="600.0" cy="312.0" r="5.6" fill="#0b1630" stroke="#3b82f6" stroke-width="1.8"/><text x="600.0" y="313.9" text-anchor="middle">54</text></g><g class="cam" id="m55" style="animation-delay:1188ms"><circle cx="530.0" cy="352.0" r="5.6" fill="#0b1630" stroke="#3b82f6" stroke-width="1.8"/><text x="530.0" y="353.9" text-anchor="middle">55</text></g><g class="cam" id="m56" style="animation-delay:1210ms"><circle cx="604.0" cy="352.0" r="5.6" fill="#0b1630" stroke="#84cc16" stroke-width="1.8"/><text x="604.0" y="353.9" text-anchor="middle">56</text></g><g class="cam" id="m57" style="animation-delay:1232ms"><circle cx="572.0" cy="372.0" r="5.6" fill="#0b1630" stroke="#84cc16" stroke-width="1.8"/><text x="572.0" y="373.9" text-anchor="middle">57</text></g><g class="cam" id="m58" style="animation-delay:1254ms"><circle cx="566.0" cy="300.0" r="5.6" fill="#0b1630" stroke="#3b82f6" stroke-width="1.8"/><text x="566.0" y="301.9" text-anchor="middle">58</text></g><g class="cam" id="m59" style="animation-delay:1276ms"><circle cx="240.0" cy="250.0" r="5.6" fill="#0b1630" stroke="#3b82f6" stroke-width="1.8"/><text x="240.0" y="251.9" text-anchor="middle">59</text></g><g class="cam" id="m60" style="animation-delay:1298ms"><circle cx="261.5" cy="334.0" r="5.6" fill="#0b1630" stroke="#84cc16" stroke-width="1.8"/><text x="261.5" y="335.9" text-anchor="middle">60</text></g><g class="cam" id="m61" style="animation-delay:1320ms"><circle cx="283.0" cy="250.0" r="5.6" fill="#0b1630" stroke="#22d3ee" stroke-width="1.8"/><text x="283.0" y="251.9" text-anchor="middle">61</text></g><g class="cam" id="m62" style="animation-delay:1342ms"><circle cx="304.5" cy="334.0" r="5.6" fill="#0b1630" stroke="#22d3ee" stroke-width="1.8"/><text x="304.5" y="335.9" text-anchor="middle">62</text></g><g class="cam" id="m63" style="animation-delay:1364ms"><circle cx="326.0" cy="250.0" r="5.6" fill="#0b1630" stroke="#3b82f6" stroke-width="1.8"/><text x="326.0" y="251.9" text-anchor="middle">63</text></g><g class="cam" id="m64" style="animation-delay:1386ms"><circle cx="347.5" cy="334.0" r="5.6" fill="#0b1630" stroke="#3b82f6" stroke-width="1.8"/><text x="347.5" y="335.9" text-anchor="middle">64</text></g><g class="cam" id="m65" style="animation-delay:1408ms"><circle cx="369.0" cy="250.0" r="5.6" fill="#0b1630" stroke="#3b82f6" stroke-width="1.8"/><text x="369.0" y="251.9" text-anchor="middle">65</text></g><g class="cam" id="m66" style="animation-delay:1430ms"><circle cx="390.5" cy="334.0" r="5.6" fill="#0b1630" stroke="#3b82f6" stroke-width="1.8"/><text x="390.5" y="335.9" text-anchor="middle">66</text></g><g class="cam" id="m67" style="animation-delay:1452ms"><circle cx="412.0" cy="250.0" r="5.6" fill="#0b1630" stroke="#ec4899" stroke-width="1.8"/><text x="412.0" y="251.9" text-anchor="middle">67</text></g><g class="cam" id="m68" style="animation-delay:1474ms"><circle cx="433.5" cy="334.0" r="5.6" fill="#0b1630" stroke="#3b82f6" stroke-width="1.8"/><text x="433.5" y="335.9" text-anchor="middle">68</text></g><g class="cam" id="m69" style="animation-delay:1496ms"><circle cx="30.0" cy="312.0" r="5.6" fill="#0b1630" stroke="#3b82f6" stroke-width="1.8"/><text x="30.0" y="313.9" text-anchor="middle">69</text></g><g class="cam" id="m70" style="animation-delay:1518ms"><circle cx="74.0" cy="312.0" r="5.6" fill="#0b1630" stroke="#3b82f6" stroke-width="1.8"/><text x="74.0" y="313.9" text-anchor="middle">70</text></g><g class="cam" id="m71" style="animation-delay:1540ms"><circle cx="118.0" cy="312.0" r="5.6" fill="#0b1630" stroke="#3b82f6" stroke-width="1.8"/><text x="118.0" y="313.9" text-anchor="middle">71</text></g><g class="cam" id="m72" style="animation-delay:1562ms"><circle cx="162.0" cy="312.0" r="5.6" fill="#0b1630" stroke="#ec4899" stroke-width="1.8"/><text x="162.0" y="313.9" text-anchor="middle">72</text></g><g class="cam" id="m73" style="animation-delay:1584ms"><circle cx="48.8" cy="30.0" r="5.6" fill="#0b1630" stroke="#3b82f6" stroke-width="1.8"/><text x="48.8" y="31.9" text-anchor="middle">73</text></g><g class="cam" id="m74" style="animation-delay:1606ms"><circle cx="116.0" cy="30.0" r="5.6" fill="#0b1630" stroke="#22d3ee" stroke-width="1.8"/><text x="116.0" y="31.9" text-anchor="middle">74</text></g><g class="cam" id="m75" style="animation-delay:1628ms"><circle cx="183.1" cy="30.0" r="5.6" fill="#0b1630" stroke="#3b82f6" stroke-width="1.8"/><text x="183.1" y="31.9" text-anchor="middle">75</text></g><g class="cam" id="m76" style="animation-delay:1650ms"><circle cx="250.3" cy="30.0" r="5.6" fill="#0b1630" stroke="#22d3ee" stroke-width="1.8"/><text x="250.3" y="31.9" text-anchor="middle">76</text></g><g class="cam" id="m77" style="animation-delay:1672ms"><circle cx="317.4" cy="30.0" r="5.6" fill="#0b1630" stroke="#84cc16" stroke-width="1.8"/><text x="317.4" y="31.9" text-anchor="middle">77</text></g><g class="cam" id="m78" style="animation-delay:1694ms"><circle cx="384.6" cy="30.0" r="5.6" fill="#0b1630" stroke="#3b82f6" stroke-width="1.8"/><text x="384.6" y="31.9" text-anchor="middle">78</text></g><g class="cam" id="m79" style="animation-delay:1716ms"><circle cx="451.7" cy="30.0" r="5.6" fill="#0b1630" stroke="#22d3ee" stroke-width="1.8"/><text x="451.7" y="31.9" text-anchor="middle">79</text></g><g class="cam" id="m80" style="animation-delay:1738ms"><circle cx="518.8" cy="30.0" r="5.6" fill="#0b1630" stroke="#84cc16" stroke-width="1.8"/><text x="518.8" y="31.9" text-anchor="middle">80</text></g><g class="cam" id="m81" style="animation-delay:1760ms"><circle cx="586.0" cy="30.0" r="5.6" fill="#0b1630" stroke="#3b82f6" stroke-width="1.8"/><text x="586.0" y="31.9" text-anchor="middle">81</text></g><g class="cam" id="m82" style="animation-delay:1782ms"><circle cx="618.0" cy="65.1" r="5.6" fill="#0b1630" stroke="#22d3ee" stroke-width="1.8"/><text x="618.0" y="67.0" text-anchor="middle">82</text></g><g class="cam" id="m83" style="animation-delay:1804ms"><circle cx="618.0" cy="132.3" r="5.6" fill="#0b1630" stroke="#3b82f6" stroke-width="1.8"/><text x="618.0" y="134.2" text-anchor="middle">83</text></g><g class="cam" id="m84" style="animation-delay:1826ms"><circle cx="618.0" cy="199.4" r="5.6" fill="#0b1630" stroke="#3b82f6" stroke-width="1.8"/><text x="618.0" y="201.3" text-anchor="middle">84</text></g><g class="cam" id="m85" style="animation-delay:1848ms"><circle cx="618.0" cy="266.6" r="5.6" fill="#0b1630" stroke="#ec4899" stroke-width="1.8"/><text x="618.0" y="268.5" text-anchor="middle">85</text></g><g class="cam" id="m86" style="animation-delay:1870ms"><circle cx="618.0" cy="333.7" r="5.6" fill="#0b1630" stroke="#3b82f6" stroke-width="1.8"/><text x="618.0" y="335.6" text-anchor="middle">86</text></g><g class="cam" id="m87" style="animation-delay:1892ms"><circle cx="593.2" cy="376.0" r="5.6" fill="#0b1630" stroke="#3b82f6" stroke-width="1.8"/><text x="593.2" y="377.9" text-anchor="middle">87</text></g><g class="cam" id="m88" style="animation-delay:1914ms"><circle cx="526.0" cy="376.0" r="5.6" fill="#0b1630" stroke="#3b82f6" stroke-width="1.8"/><text x="526.0" y="377.9" text-anchor="middle">88</text></g><g class="cam" id="m89" style="animation-delay:1936ms"><circle cx="458.9" cy="376.0" r="5.6" fill="#0b1630" stroke="#3b82f6" stroke-width="1.8"/><text x="458.9" y="377.9" text-anchor="middle">89</text></g><g class="cam" id="m90" style="animation-delay:1958ms"><circle cx="391.7" cy="376.0" r="5.6" fill="#0b1630" stroke="#22d3ee" stroke-width="1.8"/><text x="391.7" y="377.9" text-anchor="middle">90</text></g><g class="cam" id="m91" style="animation-delay:1980ms"><circle cx="324.6" cy="376.0" r="5.6" fill="#0b1630" stroke="#3b82f6" stroke-width="1.8"/><text x="324.6" y="377.9" text-anchor="middle">91</text></g><g class="cam" id="m92" style="animation-delay:2002ms"><circle cx="257.4" cy="376.0" r="5.6" fill="#0b1630" stroke="#3b82f6" stroke-width="1.8"/><text x="257.4" y="377.9" text-anchor="middle">92</text></g><g class="cam" id="m93" style="animation-delay:2024ms"><circle cx="190.3" cy="376.0" r="5.6" fill="#0b1630" stroke="#3b82f6" stroke-width="1.8"/><text x="190.3" y="377.9" text-anchor="middle">93</text></g><g class="cam" id="m94" style="animation-delay:2046ms"><circle cx="123.2" cy="376.0" r="5.6" fill="#0b1630" stroke="#3b82f6" stroke-width="1.8"/><text x="123.2" y="377.9" text-anchor="middle">94</text></g><g class="cam" id="m95" style="animation-delay:2068ms"><circle cx="56.0" cy="376.0" r="5.6" fill="#0b1630" stroke="#3b82f6" stroke-width="1.8"/><text x="56.0" y="377.9" text-anchor="middle">95</text></g><g class="cam" id="m96" style="animation-delay:2090ms"><circle cx="24.0" cy="340.9" r="5.6" fill="#0b1630" stroke="#3b82f6" stroke-width="1.8"/><text x="24.0" y="342.8" text-anchor="middle">96</text></g><g class="cam" id="m97" style="animation-delay:2112ms"><circle cx="24.0" cy="273.7" r="5.6" fill="#0b1630" stroke="#3b82f6" stroke-width="1.8"/><text x="24.0" y="275.6" text-anchor="middle">97</text></g><g class="cam" id="m98" style="animation-delay:2134ms"><circle cx="24.0" cy="206.6" r="5.6" fill="#0b1630" stroke="#22d3ee" stroke-width="1.8"/><text x="24.0" y="208.5" text-anchor="middle">98</text></g><g class="cam" id="m99" style="animation-delay:2156ms"><circle cx="24.0" cy="139.4" r="5.6" fill="#0b1630" stroke="#ec4899" stroke-width="1.8"/><text x="24.0" y="141.3" text-anchor="middle">99</text></g><g class="cam" id="m100" style="animation-delay:2178ms"><circle cx="24.0" cy="72.3" r="5.6" fill="#0b1630" stroke="#22d3ee" stroke-width="1.8"/><text x="24.0" y="74.2" text-anchor="middle">100</text></g></g><g class="chip"><rect x="34" y="380" width="74" height="18" rx="3" fill="#0b1630" opacity=".85"/><text x="40" y="388" fill="#cbd5e1">0 · 25 · 50 m</text><path d="M40 392 H102" stroke="#fff" stroke-width="1.6"/><path d="M40 392 H71" stroke="#22d3ee" stroke-width="1.6"/></g><g transform="translate(600 52)"><circle r="10" fill="#0b1630" opacity=".85"/><path d="M0 -7 L4 4 L0 1.5 L-4 4Z" fill="#fff"/><text y="-11" text-anchor="middle" class="sec" style="font-size:6px">N</text></g><g id="foco" opacity="0"><circle r="11" fill="none" stroke="#fff" stroke-width="1.6" class="anillo"/><circle r="11" fill="none" stroke="#22d3ee" class="onda2"/></g></svg>
+        <div class="ley"><span><i style="--c:#3b82f6"></i>Bala</span><span><i style="--c:#22d3ee"></i>Domo</span><span><i style="--c:#ec4899"></i>PTZ</span><span><i style="--c:#84cc16"></i>Varifocal</span><span><b class="lf"></b>Fibra</span><span><b class="lp"></b>Enlace PTP</span></div>
+        <div class="cc-kpi">
+          <div><b data-n="100">0</b><small>cámaras en línea</small></div>
+          <div><b data-n="7">0</b><small>racks conectados</small></div>
+          <div><b data-n="24" data-s="/7">0</b><small>grabación continua</small></div>
+        </div>
+        <div class="cc-log"><i></i><span id="evento">Monitoreo activo</span></div>
+      </figure>
+    </div>
+  </section>
+
+  <div class="w sectores" aria-label="Sectores">
+    <span>Trabajamos en</span><b>Gestión ambiental</b><b>Plantas industriales y energía</b><b>Logística y plataformas de descarga</b><b>Oficinas y empresas</b>
+  </div>
+
+  <section class="partners" aria-label="Partners tecnológicos">
+    <div class="w">
+      <p>Partners tecnológicos</p>
+      <div class="logos"><div class="pt"><b>Dahua</b><span>Videovigilancia</span></div><div class="pt"><b>Hikvision</b><span>Videovigilancia</span></div><div class="pt"><b>UniFi</b><span>Redes y wifi</span></div><div class="pt"><b>Cisco</b><span>Redes</span></div><div class="pt"><b>MikroTik</b><span>Redes y enlaces</span></div><div class="pt"><b>Starlink</b><span>Internet satelital</span></div><div class="pt"><b>Microsoft</b><span>Nube y productividad</span></div></div>
+    </div>
+  </section>
+
+  <section class="s" id="soluciones">
+    <div class="w">
+      <div class="cab">
+        <p class="ojo">Qué resolvemos</p>
+        <h2>Servicios de tecnología según la necesidad de cada operación</h2>
+        <p>Para jefes de operaciones, mantención, TI y prevención que necesitan un solo responsable: combinamos lo que cada proyecto requiere y respondemos por el resultado completo.</p>
+      </div>
+      <div class="pilares">
+        <article class="pilar">
+          <i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg></i>
+          <h3>Seguridad</h3>
+          <p>Visibilidad y control de lo que pasa en tu operación, de día y de noche.</p>
+          <ul>
+            <li><b>Cámaras de seguridad para empresas e industria</b><span>CCTV IP para procesos, perímetro y accesos, con equipos para polvo, lluvia y temperaturas extremas, y grabación para auditoría.</span></li>
+            <li><b>Monitoreo y registro</b><span>Integración con centros de monitoreo y respaldo continuo de video.</span></li>
+            <li><b>Lectura de patentes</b><span>Registro automático de vehículos en accesos y porterías.</span></li>
+          </ul>
+        </article>
+        <article class="pilar">
+          <i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="5" r="2.5"/><circle cx="5" cy="19" r="2.5"/><circle cx="19" cy="19" r="2.5"/><path d="M12 7.5v4M12 11.5 6.5 17M12 11.5l5.5 5.5"/></svg></i>
+          <h3>Conectividad</h3>
+          <p>Tu operación conectada y comunicada, incluso en los puntos más alejados.</p>
+          <ul>
+            <li><b>Redes industriales</b><span>Arquitecturas con segmentación VLAN, redundancia y alta disponibilidad para sistemas de control y procesos.</span></li>
+            <li><b>Fibra óptica monomodo</b><span>Backbone certificado entre sectores, con topologías en anillo y rutas redundantes.</span></li>
+            <li><b>Radioenlaces e internet satelital</b><span>Conexión para faenas, sitios remotos y acceso remoto seguro.</span></li>
+            <li><b>Voceo e intercom IP</b><span>Comunicación IP entre áreas de control y terreno.</span></li>
+          </ul>
+        </article>
+        <article class="pilar">
+          <i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 4v5h-5"/><path d="M12 8v4l3 2"/></svg></i>
+          <h3>Continuidad operacional</h3>
+          <p>Tecnología que sigue funcionando, con soporte cuando lo necesitas.</p>
+          <ul>
+            <li><b>Normalización de infraestructura crítica</b><span>Ordenamiento de racks, etiquetado, documentación y estandarización de configuraciones.</span></li>
+            <li><b>Soporte TI, Microsoft 365 y nube AWS</b><span>Correo, usuarios, equipos, migraciones y servicios en la nube.</span></li>
+            <li><b>Mantención de cámaras y redes con contrato</b><span>Preventiva y correctiva, con tiempos de respuesta acordados e informe mensual. También para sistemas que instaló otro proveedor.</span></li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="s alt" id="como">
+    <div class="w">
+      <div class="cab">
+        <p class="ojo">Cómo trabajamos</p>
+        <h2>De la primera conversación al soporte diario</h2>
+        <p>La evaluación puede ser presencial o remota, según el alcance del proyecto.</p>
+      </div>
+      <div class="pasos">
+        <div class="paso"><em>Paso 1</em><h3>Asesoría</h3><p>Analizamos la infraestructura actual en terreno: topología, equipos, cableado y sistemas críticos.</p></div>
+        <div class="paso"><em>Paso 2</em><h3>Diseño</h3><p>Identificamos puntos críticos y proponemos la solución con plano, alternativas y presupuesto claro.</p></div>
+        <div class="paso"><em>Paso 3</em><h3>Implementación</h3><p>Ejecutamos con trabajo certificado, sin detener tu operación, y entregamos todo documentado.</p></div>
+        <div class="paso"><em>Paso 4</em><h3>Soporte continuo</h3><p>Mantención, mejoras y la siguiente etapa del proyecto cuando la necesites.</p></div>
+      </div>
+      <div class="destacado">
+        <div><b>De la visita a la propuesta en horas</b><span>Lo que levantamos en terreno se convierte en cotización, plano y presentación sin volver a digitar nada.</span></div>
+        <a class="btn prim" href="#contacto">Coordinar una visita</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="s" id="entregas">
+    <div class="w">
+      <div class="cab">
+        <p class="ojo">Qué recibes</p>
+        <h2>Sabes qué se hizo, dónde y por qué</h2>
+      </div>
+      <div class="entregas">
+        <div><b>Cotización clara</b><span>Ítems por sección, alcance y condiciones.</span></div>
+        <div><b>Plano 2D y 3D</b><span>Cada cámara, punto de red y recorrido ubicado.</span></div>
+        <div><b>Página del proyecto</b><span>Un enlace para presentar la propuesta a tu gerencia.</span></div>
+        <div><b>Informe técnico</b><span>Fotos, pruebas y certificación del trabajo entregado.</span></div>
+        <div><b>Orden de trabajo firmada</b><span>Cada visita queda registrada con tu firma.</span></div>
+        <div><b>Informe mensual</b><span>Estado de los equipos e incidencias, en contratos de mantención.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="s alt" id="experiencia">
+    <div class="w">
+      <div class="cab">
+        <p class="ojo">Experiencia</p>
+        <h2>Experiencia real en plantas del sector productivo y de gestión ambiental</h2>
+      </div>
+      <div class="casos">
+        <article class="caso">
+          <small>PLANTA INDUSTRIAL · ZONA CENTRO</small>
+          <h3>Optimización de red y normalización de rack principal</h3>
+          <p>Segmentación de procesos críticos y ordenamiento completo del rack.</p>
+          <ul><li>Mejor estabilidad de comunicación entre áreas</li><li>Menos incidentes de conectividad</li><li>Infraestructura preparada para crecer</li></ul>
+        </article>
+        <article class="caso">
+          <small>ÁREA OPERATIVA · FIBRA ÓPTICA</small>
+          <h3>Backbone de fibra entre sectores productivos y rack central</h3>
+          <p>Despliegue de enlace estructurado en el área operativa.</p>
+          <ul><li>Comunicación estable entre zonas críticas</li><li>Sin intermitencias en la transmisión de datos</li><li>Base para ampliar el monitoreo IP</li></ul>
+        </article>
+        <article class="caso">
+          <small>PLANTA DE PROCESOS · CCTV</small>
+          <h3>Sistema de CCTV operacional en sectores críticos</h3>
+          <p>Monitoreo IP de la operación con registro continuo.</p>
+          <ul><li>Mayor visibilidad de los procesos</li><li>Registro continuo para auditoría</li><li>Mejor control y trazabilidad</li></ul>
+        </article>
+      </div>
+      <p class="nota">Nombres de clientes reservados por confidencialidad.</p>
+      <div class="respaldo">
+        <div class="perfil">
+          <small>QUIÉN ESTÁ DETRÁS</small>
+          <h3>Dirigido por un ingeniero en telecomunicaciones con 16 años de experiencia</h3>
+          <p>Jefatura de proyectos de redes y conectividad, y soporte informático para más de 300 usuarios a nivel nacional. Cada proyecto lo diseña y supervisa directamente quien responde por él.</p>
+        </div>
+        <div class="sellos">
+          <div><span>Certificaciones del equipo</span><p><code>Cisco CCNA</code><code>Fortinet</code><code>MikroTik</code><code>AWS</code><code>ITIL</code><code>Microsoft</code><code>Dahua CCTV</code><code>Automatización con IA</code></p></div>
+                    <div><span>Estándares</span><p><code>IEEE</code><code>ISA</code><code>TIA</code></p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="s" id="preguntas">
+    <div class="w">
+      <div class="cab">
+        <p class="ojo">Preguntas frecuentes</p>
+        <h2>Lo que nos preguntan antes de cotizar</h2>
+      </div>
+      <div class="faq">
+        <details><summary>¿Cuánto demora una cotización?</summary><p>Después de la visita técnica enviamos la propuesta en horas: cotización, plano y presentación del proyecto. Si ya tienes planos o fotos, podemos partir con una evaluación remota.</p></details>
+        <details><summary>¿Trabajan en regiones y faenas?</summary><p>Sí. Operamos desde Santiago con cobertura nacional, incluyendo plantas, faenas y sitios remotos sin conexión, donde usamos radioenlaces o internet satelital.</p></details>
+        <details><summary>¿Pueden mantener un sistema que instaló otra empresa?</summary><p>Sí. Hacemos un catastro de lo existente (cámaras, grabadores, red y racks), lo documentamos en un plano y proponemos un contrato de mantención con informe mensual.</p></details>
+        <details><summary>¿Los equipos aguantan polvo, lluvia y calor?</summary><p>Usamos equipos con protección para intemperie y carcasas adecuadas a cada ambiente, y diseñamos la alimentación y el respaldo para que la grabación no se corte.</p></details>
+        <details><summary>¿Qué incluye un contrato de mantención?</summary><p>Visitas preventivas programadas, atención de fallas con tiempos acordados, informe mensual del estado de los equipos y soporte 24/7 para clientes con contrato.</p></details>
+        <details><summary>¿Hacen solo cámaras o también la red y el soporte?</summary><p>Ambos. Podemos hacernos cargo de cámaras, red, fibra, enlaces, voceo, correo y soporte a usuarios, para que tengas un solo responsable.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <section class="s alt" id="contacto">
+    <div class="w">
+      <div class="cab">
+        <p class="ojo">Contacto</p>
+        <h2>Cuéntanos qué necesitas y coordinamos una evaluación técnica</h2>
+      </div>
+      <div class="contacto">
+        <form id="f" novalidate>
+          <div class="fila">
+            <label for="nombre">Nombre<input id="nombre" name="nombre" autocomplete="name" required></label>
+            <label for="empresa">Empresa<input id="empresa" name="empresa" autocomplete="organization" required></label>
+          </div>
+          <div class="fila">
+            <label for="tel">Teléfono<input id="tel" name="tel" type="tel" autocomplete="tel" placeholder="+56 9 …"></label>
+            <label for="tema">Necesito<select id="tema" name="tema"><option>Evaluación técnica</option><option>Seguridad / CCTV</option><option>Conectividad / redes / enlaces</option><option>Soporte TI o mantención</option><option>Otro</option></select></label>
+          </div>
+          <label for="msg">Mensaje<textarea id="msg" name="msg" required placeholder="Dónde está la instalación y qué te gustaría resolver"></textarea></label>
+          <p class="aviso" id="err" hidden>Completa tu nombre, empresa y mensaje para enviarlo.</p>
+          <button class="btn prim" type="submit">Enviar por WhatsApp</button>
+          <p class="envio" id="ok" hidden>Se abrió WhatsApp con tu mensaje listo. Si no se abrió, <a id="okl" href="#" target="_blank" rel="noopener">toca aquí para abrirlo</a>.</p>
+        </form>
+        <div class="datosc">
+          <div class="dc"><small>WhatsApp y teléfono</small><b>+56 9 9327 5874</b></div>
+          <div class="dc"><small>Correo</small><b>contacto@nws.cl</b></div>
+          <div class="dc"><small>Horario</small><b>Lunes a viernes, 9:00 a 18:00</b><span>Soporte 24/7 para clientes con contrato de servicio</span></div>
+          <div class="dc"><small>Cobertura</small><b>Nacional, desde Santiago</b></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="w pie">
+    <span>© 2026 NetWatch Solutions · Seguridad · Conectividad · Continuidad operacional</span>
+    <nav aria-label="Enlaces">
+      <a href="#soluciones">Soluciones</a><a href="#experiencia">Experiencia</a><a href="#contacto">Contacto</a>
+      <a href="https://www.instagram.com/nwsolutions_/" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://nws.cl/tarjeta" target="_blank" rel="noopener">Tarjeta de contacto</a>
+    </nav>
+  </div>
+</footer>
+
+<a class="wa" href="https://wa.me/56993275874?text=Hola%20NWS%2C%20te%20escribo%20desde%20la%20web." target="_blank" rel="noopener" aria-label="Escribir por WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1-.2-.1-1-.4-1.9-1.2-.7-.6-1.2-1.4-1.3-1.6-.1-.2 0-.4.1-.5l.4-.4.2-.4v-.4l-.8-1.9c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 1.9s.8 2.2.9 2.3c.1.2 1.6 2.5 3.9 3.5.5.2 1 .4 1.3.5.6.2 1.1.2 1.5.1.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2l-.5-.2z"/></svg>
+  <span>WhatsApp</span>
+</a>
+
+<script>
+document.getElementById('f').addEventListener('submit', function (e) {
+  e.preventDefault();
+  var v = function (id) { return document.getElementById(id).value.trim(); };
+  var err = document.getElementById('err'), ok = document.getElementById('ok');
+  if (!v('nombre') || !v('empresa') || !v('msg')) { err.hidden = false; ok.hidden = true; return; }
+  err.hidden = true;
+  var texto = 'Hola NWS, soy ' + v('nombre') + ' de ' + v('empresa') + '.\n' +
+    'Necesito: ' + v('tema') + '.\n' + v('msg') + (v('tel') ? '\nMi teléfono: ' + v('tel') : '');
+  var url = 'https://wa.me/56993275874?text=' + encodeURIComponent(texto);
+  document.getElementById('okl').href = url;
+  ok.hidden = false;
+  window.open(url, '_blank', 'noopener');
+});
+</script>
+<script>
+(function(){
+  var red=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var r=document.getElementById('reloj');
+  function tic(){var d=new Date();r.textContent=d.toLocaleTimeString('es-CL',{hour12:false});}
+  if(r){tic();setInterval(tic,1000);}
+  document.querySelectorAll('.cc-kpi b').forEach(function(b){
+    var n=parseFloat(b.dataset.n),dec=+(b.dataset.d||0),t0=null,dur=red?0:1600;
+    function paso(t){if(!t0)t0=t;var k=dur?Math.min(1,(t-t0)/dur):1;k=1-Math.pow(1-k,3);b.textContent=(n*k).toFixed(dec).replace('.',',')+(k>=1&&b.dataset.s?b.dataset.s:'');if(k<1)requestAnimationFrame(paso);}
+    requestAnimationFrame(paso);
+  });
+  var C=[[206.3, 105, "b", "Nave principal"], [238.8, 105, "b", "Nave principal"], [271.4, 105, "b", "Nave principal"], [303.9, 105, "b", "Nave principal"], [336.5, 105, "b", "Nave principal"], [369.0, 105, "b", "Nave principal"], [401.5, 105, "b", "Nave principal"], [434.1, 105, "d", "Nave principal"], [447, 138.6, "v", "Nave principal"], [447, 171.2, "v", "Nave principal"], [447, 203.7, "v", "Nave principal"], [423.7, 227, "b", "Nave principal"], [391.2, 227, "b", "Nave principal"], [358.6, 227, "b", "Nave principal"], [326.1, 227, "d", "Nave principal"], [293.5, 227, "d", "Nave principal"], [261.0, 227, "p", "Nave principal"], [228.5, 227, "p", "Nave principal"], [195.9, 227, "d", "Nave principal"], [183, 193.4, "d", "Nave principal"], [183, 160.8, "d", "Nave principal"], [183, 128.3, "b", "Nave principal"], [58.8, 225, "b", "Bodegas"], [104.4, 225, "b", "Bodegas"], [150.0, 225, "b", "Bodegas"], [199, 235.6, "b", "Bodegas"], [199, 281.2, "b", "Bodegas"], [169.2, 311, "d", "Bodegas"], [123.6, 311, "b", "Bodegas"], [78.0, 311, "b", "Bodegas"], [29, 300.4, "d", "Bodegas"], [29, 254.8, "b", "Bodegas"], [493.5, 33, "d", "Oficinas"], [540.5, 33, "p", "Oficinas"], [587.5, 33, "d", "Oficinas"], [601, 80.5, "b", "Oficinas"], [570.5, 111, "b", "Oficinas"], [523.5, 111, "b", "Oficinas"], [476.5, 111, "p", "Oficinas"], [463, 63.5, "v", "Oficinas"], [499.0, 153, "v", "Taller"], [545.0, 153, "d", "Taller"], [593, 165.0, "b", "Taller"], [593, 211.0, "b", "Taller"], [563.0, 241, "d", "Taller"], [517.0, 241, "d", "Taller"], [469, 229.0, "b", "Taller"], [469, 183.0, "p", "Taller"], [85.5, 97, "b", "Data center"], [143, 120.5, "p", "Data center"], [102.5, 161, "b", "Data center"], [45, 137.5, "b", "Data center"], [530, 312, "b", "Acceso"], [600, 312, "b", "Acceso"], [530, 352, "b", "Acceso"], [604, 352, "v", "Acceso"], [572, 372, "v", "Acceso"], [566, 300, "b", "Acceso"], [240.0, 250, "b", "Patio de carga"], [261.5, 334, "v", "Patio de carga"], [283.0, 250, "d", "Patio de carga"], [304.5, 334, "d", "Patio de carga"], [326.0, 250, "b", "Patio de carga"], [347.5, 334, "b", "Patio de carga"], [369.0, 250, "b", "Patio de carga"], [390.5, 334, "b", "Patio de carga"], [412.0, 250, "p", "Patio de carga"], [433.5, 334, "b", "Patio de carga"], [30, 312, "b", "Acopio"], [74, 312, "b", "Acopio"], [118, 312, "b", "Acopio"], [162, 312, "p", "Acopio"], [48.8, 30, "b", "Perímetro"], [116.0, 30, "d", "Perímetro"], [183.1, 30, "b", "Perímetro"], [250.3, 30, "d", "Perímetro"], [317.4, 30, "v", "Perímetro"], [384.6, 30, "b", "Perímetro"], [451.7, 30, "d", "Perímetro"], [518.8, 30, "v", "Perímetro"], [586.0, 30, "b", "Perímetro"], [618, 65.1, "d", "Perímetro"], [618, 132.3, "b", "Perímetro"], [618, 199.4, "b", "Perímetro"], [618, 266.6, "p", "Perímetro"], [618, 333.7, "b", "Perímetro"], [593.2, 376, "b", "Perímetro"], [526.0, 376, "b", "Perímetro"], [458.9, 376, "b", "Perímetro"], [391.7, 376, "d", "Perímetro"], [324.6, 376, "b", "Perímetro"], [257.4, 376, "b", "Perímetro"], [190.3, 376, "b", "Perímetro"], [123.2, 376, "b", "Perímetro"], [56.0, 376, "b", "Perímetro"], [24, 340.9, "b", "Perímetro"], [24, 273.7, "b", "Perímetro"], [24, 206.6, "d", "Perímetro"], [24, 139.4, "p", "Perímetro"], [24, 72.3, "d", "Perímetro"]];
+  var TN={b:'Bala 4 MP',d:'Domo 4 MP',p:'PTZ 25x',v:'Varifocal 4 MP'};
+  var ES=['en línea · grabando','movimiento registrado','en línea · visión nocturna','revisión preventiva OK','en línea · grabando'];
+  var e=document.getElementById('evento'),f=document.getElementById('foco'),prev=0,j=0;
+  function foco(){
+    var n=1+Math.floor(Math.random()*100);if(n===prev)n=n%100+1;
+    if(prev){document.getElementById('m'+prev).classList.remove('on');document.getElementById('k'+prev).classList.remove('on');}
+    var c=C[n-1];document.getElementById('m'+n).classList.add('on');document.getElementById('k'+n).classList.add('on');
+    f.setAttribute('transform','translate('+c[0]+' '+c[1]+')');f.setAttribute('opacity','1');prev=n;
+    var txt='Cámara '+(n<10?'0':'')+n+' · '+TN[c[2]]+' · '+c[3]+' · '+ES[j++%ES.length];
+    e.classList.add('sale');setTimeout(function(){e.textContent=txt;e.classList.remove('sale');},300);
+  }
+  if(e&&f){setTimeout(function(){foco();if(!red)setInterval(foco,2400);},red?0:2600);}
+  var obs='IntersectionObserver' in window&&!red?new IntersectionObserver(function(es){es.forEach(function(x){if(x.isIntersecting){x.target.classList.add('ve');obs.unobserve(x.target);}});},{threshold:.12}):null;
+  document.querySelectorAll('.cab,.pilar,.paso,.caso,.entregas,.respaldo,.faq details,.partners .logos').forEach(function(el,k){if(!obs)return;el.classList.add('revela');el.style.transitionDelay=(k%3)*90+'ms';obs.observe(el);});
+})();
+</script>
+</body>
+</html>
