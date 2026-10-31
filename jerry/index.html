@@ -61,6 +61,15 @@ h2{margin:30px 4px 12px;font-size:12px;letter-spacing:.14em;text-transform:upper
 .paso em{flex:none;width:28px;height:28px;border-radius:50%;background:var(--grad);display:grid;place-items:center;font-style:normal;font-weight:800;font-size:13px}
 .paso b{font-size:14px}
 .paso p{color:var(--sub);font-size:12.5px;margin-top:2px;line-height:1.4}
+.cifras{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.cifras div{padding:14px 10px;border-radius:18px;border:1px solid var(--line);background:var(--glass);text-align:center}
+.cifras b{display:block;font-size:20px;font-weight:800;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.cifras span{display:block;margin-top:3px;color:var(--sub);font-size:11.5px;line-height:1.35}
+.sellos{margin-top:10px;padding:14px 16px;border-radius:22px;border:1px solid var(--line);background:var(--glass)}
+.sellos small{display:block;color:var(--sub);font-size:11.5px;margin:0 0 7px}
+.sellos small+ul{margin-bottom:12px}.sellos ul:last-child{margin-bottom:0}
+.sellos ul{list-style:none;padding:0;display:flex;flex-wrap:wrap;gap:6px}
+.sellos li{font-size:11.5px;font-weight:600;color:#9fd9ec;padding:4px 9px;border-radius:999px;background:rgba(6,182,212,.1);border:1px solid rgba(6,182,212,.22)}
 .qr{display:flex;gap:16px;align-items:center;padding:16px;border-radius:22px;border:1px solid var(--line);background:var(--glass)}
 .qr .code{flex:none;width:112px;height:112px;padding:9px;border-radius:14px;background:#fff}
 .qr .code img{width:100%;height:100%;display:block}
@@ -116,6 +125,12 @@ footer a{color:var(--sub);text-decoration:none}
     <div class="paso"><em>2</em><div><b>Diseño</b><p>La solución adecuada, con plano y presupuesto claros.</p></div></div>
     <div class="paso"><em>3</em><div><b>Implementación</b><p>Trabajo certificado y todo documentado.</p></div></div>
     <div class="paso"><em>4</em><div><b>Soporte continuo</b><p>Mantención, mejoras y nuevas etapas cuando las necesites.</p></div></div>
+  </div>
+
+  <h2 class="in" style="animation-delay:.29s">Respaldo</h2>
+  <div class="in" style="animation-delay:.3s">
+    <div class="cifras"><div><b>16 años</b><span>en telecomunicaciones y redes</span></div><div><b>+300</b><span>usuarios con soporte TI</span></div><div><b>+100</b><span>equipos CCTV en mantención</span></div></div>
+    <div class="sellos"><small>Certificaciones</small><ul><li>Cisco CCNA</li><li>Fortinet</li><li>MikroTik</li><li>AWS</li><li>ITIL</li><li>Microsoft</li><li>Dahua CCTV</li></ul><small>Marcas con que trabajamos</small><ul><li>Dahua</li><li>Hikvision</li><li>UniFi</li><li>Cisco</li><li>MikroTik</li><li>Starlink</li><li>Microsoft</li></ul></div>
   </div>
 
   <h2 class="in" style="animation-delay:.3s">Comparte este contacto</h2>
