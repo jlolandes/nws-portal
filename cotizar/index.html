@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Cotiza con NWS · NetWatch Solutions</title>
+<meta name="description" content="Diagnóstico gratuito de cámaras, redes, internet satelital y soporte TI. Hogar y empresas en la Región Metropolitana. Respuesta por WhatsApp.">
+<meta property="og:title" content="Cotiza con NWS · Diagnóstico gratuito">
+<meta property="og:description" content="Cámaras, redes, internet satelital y soporte TI. Planes mes a mes, sin amarres.">
+<meta property="og:image" content="https://portal.nws.cl/jerry/avatar-nws.png">
+<link rel="icon" href="https://portal.nws.cl/jerry/avatar-nws.png">
+<style>
+:root{--bg:#050a17;--panel:#0b1630;--line:rgba(148,178,220,.22);--fg:#eef4ff;--mut:#a9bbd6;--ac:#22d3ee;--ac2:#2563eb;--ok:#4ade80;--bad:#f87171;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;background:radial-gradient(90% 50% at 15% 0%,#173a78 0%,#0b1630 45%,#050a17 100%);color:var(--fg);font:16px/1.5 Inter,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.w{max-width:560px;margin:0 auto;padding:28px max(18px,env(safe-area-inset-left)) 40px max(18px,env(safe-area-inset-right));display:flex;flex-direction:column;gap:22px}
+.top{display:flex;align-items:center;justify-content:space-between}
+.logo{display:flex;align-items:center;gap:10px;font-weight:900;font-size:24px;letter-spacing:-.02em;color:var(--fg);text-decoration:none}
+.chip{font-size:12px;font-weight:700;letter-spacing:.14em;border:1.5px solid var(--ac);border-radius:999px;padding:6px 12px}
+h1{margin:0;font-size:clamp(30px,8vw,40px);line-height:1.05;letter-spacing:-.03em;font-weight:300;text-wrap:balance}
+h1 b{font-weight:900;color:var(--ac)}
+.sub{margin:0;color:var(--mut)}
+.pills{display:flex;flex-wrap:wrap;gap:8px}
+.pills span{font-size:13px;font-weight:600;border:1px solid var(--line);background:rgba(11,22,48,.7);border-radius:999px;padding:6px 12px}
+form{background:rgba(11,22,48,.85);border:1px solid var(--line);border-radius:20px;padding:20px;display:flex;flex-direction:column;gap:14px}
+label{display:flex;flex-direction:column;gap:6px;font-size:14px;font-weight:600}
+input,select,textarea{font:inherit;color:var(--fg);background:#06102a;border:1px solid var(--line);border-radius:12px;padding:12px 14px;width:100%}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--ac);outline-offset:1px}
+textarea{min-height:84px;resize:vertical}
+.seg{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.seg input{position:absolute;opacity:0;width:1px;height:1px}
+.seg label{flex-direction:row;justify-content:center;align-items:center;border:1px solid var(--line);border-radius:12px;padding:12px;cursor:pointer;background:#06102a;font-weight:700}
+.seg input:checked+span{color:var(--ac)}
+.seg label:has(input:checked){border-color:var(--ac);background:rgba(34,211,238,.08)}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:460px){.row{grid-template-columns:1fr}}
+button{font:inherit;font-weight:900;font-size:17px;border:0;border-radius:999px;padding:15px 20px;background:linear-gradient(135deg,#06b6d4,#2563eb);color:#fff;cursor:pointer}
+button:disabled{opacity:.6;cursor:wait}
+.legal{font-size:12px;color:var(--mut);margin:0}
+.hp{position:absolute;left:-9999px}
+.msg{border-radius:14px;padding:14px 16px;font-size:15px}
+.msg.err{background:rgba(248,113,113,.12);border:1px solid var(--bad)}
+.done{background:rgba(11,22,48,.85);border:1px solid var(--ok);border-radius:20px;padding:22px;display:flex;flex-direction:column;gap:12px}
+.done h2{margin:0;font-size:24px}
+.wa{display:inline-block;text-align:center;text-decoration:none;font-weight:900;color:#052e16;background:#4ade80;border-radius:999px;padding:14px 20px}
+.trust{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;text-align:center}
+.trust b{display:block;font-size:24px;font-weight:900;color:var(--ac)}
+.trust span{font-size:12px;color:var(--mut)}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+<main class="w">
+  <div class="top">
+    <a class="logo" href="https://nws.cl"><svg viewBox="0 0 110 100" width="34" height="31" aria-hidden="true"><defs><linearGradient id="lg" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#06B6D4"/><stop offset="1" stop-color="#2563EB"/></linearGradient></defs><path d="M10 90 L35 20 L50 20 L25 90 Z" fill="url(#lg)"/><path d="M35 90 L60 20 L75 20 L50 90 Z" fill="url(#lg)" opacity=".85"/><path d="M60 90 L85 20 L100 20 L75 90 Z" fill="url(#lg)" opacity=".7"/></svg>NWS</a>
+    <span class="chip">DIAGNÓSTICO GRATUITO</span>
+  </div>
+
+  <h1>Cuéntanos qué necesitas y te respondemos <b>por WhatsApp</b></h1>
+  <p class="sub">Cámaras, redes, internet satelital y soporte TI para hogar y empresas. Diagnóstico gratuito en la Región Metropolitana. Planes mes a mes, sin amarres.</p>
+  <div class="pills"><span>Toma 30 segundos</span><span>Sin compromiso</span><span>Respuesta en horario hábil</span></div>
+
+  <form id="f" novalidate>
+    <div class="seg" role="radiogroup" aria-label="Para quién es">
+      <label><input type="radio" name="tipo" value="Hogar"><span>Hogar</span></label>
+      <label><input type="radio" name="tipo" value="Empresa" checked><span>Empresa</span></label>
+    </div>
+    <label for="servicio">¿Qué necesitas?
+      <select id="servicio" name="servicio" required>
+        <option>Cámaras de seguridad</option>
+        <option>Redes y wifi</option>
+        <option>Internet satelital</option>
+        <option>Soporte TI</option>
+        <option>Insumos y equipos</option>
+        <option>Otro</option>
+      </select>
+    </label>
+    <div class="row">
+      <label for="nombre">Tu nombre<input id="nombre" name="nombre" autocomplete="name" maxlength="80" required></label>
+      <label for="telefono">WhatsApp<input id="telefono" name="telefono" type="tel" inputmode="tel" autocomplete="tel" placeholder="+56 9 1234 5678" maxlength="20" required></label>
+    </div>
+    <label for="comuna">Comuna<input id="comuna" name="comuna" maxlength="60" placeholder="Ej.: Quilicura"></label>
+    <label for="mensaje">Cuéntanos un poco (opcional)<textarea id="mensaje" name="mensaje" maxlength="600" placeholder="Ej.: tengo 8 cámaras y 2 no graban de noche"></textarea></label>
+    <input class="hp" id="web" name="web" tabindex="-1" autocomplete="off" aria-hidden="true">
+    <div class="msg err" id="err" hidden></div>
+    <button id="btn" type="submit">Quiero mi diagnóstico gratuito</button>
+    <p class="legal">Usamos tus datos solo para responder esta solicitud. No los compartimos con terceros.</p>
+  </form>
+
+  <section class="done" id="ok" hidden>
+    <h2>¡Listo! Recibimos tu solicitud.</h2>
+    <p class="sub" style="margin:0">Te escribimos por WhatsApp. Si quieres adelantar, mándanos un mensaje ahora:</p>
+    <a class="wa" id="wa" href="https://wa.me/56993275874" target="_blank" rel="noopener">Escribir por WhatsApp</a>
+  </section>
+
+  <div class="trust">
+    <div><b>16 años</b><span>en telecomunicaciones y redes</span></div>
+    <div><b>+300</b><span>usuarios con soporte TI</span></div>
+    <div><b>+100</b><span>cámaras en mantención</span></div>
+  </div>
+</main>
+<script>
+(function(){
+  var URL_='https://camuxwyvvldqlmsmfbju.supabase.co/rest/v1/mkt_leads';
+  var KEY='sb_publishable_jeJlfqULfC7x6iUZrXjl8A_8zB5oVAm';
+  var q=new URLSearchParams(location.search);
+  var origen=(q.get('o')||q.get('utm_source')||(document.referrer?(new URL(document.referrer).hostname.replace('www.','')):'directo')).slice(0,40);
+  var campana=(q.get('c')||q.get('utm_campaign')||'').slice(0,80)||null;
+  var f=document.getElementById('f'),err=document.getElementById('err'),btn=document.getElementById('btn');
+  function fail(t){err.textContent=t;err.hidden=false;}
+  f.addEventListener('submit',function(e){
+    e.preventDefault();err.hidden=true;
+    if(f.web.value){document.getElementById('ok').hidden=false;f.hidden=true;return;}
+    var nombre=f.nombre.value.trim(),tel=f.telefono.value.replace(/[^\d+]/g,'');
+    if(nombre.length<2)return fail('Escribe tu nombre.');
+    if(tel.replace(/\D/g,'').length<8)return fail('Revisa tu número de WhatsApp.');
+    var d={nombre:nombre,telefono:tel,tipo:f.querySelector('input[name=tipo]:checked').value,servicio:f.servicio.value,comuna:f.comuna.value.trim()||null,mensaje:f.mensaje.value.trim()||null,origen:origen,campana:campana};
+    btn.disabled=true;btn.textContent='Enviando…';
+    fetch(URL_,{method:'POST',headers:{'apikey':KEY,'Authorization':'Bearer '+KEY,'Content-Type':'application/json','Prefer':'return=minimal'},body:JSON.stringify(d)})
+      .then(function(r){if(!r.ok)throw new Error(r.status);
+        var t='Hola NWS, soy '+d.nombre+'. Pedí un diagnóstico de '+d.servicio.toLowerCase()+' ('+d.tipo.toLowerCase()+(d.comuna?', '+d.comuna:'')+').';
+        document.getElementById('wa').href='https://wa.me/56993275874?text='+encodeURIComponent(t);
+        f.hidden=true;document.getElementById('ok').hidden=false;window.scrollTo(0,0);})
+      .catch(function(){btn.disabled=false;btn.textContent='Quiero mi diagnóstico gratuito';fail('No se pudo enviar. Escríbenos directo por WhatsApp al +56 9 9327 5874.');});
+  });
+})();
+</script>
+</body>
+</html>
