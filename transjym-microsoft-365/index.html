@@ -5,198 +5,83 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="robots" content="noindex,nofollow">
 <meta name="theme-color" content="#0b1f3a">
-<title>Transportes J y M · Microsoft 365 · NWS</title>
+<title>Propuesta NWS · Transportes J y M</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Public+Sans:wght@400;600&display=swap">
-<style>
-:root{--navy:#0b1f3a;--blue:#123a6b;--cyan:#1aa3e0;--ink:#1f2937;--mut:#64748b;--line:#e5e7eb;--bg:#f4f7fb;--card:#fff;--ok:#10b981;--warn:#f59e0b}
-*{box-sizing:border-box}html{scroll-behavior:smooth}
-body{margin:0;font-family:"Public Sans",system-ui,sans-serif;color:var(--ink);background:var(--bg);line-height:1.55;-webkit-font-smoothing:antialiased}
-h1,h2,h3,.kv,.n{font-family:Montserrat,sans-serif}
-a{color:inherit}
-.top{position:sticky;top:0;z-index:20;display:flex;align-items:center;gap:12px;padding:10px 20px;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
-.top img{height:26px}.top .t{display:flex;flex-direction:column;line-height:1.2}.top b{font-size:14px;color:var(--navy)}.top small{font-size:11.5px;color:var(--mut)}
-.top nav{margin-left:auto;display:flex;gap:4px}.top nav a{font-size:13px;text-decoration:none;padding:7px 11px;border-radius:8px;color:var(--mut);font-weight:600}.top nav a:hover{background:var(--bg);color:var(--navy)}
-.hero{position:relative;overflow:hidden;color:#fff;background:linear-gradient(150deg,#0b1f3a 0%,#123a6b 45%,#0e7fb8 82%,#1aa3e0 100%);padding:64px 20px 96px}
-.hero:before{content:"";position:absolute;right:-180px;top:-160px;width:560px;height:560px;border-radius:50%;border:1px solid rgba(255,255,255,.12)}
-.hero:after{content:"";position:absolute;right:-90px;top:-60px;width:360px;height:360px;border-radius:50%;background:rgba(255,255,255,.05)}
-.wrap{max-width:1040px;margin:0 auto;position:relative;z-index:1}
-.k{font-size:12px;letter-spacing:.24em;color:#9fdcf7;font-weight:600;text-transform:uppercase}
-.hero h1{font-size:clamp(30px,5vw,48px);line-height:1.08;margin:12px 0 14px;font-weight:800}
-.hero p{max-width:640px;color:#d6eefb;font-size:16px;margin:0}
-.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}.chip{font-size:12.5px;padding:6px 12px;border-radius:99px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2)}
-.chip.ok{background:rgba(16,185,129,.22);border-color:rgba(16,185,129,.5)}
-.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:-58px;position:relative;z-index:2}
-.kpi{background:var(--card);border-radius:14px;padding:18px;box-shadow:0 10px 30px -12px rgba(11,31,58,.25);border-top:3px solid var(--cyan)}
-.kpi .kv{font-size:28px;font-weight:800;color:var(--navy);line-height:1.1}.kpi span{font-size:12.5px;color:var(--mut)}
-section{padding:38px 20px 4px}
-.sh{display:flex;align-items:baseline;gap:10px;margin-bottom:16px}.sh .n{color:var(--cyan);font-weight:800;font-size:24px}.sh h2{margin:0;font-size:22px;color:var(--navy)}
-.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px}
-.grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.ba{display:grid;grid-template-columns:1fr 44px 1fr;gap:10px;align-items:stretch}
-.box{border-radius:14px;padding:16px}.box h3{margin:0 0 10px;font-size:12px;letter-spacing:.14em}
-.before{background:#fff7ed;border:1px solid #fed7aa}.before h3{color:#c2410c}.after{background:#ecfdf5;border:1px solid #a7f3d0}.after h3{color:#047857}
-.node{background:#fff;border:1px solid var(--line);border-radius:10px;padding:9px 12px;margin:7px 0;font-size:14px}.node b{color:var(--navy)}
-.arr{display:flex;align-items:center;justify-content:center;font-size:30px;color:var(--cyan);font-weight:800}
-.st{display:flex;justify-content:space-between;align-items:center;padding:11px 0;border-bottom:1px solid #f1f5f9;font-size:14.5px}.st:last-child{border:0}
-.pill{font-size:12px;font-weight:600;padding:3px 11px;border-radius:99px;background:#dcfce7;color:#166534}.pill.w{background:#fef3c7;color:#92400e}
-.tl{position:relative;padding-left:26px}.tl:before{content:"";position:absolute;left:8px;top:6px;bottom:6px;width:2px;background:#dbeafe}
-.ev{position:relative;margin:0 0 16px}.ev:before{content:"";position:absolute;left:-23px;top:5px;width:12px;height:12px;border-radius:50%;background:var(--cyan);box-shadow:0 0 0 3px #fff,0 0 0 5px var(--cyan)}
-.ev small{font-weight:700;color:var(--cyan);font-size:12px;letter-spacing:.05em}.ev b{display:block;color:var(--navy);font-size:15px}.ev p{margin:2px 0 0;color:var(--mut);font-size:14px}
-.svc{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
-.sv{background:#fff;border:1px solid var(--line);border-radius:12px;padding:13px}.sv i{width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center;color:#fff;font-style:normal;font-family:Montserrat;font-weight:700;margin-bottom:8px}
-.sv b{display:block;color:var(--navy);font-size:14px}.sv span{font-size:12.5px;color:var(--mut)}
-.sup{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
-.si{border-left:4px solid var(--ok)}.si .tg{font-size:11.5px;font-weight:600;background:#ecfdf5;color:#047857;padding:2px 9px;border-radius:99px}.si small{float:right;color:var(--mut);font-size:12px}
-.si b{display:block;color:var(--navy);margin:8px 0 3px}.si p{margin:0;color:#475569;font-size:14px}
-.money .row{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid #f1f5f9;font-size:14.5px}
-.money .tot{background:var(--navy);color:#fff;border-radius:10px;padding:13px 14px;margin-top:10px;display:flex;justify-content:space-between;font-family:Montserrat;font-weight:700;font-size:17px}
-.money .note{font-size:12.5px;color:var(--mut);margin-top:10px}
-.big{font-family:Montserrat;font-size:32px;font-weight:800;color:var(--navy)}
-.docs{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
-.doc{background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden;text-decoration:none;display:flex;flex-direction:column;transition:transform .15s,box-shadow .15s}
-.doc:hover{transform:translateY(-3px);box-shadow:0 14px 30px -14px rgba(11,31,58,.35)}
-.doc .th{aspect-ratio:210/297;max-height:230px;background:#e2e8f0 center top/cover no-repeat;border-bottom:1px solid var(--line)}
-.doc .tx{padding:12px 14px}.doc b{display:block;color:var(--navy);font-size:14.5px}.doc span{font-size:12.5px;color:var(--mut)}
-.doc .dl{margin-top:8px;display:inline-block;font-size:12.5px;font-weight:600;color:var(--cyan)}
-.rec{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid #f1f5f9}.rec:last-child{border:0}
-.pr{flex:0 0 auto;font-size:11px;font-weight:700;padding:3px 10px;border-radius:99px;height:fit-content}.pr.a{background:#fee2e2;color:#b91c1c}.pr.m{background:#fef3c7;color:#92400e}
-.rec b{color:var(--navy)}.rec p{margin:2px 0 0;color:#475569;font-size:14px}
-.cta{background:linear-gradient(135deg,#0b1f3a,#0e7fb8);color:#e5f2fb;border-radius:18px;padding:26px;display:grid;grid-template-columns:1.3fr 1fr 1fr 1fr;gap:16px;align-items:center}
-.cta h3{color:#fff;margin:0 0 4px;font-size:20px}.cta div.c{background:rgba(255,255,255,.08);border-radius:12px;padding:12px 14px;font-size:13.5px}.cta div.c b{display:block;color:#fff;font-size:15px}
-.btn{display:inline-block;background:var(--cyan);color:#fff;text-decoration:none;font-weight:700;padding:10px 16px;border-radius:10px;font-size:14px;margin-top:10px}
-footer{text-align:center;color:var(--mut);font-size:12.5px;padding:34px 20px 46px}
-.rv{opacity:0;transform:translateY(14px);transition:opacity .5s,transform .5s}.rv.in{opacity:1;transform:none}
-@media (max-width:860px){.kpis,.svc,.docs{grid-template-columns:repeat(2,1fr)}.grid2,.sup{grid-template-columns:1fr}.cta{grid-template-columns:1fr}.top nav{display:none}}
-@media (max-width:560px){.ba{grid-template-columns:1fr}.arr{transform:rotate(90deg);height:30px}.kpi .kv{font-size:23px}section{padding:30px 16px 4px}.hero{padding:44px 16px 86px}}
-@media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
-</style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Public+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="../_propuesta/propuesta.css">
 </head>
 <body>
-<header class="top">
- <img src="logo.png" alt="NWS">
- <div class="t"><b>Microsoft 365 · Transportes J y M</b><small>Portal del proyecto · NetWatch Solutions</small></div>
- <nav><a href="#resumen">Resumen</a><a href="#proyecto">Proyecto</a><a href="#soporte">Soporte</a><a href="#valores">Valores</a><a href="#documentos">Documentos</a></nav>
-</header>
-
-<div class="hero"><div class="wrap">
- <span class="k">Informe de cierre · noviembre 2026</span>
- <h1>Migración a Microsoft 365<br>y soporte mensual</h1>
- <p>El correo y las herramientas de trabajo de Transportes J y M ya operan en Microsoft 365. Aquí encuentras el resumen del proyecto, el estado del servicio y todos los documentos.</p>
- <div class="chips"><span class="chip ok">● Servicio operativo</span><span class="chip">Dominio tjym.cl</span><span class="chip">NWS-COT-TJYM-2026-01</span><span class="chip">Vigente desde 01-10-2026</span></div>
-</div></div>
-
-<div class="wrap" style="padding:0 20px">
- <div class="kpis">
-  <div class="kpi rv"><div class="kv">15</div><span>licencias Microsoft 365 Business Standard</span></div>
-  <div class="kpi rv"><div class="kv">14</div><span>usuarios con cuenta y equipo configurado</span></div>
-  <div class="kpi rv"><div class="kv">≈ 2 sem.</div><span>de implementación (1 al 16 de octubre)</span></div>
-  <div class="kpi rv"><div class="kv">2 → 1</div><span>dominios consolidados en tjym.cl</span></div>
- </div>
-</div>
-
-<section id="resumen"><div class="wrap">
- <div class="sh"><span class="n">01</span><h2>Antes y después</h2></div>
- <div class="ba rv">
-  <div class="box before"><h3>SITUACIÓN INICIAL</h3>
-   <div class="node"><b>Servidor cPanel</b> · transjym.cl, buzones tradicionales</div>
-   <div class="node"><b>Tenant Microsoft 365</b> ya existente, sin uso ordenado</div>
-   <div class="node"><b>Dos dominios</b> y cuentas compartidas entre personas</div></div>
-  <div class="arr">→</div>
-  <div class="box after"><h3>SITUACIÓN ACTUAL</h3>
-   <div class="node"><b>Microsoft 365</b> · dominio único tjym.cl</div>
-   <div class="node"><b>Cuenta propia</b> por usuario, con el historial de correo migrado</div>
-   <div class="node"><b>MFA</b> con Authenticator y soporte NWS mensual</div></div>
- </div>
- <div class="grid2" style="margin-top:14px">
-  <div class="card rv"><h3 style="margin:0 0 6px;color:var(--navy)">Estado del servicio</h3>
-   <div class="st"><span>Correo Microsoft 365 · tjym.cl</span><span class="pill">Operativo</span></div>
-   <div class="st"><span>Migración desde cPanel</span><span class="pill">Completada</span></div>
-   <div class="st"><span>15 licencias Business Standard</span><span class="pill">Activas</span></div>
-   <div class="st"><span>Equipos de los usuarios</span><span class="pill">Configurados</span></div>
-   <div class="st"><span>Nube compartida de gerencia</span><span class="pill">Habilitada</span></div>
-   <div class="st"><span>MFA en todos los usuarios</span><span class="pill w">En curso</span></div>
-  </div>
-  <div class="card rv"><h3 style="margin:0 0 10px;color:var(--navy)">Qué tiene cada usuario</h3>
-   <div class="svc" style="grid-template-columns:repeat(2,1fr)">
-    <div class="sv"><i style="background:#0f6cbd">O</i><b>Outlook</b><span>Correo corporativo</span></div>
-    <div class="sv"><i style="background:#185abd">W</i><b>Office</b><span>Word, Excel y PowerPoint</span></div>
-    <div class="sv"><i style="background:#0364b8">D</i><b>OneDrive</b><span>Archivos en la nube</span></div>
-    <div class="sv"><i style="background:#5b5fc7">T</i><b>Teams</b><span>Chat y reuniones</span></div>
-   </div></div>
- </div>
-</div></section>
-
-<section id="proyecto"><div class="wrap">
- <div class="sh"><span class="n">02</span><h2>Cómo se desarrolló</h2></div>
- <div class="card rv"><div class="tl">
-  <div class="ev"><small>23 SEP</small><b>Cierre comercial</b><p>Servicio mensual de licencias con soporte e implementación acordada.</p></div>
-  <div class="ev"><small>1 OCT</small><b>Licencias recibidas</b><p>Inicio formal del servicio y de la implementación.</p></div>
-  <div class="ev"><small>5 OCT</small><b>Cambio de diagnóstico</b><p>Se detectó un tenant Microsoft 365 activo además de cPanel; se decidió consolidar todo en tjym.cl.</p></div>
-  <div class="ev"><small>7 OCT</small><b>Visita en terreno · Lampa</b><p>Administración de Microsoft 365, carga de licencias e inicio de la migración de correos.</p></div>
-  <div class="ev"><small>15 OCT</small><b>Migración completada</b><p>Configuración de los equipos de los usuarios, en terreno y por acceso remoto.</p></div>
-  <div class="ev"><small>16 – 27 OCT</small><b>Ampliación a 15 licencias</b><p>Primeras 10 cuentas operativas y activación de las cuentas adicionales.</p></div>
- </div></div>
-</div></section>
-
-<section id="soporte"><div class="wrap">
- <div class="sh"><span class="n">03</span><h2>Soporte de octubre</h2></div>
- <div class="sup">
-  <div class="card si rv"><span class="tg">Cuentas</span><small>22 oct</small><b>Uso de buzones</b><p>Se ordenó el uso de una cuenta personal para el acceso a Copec; quedó regularizado el mismo día.</p></div>
-  <div class="card si rv"><span class="tg">Acceso y MFA</span><small>27 oct</small><b>Cuenta de gerencia</b><p>Entrega de cuenta con acceso a Outlook web y activación de Microsoft Authenticator.</p></div>
-  <div class="card si rv"><span class="tg">Equipos</span><small>30 oct</small><b>Configuración de notebook</b><p>Notebook de usuario configurado para Microsoft 365, coordinado con Tesorería.</p></div>
-  <div class="card si rv"><span class="tg">Mesa de ayuda</span><small>Octubre</small><b>Atención continua</b><p>Consultas de acceso, cambio de contraseñas y uso de las cuentas durante la transición.</p></div>
- </div>
- <div class="card rv" style="margin-top:14px"><h3 style="margin:0 0 4px;color:var(--navy)">Recomendaciones</h3>
-  <div class="rec"><span class="pr a">Alta</span><div><b>Rotar contraseñas</b><p>Cambiar las claves de cPanel, del administrador de Microsoft 365 y de buzones compartidos, y coordinar accesos solo por canal seguro.</p></div></div>
-  <div class="rec"><span class="pr a">Alta</span><div><b>MFA con Authenticator para todos</b><p>Migrar a Authenticator a los usuarios que aún validan por SMS.</p></div></div>
-  <div class="rec"><span class="pr m">Media</span><div><b>Buzón para procesos</b><p>Usar un buzón compartido para Copec y otros servicios externos.</p></div></div>
-  <div class="rec"><span class="pr m">Media</span><div><b>Baja de transjym.cl</b><p>Mantener cPanel como respaldo un período y luego darlo de baja, con confirmación de la empresa.</p></div></div>
- </div>
-</div></section>
-
-<section id="valores"><div class="wrap">
- <div class="sh"><span class="n">04</span><h2>Valores del servicio</h2></div>
- <div class="grid2">
-  <div class="card money rv"><small style="color:var(--mut)">Servicio mensual · desde octubre 2026</small><div class="big">$327.495 <small style="font-size:15px;color:var(--mut);font-weight:600">+ IVA</small></div>
-   <div class="row"><span>Licencias (15 × $13.833)</span><span>$207.495</span></div>
-   <div class="row"><span>Soporte y administración</span><span>$120.000</span></div>
-   <div class="row"><span>IVA 19 %</span><span>$62.224</span></div>
-   <div class="tot"><span>Mensual con IVA</span><span>$389.719</span></div>
-   <p class="note">Facturación mensual por mes vencido, pago a 30 días. Contrato de 12 meses renovable.</p></div>
-  <div class="card money rv"><small style="color:var(--mut)">Primera factura · implementación + octubre</small><div class="big">$603.919 <small style="font-size:15px;color:var(--mut);font-weight:600">IVA incl.</small></div>
-   <div class="row"><span>Implementación y migración (pago único)</span><span>$180.000</span></div>
-   <div class="row"><span>Mensualidad octubre 2026</span><span>$327.495</span></div>
-   <div class="row"><span>Subtotal neto</span><span>$507.495</span></div>
-   <div class="row"><span>IVA 19 %</span><span>$96.424</span></div>
-   <div class="tot"><span>Total</span><span>$603.919</span></div></div>
- </div>
-</div></section>
-
-<section id="documentos"><div class="wrap">
- <div class="sh"><span class="n">05</span><h2>Documentos</h2></div>
- <div class="docs">
-  <a class="doc rv" href="Informe_Implementacion_M365_TJyM.pdf" target="_blank" rel="noopener"><div class="th" style="background-image:url(t_Informe_Implementacion_M365_TJyM.jpg)"></div><div class="tx"><b>Informe técnico</b><span>Alcance, arquitectura, usuarios, soporte y acta · 7 págs.</span><br><span class="dl">Abrir PDF →</span></div></a>
-  <a class="doc rv" href="NWS-COT-TJYM-2026-01.pdf" target="_blank" rel="noopener"><div class="th" style="background-image:url(t_NWS-COT-TJYM-2026-01.jpg)"></div><div class="tx"><b>Presupuesto</b><span>NWS-COT-TJYM-2026-01 · detalle por ítems</span><br><span class="dl">Abrir PDF →</span></div></a>
-  <a class="doc rv" href="Contrato_Servicio_M365_TJyM.pdf" target="_blank" rel="noopener"><div class="th" style="background-image:url(t_Contrato_Servicio_M365_TJyM.jpg)"></div><div class="tx"><b>Contrato de servicio</b><span>Licencias y soporte mensual · para firma</span><br><span class="dl">Abrir PDF →</span></div></a>
-  <a class="doc rv" href="Guia_Usuario_Microsoft365_TJyM.pdf" target="_blank" rel="noopener"><div class="th" style="background-image:url(t_Guia_Usuario_Microsoft365_TJyM.jpg)"></div><div class="tx"><b>Guía de usuario</b><span>Ingreso, MFA, Outlook, OneDrive y Teams</span><br><span class="dl">Abrir PDF →</span></div></a>
- </div>
-</div></section>
-
-<section><div class="wrap">
- <div class="cta rv">
-  <div><h3>¿Necesitas ayuda?</h3>Soporte y administración Microsoft 365 incluido en tu servicio mensual.</div>
-  <div class="c"><b>Horario</b>Lunes a viernes, 09:00 a 18:00</div>
-  <div class="c"><b>Respuesta</b>Hasta 4 horas hábiles, remoto o en terreno</div>
-  <div class="c"><b>Jerry Lolandes</b>+56 9 9327 5874<br><a class="btn" href="https://wa.me/56993275874" target="_blank" rel="noopener">WhatsApp</a> <a class="btn" style="background:rgba(255,255,255,.15)" href="mailto:jlolandes@nws.cl">Correo</a></div>
- </div>
-</div></section>
-
-<footer>NetWatch Solutions SpA · RUT 77.859.162-6 · <a href="https://www.nws.cl" style="color:var(--cyan)">www.nws.cl</a><br>Documento confidencial para Transportes J y M</footer>
-
 <script>
-(function(){var els=document.querySelectorAll('.rv');if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('in')});return}
-var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12});els.forEach(function(e){io.observe(e)})})();
+window.PROPUESTA = {
+  numero: 'NWS-COT-TJYM-2026-01',
+  fecha: '3 de noviembre de 2026', validez: '3 de diciembre de 2026',
+  cliente: 'Transportes J y M', contacto_cliente: 'Gonzalo Ignacio Ferrer',
+  linea: 'Microsoft 365 · Soporte TI',
+  titulo: 'El correo y Office de todo su equipo, en Microsoft 365 y con soporte NWS.',
+  bajada: 'Migramos el correo de cPanel a Microsoft 365 para 15 usuarios con el dominio tjym.cl, y seguimos a cargo de las licencias y el soporte cada mes.',
+  resumen: [
+    { t: 'Lo que necesitaba', d: 'Dejar el correo del servidor cPanel y pasar a una plataforma profesional para todo el equipo, sin perder los correos históricos.' },
+    { t: 'Lo que hicimos', d: 'Migración completa a Microsoft 365 Business Standard: buzones, dominio tjym.cl, Office en los equipos y verificación en dos pasos.' },
+    { t: 'Lo que sigue', d: 'Licencias y soporte mensual: altas y bajas de usuarios, configuración de equipos nuevos y ayuda remota cuando la necesiten.' }
+  ],
+  solucion: {
+    titulo: '15 usuarios en Microsoft 365',
+    bajada: 'La implementación ya está operativa desde octubre de 2026. Esta propuesta formaliza el servicio mensual.',
+    bloques: [
+      { nombre: 'Implementación', sub: 'Ejecutada en octubre de 2026 · aprox. 2 semanas', cifra: '✓', unidad: 'entregada',
+        incluye: ['Diagnóstico de cuentas cPanel y del tenant Microsoft 365', 'Consolidación del dominio transjym.cl → tjym.cl y DNS', 'Migración de buzones y correos históricos', 'Office, Outlook, OneDrive y Teams en cada equipo', 'Verificación en dos pasos (Microsoft Authenticator)'] },
+      { nombre: 'Licencias', sub: 'Microsoft 365 Business Standard', cifra: 15, unidad: 'usuarios',
+        incluye: ['Correo corporativo con dominio tjym.cl', 'Office de escritorio y móvil', 'OneDrive, Teams y SharePoint', 'Facturación mensual por usuario'] },
+      { nombre: 'Soporte mensual', sub: 'Administración de la plataforma', cifra: '1', unidad: 'responsable NWS',
+        incluye: ['Soporte remoto a usuarios', 'Altas, bajas y gestión de licencias', 'Ayuda con Outlook, OneDrive y Teams', 'Configuración de equipos nuevos'] }
+    ]
+  },
+  plan_titulo: 'Dónde estamos',
+  plan: [
+    { t: 'Diagnóstico', d: 'Cuentas cPanel y tenant existente.', estado: 'hecho' },
+    { t: 'Migración', d: 'Buzones, dominio y correos históricos.', estado: 'hecho' },
+    { t: 'Puesta en marcha', d: 'Office en los equipos y entrega de accesos (oct 2026).', estado: 'hecho' },
+    { t: 'Contrato de servicio', d: 'Aceptación y firma del servicio mensual.', estado: 'ahora' },
+    { t: 'Soporte mensual', d: 'Desde noviembre, factura mes a mes.' }
+  ],
+  inversion: {
+    titulo: 'Inversión',
+    bajada: 'Ajuste la cantidad de usuarios para ver cómo cambia la mensualidad. Valores netos en pesos chilenos.',
+    grupos: [
+      { id: 'impl', nombre: 'Implementación y migración', detalle: 'Servicio ya ejecutado y entregado', pago: 'unico',
+        items: [['Diagnóstico de cuentas cPanel y tenant Microsoft 365', 1, 0], ['Configuración del tenant y asignación de licencias', 1, 0], ['Consolidación de dominio transjym.cl → tjym.cl y DNS', 1, 0], ['Migración de buzones y correos históricos', 1, 0], ['Configuración de equipos: Office, Outlook, OneDrive y Teams', 1, 0], ['Verificación en dos pasos, pruebas y entrega de credenciales', 1, 0], ['Servicio de implementación NWS (valor acordado)', 1, 180000]] },
+      { id: 'lic', nombre: 'Licencias Microsoft 365 Business Standard', detalle: '$13.833 neto por usuario al mes', pago: 'mensual',
+        cantidad: { etiqueta: 'usuarios', valor: 15, min: 1, item: 0 },
+        items: [['Microsoft 365 Business Standard (usuario/mes)', 15, 13833]] },
+      { id: 'sop', nombre: 'Soporte y administración', detalle: 'Soporte remoto, usuarios, licencias y equipos nuevos', pago: 'mensual',
+        items: [['Plan de soporte y administración Microsoft 365', 1, 120000]] }
+    ],
+    nota_mensual: 'La primera factura (octubre 2026) suma implementación y mensualidad: $507.495 neto ($603.919 con IVA).'
+  },
+  porque: [
+    { v: '16 años', d: 'en TI, telecomunicaciones y redes' },
+    { v: '300+', d: 'usuarios con soporte a nivel nacional' },
+    { v: 'Microsoft', d: 'partner tecnológico de NWS' },
+    { v: '90 días', d: 'de garantía sobre la configuración realizada' }
+  ],
+  condiciones: [
+    ['Forma de pago', '30 días. Implementación en factura única; licencias y soporte en factura mensual por mes vencido.'],
+    ['Vigencia', 'Desde el 1 de octubre de 2026, por 12 meses, renovable automáticamente salvo aviso con 30 días.'],
+    ['Usuarios adicionales', '$13.833 + IVA por usuario al mes, desde el mes de su activación.'],
+    ['Garantía', '90 días sobre la configuración realizada.'],
+    ['No incluye', 'Computadores o hardware, red o cableado y otras migraciones; se cotizan por separado.'],
+    ['Validez', '30 días desde la emisión. Valores en pesos chilenos, netos más IVA.']
+  ],
+  documentos: [
+    { nombre: 'Cotización en PDF', url: 'NWS-COT-TJYM-2026-01.pdf' },
+    { nombre: 'Contrato de servicio', url: 'Contrato_Servicio_M365_TJyM.pdf' },
+    { nombre: 'Informe de implementación', url: 'Informe_Implementacion_M365_TJyM.pdf' },
+    { nombre: 'Guía de usuario', url: 'Guia_Usuario_Microsoft365_TJyM.pdf' }
+  ],
+  aceptar_texto: 'Complete los datos de facturación y envíe la aceptación por WhatsApp o correo. Con eso firmamos el contrato de servicio mensual.',
+  nws: { nombre: 'Jerry Lolandes', cargo: 'Jefe de Proyecto', email: 'jlolandes@nws.cl', fono: '+56 9 9327 5874', wa: '56993275874' }
+};
 </script>
+<script src="../_propuesta/propuesta.js"></script>
 </body>
 </html>

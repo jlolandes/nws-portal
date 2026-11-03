@@ -5,46 +5,70 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="robots" content="noindex,nofollow">
 <meta name="theme-color" content="#0b1f3a">
-<title>Sinthesi · Cámaras de seguridad · NWS</title>
+<title>Propuesta NWS · Sinthesi</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Public+Sans:wght@400;600&display=swap">
-<link rel="stylesheet" href="../_app/portal.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Public+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="../_propuesta/propuesta.css">
 </head>
 <body>
 <script>
-window.NWS = {
-  demo: false,
-  titulo: 'Cámaras de seguridad · San Miguel y Bodega Quilicura',
-  cliente: 'Sinthesi',
-  sitio: 'San Miguel + Quilicura',
-  direccion: 'Segunda Avenida 1209, San Miguel · Av. Eduardo Frei Montalva 9227, Quilicura',
-  codigo: 'COT-2026-9880',
-  linea: 'CCTV',
-  fecha: '02-11-2026',
-  validez: 'hasta el 02-12-2026',
-  logo: 'logo.png',
-  kpis: [
-    { v: 15, l: 'Cámaras IP' },
-    { v: 2, l: 'Sedes' },
-    { v: '30 días', l: 'De grabación' }
+window.PROPUESTA = {
+  numero: 'NWS-COT-SINTHESI-2026-01', erp: 'COT-2026-9880',
+  fecha: '2 de noviembre de 2026', validez: '2 de diciembre de 2026',
+  cliente: 'Sinthesi', contacto_cliente: 'Emilio Marisio',
+  linea: 'Seguridad · CCTV',
+  titulo: 'Sus dos sedes protegidas y visibles desde el celular.',
+  bajada: 'Sistema de cámaras IP Dahua para la planta de San Miguel y la bodega de Quilicura, con grabación continua y acceso remoto, instalado y mantenido por NWS en terreno.',
+  resumen: [
+    { t: 'Lo que necesita', d: 'Vigilar ambas instalaciones con imagen clara de día y de noche, y poder revisar lo que pasa sin estar en el lugar.' },
+    { t: 'Lo que proponemos', d: '15 cámaras IP Full Color en dos sistemas independientes, uno por sede, con su grabador, respaldo eléctrico y acceso por app.' },
+    { t: 'Lo que obtiene', d: 'Unos 30 días de grabación continua, alertas y revisión remota, más informe, plano y diagrama de cada sede.' }
   ],
-  alcance: [
-    'San Miguel: 9 domos y 2 bullet IP 2MP Full Color, NVR 16 canales con disco 4 TB, switch PoE, rack 4U y UPS.',
-    'Bodega Quilicura: 4 domos IP 2MP Full Color y NVR 4 canales PoE con disco 2 TB; ejecución en 1 día.',
-    'Cableado UTP Cat6 exterior, cajas estancas IP65 y terminaciones estéticas.',
-    'Configuración de grabación, acceso remoto por app y capacitación básica.',
-    'Informe técnico, plano de ubicación de cámaras y diagrama lógico por sede.'
+  solucion: {
+    titulo: '15 cámaras en 2 sedes',
+    bajada: 'Cada sede tiene su propio sistema: si una falla, la otra sigue grabando.',
+    bloques: [
+      { nombre: 'Planta San Miguel', sub: 'Segunda Avenida 1209, San Miguel', cifra: 11, unidad: 'cámaras',
+        incluye: ['9 cámaras domo y 2 bullet IP 2MP Full Color', 'Grabador NVR Dahua 16 canales con disco 4 TB', 'Switch PoE de 16 puertos, rack 4U y UPS 1500 VA', 'Cableado UTP Cat6 exterior y cajas estancas IP65'] },
+      { nombre: 'Bodega Quilicura', sub: 'Av. Eduardo Frei Montalva 9227, Quilicura', cifra: 4, unidad: 'cámaras',
+        incluye: ['4 cámaras domo IP 2MP Full Color', 'Grabador NVR Dahua 4 canales PoE con disco 2 TB', 'Cableado UTP Cat6 exterior y cajas estancas IP65', 'Instalación en 1 día'] }
+    ]
+  },
+  plan: [
+    { t: 'Visita y levantamiento', d: 'Recorrido de ambas sedes.', estado: 'hecho' },
+    { t: 'Propuesta', d: 'Esta propuesta consolidada.', estado: 'ahora' },
+    { t: 'Aceptación', d: 'Orden de compra con razón social y RUT.' },
+    { t: 'Instalación', d: 'Quilicura en 1 día; San Miguel en fecha a coordinar.' },
+    { t: 'Entrega', d: 'App configurada, capacitación, informe y plano.' }
   ],
-  cotizaciones: [
-    { nombre: 'Propuesta consolidada San Miguel + Quilicura', numero: 'NWS-COT-SINTHESI-2026-01', neto: 3609000, iva: 685710, total: 4294710, pdf: 'NWS-COT-SINTHESI-2026-01.pdf', nota: 'Incluye descuento de $200.000 neto por adjudicar ambos proyectos' }
+  inversion: {
+    titulo: 'Elija lo que adjudica',
+    bajada: 'Marque las sedes: el total se actualiza al instante. Valores netos en pesos chilenos.',
+    grupos: [
+      { id: 'sm', nombre: 'Planta San Miguel', detalle: '11 cámaras · Segunda Avenida 1209', pago: 'unico', opcional: true,
+        items: [['Cámara IP domo Dahua 2MP Full Color', 9, 58000], ['Cámara IP bullet Dahua 2MP Full Color', 2, 50000], ['Grabador NVR Dahua 16 canales IA', 1, 250000], ['Disco duro 4 TB videovigilancia 24/7', 1, 220000], ['Switch PoE Dahua 16 puertos', 1, 130000], ['Gabinete rack 4U', 1, 65000], ['UPS Global Link 1500 VA', 1, 180000], ['Cable UTP Cat6 exterior 305 m', 2, 120000], ['Caja estanca IP65', 16, 1600], ['Mano de obra e instalación', 1, 960000], ['Informe técnico, plano y diagrama lógico', 1, 120000]] },
+      { id: 'qu', nombre: 'Bodega Quilicura', detalle: '4 cámaras · Av. Eduardo Frei Montalva 9227', pago: 'unico', opcional: true,
+        items: [['Cámara IP domo Dahua 2MP Full Color', 4, 55000], ['Grabador NVR Dahua 4 canales PoE', 1, 120000], ['Disco duro 2 TB SkyHawk 24/7', 1, 110000], ['Cable UTP Cat6 exterior 305 m', 1, 120000], ['Caja estanca IP65', 4, 1600], ['Mano de obra e instalación', 1, 300000], ['Informe técnico, plano y diagrama lógico', 1, 120000]] }
+    ],
+    descuento: { monto: 200000, requiere: ['sm', 'qu'], texto: 'Descuento por adjudicar ambas sedes' }
+  },
+  porque: [
+    { v: '16 años', d: 'en telecomunicaciones, redes y seguridad' },
+    { v: 'En terreno', d: 'diseñamos, instalamos y mantenemos donde está su operación' },
+    { v: 'Dahua', d: 'equipos de marcas con soporte y repuestos en Chile' },
+    { v: '12 meses', d: 'de garantía en equipos, según fabricante' }
   ],
-  documentos: [
-    { nombre: 'Cotización NWS-COT-SINTHESI-2026-01', detalle: '$3.609.000 neto · $4.294.710 con IVA · PDF', url: 'NWS-COT-SINTHESI-2026-01.pdf', tipo: 'pdf' },
-    { nombre: 'Presentación animada', detalle: 'Sedes, cámaras, inversión y próximos pasos · 30 s', url: 'presentacion/', tipo: 'slides' }
+  condiciones: [
+    ['Forma de pago', 'San Miguel: 30 días desde la recepción conforme. Quilicura: 50 % al inicio y saldo al término.'],
+    ['Plazo', 'A coordinar desde la orden de compra, sujeto a stock.'],
+    ['Garantía', '12 meses en equipos (según fabricante) y 6 meses en mano de obra.'],
+    ['No incluye', 'Obras civiles, empalmes eléctricos nuevos ni enlace de internet.'],
+    ['Validez', '30 días desde la emisión. Valores en pesos chilenos, netos más IVA.']
   ],
-  contacto: { nombre: 'Jerry Lolandes', cargo: 'Jefe de Proyecto' }
+  documentos: [{ nombre: 'Cotización en PDF', url: 'NWS-COT-SINTHESI-2026-01.pdf' }, { nombre: 'Presentación animada', url: 'presentacion/' }],
+  nws: { nombre: 'Jerry Lolandes', cargo: 'Jefe de Proyecto', email: 'jlolandes@nws.cl', fono: '+56 9 9327 5874', wa: '56993275874' }
 };
 </script>
-<script src="../_app/portal.js"></script>
+<script src="../_propuesta/propuesta.js"></script>
 </body>
 </html>
