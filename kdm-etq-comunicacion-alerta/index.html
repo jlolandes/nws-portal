@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#0b1f3a">
+<title>Propuesta NWS · Comunicación y Alerta ETQ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Public+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="../_propuesta/propuesta.css">
+</head>
+<body>
+<script>
+window.PROPUESTA = {
+  numero: 'NWS-COT-KDM-2026-08',
+  fecha: '3 de noviembre de 2026', validez: '3 de diciembre de 2026',
+  cliente: 'KDM S.A. · ETQ, KDM Tratamiento RM', contacto_cliente: 'Cristián Sepúlveda Frigerio · Jefe de Operaciones y Pesaje ETQ',
+  linea: 'Seguridad operacional · Comunicaciones',
+  titulo: 'Llamar, ver y hablar: comunicación y alerta en las plataformas de la ETQ.',
+  bajada: 'Un sistema IP que une la Sala SCADA con la Plataforma Superior y la Intermedia: voceo de alta potencia, balizas visuales y teléfonos industriales, para que cada aviso llegue aunque haya ruido de maquinaria.',
+  resumen: [
+    { t: 'Lo que necesita', d: 'Avisar al instante a los operadores de las plataformas desde la Sala SCADA y que ellos puedan responder, con alertas que se escuchen y se vean sobre el ruido de la operación.' },
+    { t: 'Lo que proponemos', d: 'Altavoces IP de 30 W (hasta 95 dB(A)), balizas estroboscópicas, teléfonos SIP industriales y una consola en SCADA, todo sobre una central IP y fibra óptica blindada.' },
+    { t: 'Cómo se ejecuta', d: 'En una o dos etapas, en 5 a 6 semanas: levantamiento, abastecimiento, instalación en 10 a 12 días hábiles y puesta en marcha con capacitación por turno.' }
+  ],
+  solucion: {
+    titulo: 'Tres puntos conectados',
+    bajada: 'Sala SCADA y dos plataformas, unidas por 900 m de fibra óptica OS2 blindada (aprox. 400 m por plataforma).',
+    bloques: [
+      { nombre: 'Sala SCADA', sub: 'Centro de mando', cifra: 1, unidad: 'consola de voceo',
+        incluye: ['Consola IP Fanvil V64 para llamar y vocear por zona', 'Central IP-PBX Yeastar P550', 'Llamada general o por plataforma', 'Registro de llamadas'] },
+      { nombre: 'Plataforma Superior', sub: 'Etapa 1', cifra: 4, unidad: 'altavoces IP 30 W',
+        incluye: ['4 altavoces Fanvil A233', '2 balizas estroboscópicas', '2 teléfonos SIP industriales', 'Nodo IP66 con switch Omada y UPS'] },
+      { nombre: 'Plataforma Intermedia', sub: 'Etapa 2', cifra: 4, unidad: 'altavoces IP 30 W',
+        incluye: ['4 altavoces Fanvil A233', '2 balizas estroboscópicas', '2 teléfonos SIP industriales', 'Nodo IP66 con switch Omada y UPS'] }
+    ]
+  },
+  plan_titulo: 'Plan de trabajo · 5 a 6 semanas',
+  plan: [
+    { t: 'Visita y propuesta', d: 'Recorrido de las plataformas y diseño del sistema.', estado: 'hecho' },
+    { t: 'Aprobación', d: 'Elección de etapas y teléfono, y orden de compra.', estado: 'ahora' },
+    { t: 'Levantamiento', d: 'Semana 1: rutas de fibra, alturas y puntos de energía.' },
+    { t: 'Abastecimiento', d: 'Semanas 1 a 3: equipos y fibra.' },
+    { t: 'Instalación', d: '10 a 12 días hábiles en terreno.' },
+    { t: 'Puesta en marcha', d: 'Pruebas de audio, capacitación por turno y entrega.' }
+  ],
+  inversion: {
+    titulo: 'Inversión',
+    bajada: 'Marque las etapas que quiere adjudicar para ver el total. Valores netos en pesos chilenos.',
+    grupos: [
+      { id: 'e1', nombre: 'Etapa 1 · Sala SCADA + Plataforma Superior', detalle: 'Central, consola, nodo IP66 y equipos de la plataforma', pago: 'unico', opcional: true,
+        items: [['Central IP-PBX y consola de voceo en Sala SCADA', 1, 0], ['4 altavoces IP 30 W, 2 balizas y 2 teléfonos SIP industriales', 1, 0], ['Nodo IP66 con switch y UPS', 1, 0], ['Fibra óptica OS2 blindada, instalación y puesta en marcha', 1, 0], ['Etapa 1 (valor total)', 1, 13600000]] },
+      { id: 'e2', nombre: 'Etapa 2 · Plataforma Intermedia', detalle: 'Nodo IP66 y equipos de la plataforma', pago: 'unico', opcional: true,
+        items: [['4 altavoces IP 30 W, 2 balizas y 2 teléfonos SIP industriales', 1, 0], ['Nodo IP66 con switch y UPS', 1, 0], ['Fibra óptica OS2 blindada, instalación y puesta en marcha', 1, 0], ['Etapa 2 (valor total)', 1, 10200000]] }
+    ],
+    descuento: { monto: 300000, requiere: ['e1', 'e2'], texto: 'Ahorro por ejecutar ambas etapas juntas' }
+  },
+  porque: [
+    { v: '16 años', d: 'en TI, telecomunicaciones y redes' },
+    { v: '95 dB(A)', d: 'por altavoz, sobre el ruido de la operación' },
+    { v: '12 meses', d: 'de garantía y soporte remoto' },
+    { v: '30 días', d: 'visita de ajuste sin costo' }
+  ],
+  condiciones: [
+    ['Forma de pago', '50 % con la orden de compra y 50 % contra entrega y puesta en marcha.'],
+    ['Plazo', '5 a 6 semanas desde la orden de compra; instalación de 10 a 12 días hábiles.'],
+    ['Teléfonos', 'Valores con teléfono industrial Joiwo JWAT921. Opción recomendada Zenitel IPHDT-DY: total $33.200.000 neto (Zenitel IPHDT-KY: $32.700.000).'],
+    ['Incluye sin costo', 'Visita de ajuste a los 30 días, soporte remoto por 12 meses y capacitación por turno.'],
+    ['Garantía', '12 meses sobre equipos e instalación.'],
+    ['Validez', '30 días desde la emisión. Valores en pesos chilenos, netos más IVA.']
+  ],
+  documentos: [{ nombre: 'Animación del sistema', url: 'animacion/' }],
+  nws: { nombre: 'Jerry Lolandes', cargo: 'Jefe de Proyecto', email: 'jlolandes@nws.cl', fono: '+56 9 9327 5874', wa: '56993275874' }
+};
+</script>
+<script src="../_propuesta/propuesta.js"></script>
+</body>
+</html>
