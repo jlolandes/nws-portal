@@ -1,0 +1,131 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow"><meta name="theme-color" content="#0f1b2d">
+<title>Escuela Culinaria Francesa · Normalización de cableado · NWS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;700&display=swap">
+<style>.ba{position:relative;overflow:hidden;touch-action:pan-y}
+.ba img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.after{position:absolute;inset:0;clip-path:inset(0 0 0 var(--p))}
+.ba input{position:absolute;inset:0;width:100%;height:100%;opacity:0;margin:0;cursor:ew-resize}
+.knob{position:absolute;top:0;bottom:0;left:var(--p);width:2px;margin-left:-1px;pointer-events:none}
+.knob::after{content:"";position:absolute;top:50%;left:50%;width:40px;height:40px;transform:translate(-50%,-50%);border-radius:50%}
+.tg{position:absolute;top:12px;pointer-events:none}.t1{left:12px}.t2{right:12px}
+.rv{opacity:0;transform:translateY(18px);transition:opacity .8s ease,transform .8s ease}.rv.on{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none}}
+:root{--bg:#f3f5f8;--paper:#fff;--ink:#0f1b2d;--mut:#5f6b7c;--line:#d5dce6;--blue:#1d4ed8;--red:#c2410c;--grid:rgba(29,78,216,.07)}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:24px 24px;color:var(--ink);font-family:'IBM Plex Sans',system-ui,sans-serif;font-size:16px;line-height:1.6}
+img{display:block;max-width:100%}a{color:inherit}.w{max-width:1180px;margin:0 auto;padding:0 24px}
+.mono{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.06em;text-transform:uppercase}
+.bar{background:var(--ink);color:#fff}.bar .w{display:flex;justify-content:space-between;align-items:center;height:52px}.bar img{height:26px;background:#fff;padding:3px 8px}
+.sheet{background:var(--paper);border:1px solid var(--ink);margin:32px auto;max-width:1180px}
+.tb{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;border-bottom:1px solid var(--ink)}.tb div{padding:12px 16px;border-right:1px solid var(--ink)}.tb div:last-child{border:0}
+.tb small{display:block;color:var(--mut)}.tb b{font-size:15px}
+.hd{display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--ink)}
+.hd .t{padding:48px 40px;border-right:1px solid var(--ink)}
+h1{font-size:clamp(36px,5vw,58px);line-height:1.04;letter-spacing:-.025em;margin:14px 0 16px;font-weight:700}
+h1 u{text-decoration:none;color:var(--blue)}.hd p{color:var(--mut);font-size:18px;margin:0}
+.hd .ba{height:100%;min-height:340px}
+.hd .ba .tg{background:var(--paper);border:1px solid var(--ink);padding:3px 8px}.hd .ba .t2{background:var(--blue);color:#fff;border-color:var(--blue)}
+.knob{background:var(--blue)}.knob::after{background:var(--paper);border:2px solid var(--blue);border-radius:0;width:28px;height:28px}
+.ks{display:grid;grid-template-columns:repeat(4,1fr)}.ks div{padding:22px 24px;border-right:1px solid var(--line)}.ks div:last-child{border:0}
+.ks b{display:block;font-size:34px;font-family:'IBM Plex Mono',monospace;font-weight:500;letter-spacing:-.03em}.ks span{color:var(--mut);font-size:14px}
+.sec{border-top:1px solid var(--ink);padding:44px 40px}
+.sh{display:flex;gap:16px;align-items:baseline;margin-bottom:24px}.sh .mono{color:var(--blue)}
+h2{font-size:clamp(26px,3.4vw,38px);margin:0;letter-spacing:-.02em}
+.tbl{width:100%;border-collapse:collapse;font-size:15px}.tbl th{text-align:left;font-family:'IBM Plex Mono',monospace;font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--mut);font-weight:500;border-bottom:1px solid var(--ink);padding:8px 10px}
+.tbl td{border-bottom:1px solid var(--line);padding:12px 10px;vertical-align:top}.tbl td:first-child{font-family:'IBM Plex Mono',monospace;color:var(--red);width:60px}
+.tbl img{width:120px;aspect-ratio:4/3;object-fit:cover;border:1px solid var(--line)}
+.g2{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;align-items:start}
+.pi{margin:0;border:1px solid var(--ink)}
+.pi .ba .tg{background:var(--paper);border:1px solid var(--ink);padding:2px 7px;font-family:'IBM Plex Mono',monospace;font-size:11px;text-transform:uppercase}.pi .ba .t2{background:var(--blue);color:#fff;border-color:var(--blue)}
+.pc{display:block;padding:12px 14px;border-top:1px solid var(--ink)}.pc b{display:block}.pc span{color:var(--mut);font-size:14px}
+.spec{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--ink)}
+.spec div{padding:20px;border-right:1px solid var(--ink)}.spec div:last-child{border:0}
+.spec .ic{height:48px;display:flex;align-items:center;justify-content:center;background:repeating-linear-gradient(45deg,#f5f7fb,#f5f7fb 6px,#fff 6px,#fff 12px);border:1px dashed var(--line);margin-bottom:14px}
+.spec b{font-family:'IBM Plex Mono',monospace;font-size:22px;font-weight:500}.spec em{display:block;font-style:normal;color:var(--blue);font-family:'IBM Plex Mono',monospace;font-size:13px}
+.spec p{margin:6px 0 0;color:var(--mut);font-size:14px}
+.gantt{margin-top:28px;border:1px solid var(--ink)}.gr{display:grid;grid-template-columns:200px repeat(4,1fr);border-bottom:1px solid var(--line)}.gr:last-child{border:0}
+.gr>*{padding:10px 12px;border-right:1px solid var(--line);font-size:14px}.gr>*:last-child{border:0}.gr .on2{background:var(--blue);color:#fff;font-family:'IBM Plex Mono',monospace;font-size:12px}
+.gh{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--mut);background:#f7f9fc}
+.inv{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--ink)}
+.inv>div{padding:28px}.inv>div:first-child{border-right:1px solid var(--ink)}
+.n{font-family:'IBM Plex Mono',monospace;font-size:clamp(40px,5vw,58px);font-weight:500;letter-spacing:-.04em;line-height:1.05;margin:10px 0 4px}
+.r{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px dashed var(--line);font-size:15px}.r span:last-child{font-family:'IBM Plex Mono',monospace}
+.btn{display:inline-block;margin-top:22px;background:var(--ink);color:#fff;text-decoration:none;padding:13px 20px;font-family:'IBM Plex Mono',monospace;font-size:13px;text-transform:uppercase;letter-spacing:.06em}
+.chk li{list-style:none;padding:10px 0 10px 30px;border-bottom:1px solid var(--line);position:relative}.chk{padding:0;margin:0}.chk li::before{content:"[✓]";position:absolute;left:0;font-family:'IBM Plex Mono',monospace;color:var(--blue);font-size:13px;top:11px}
+.docs{display:grid;grid-template-columns:1.3fr 1fr;gap:24px}.docs video{width:100%;border:1px solid var(--ink);background:#000}
+.dl a{display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:center;border:1px solid var(--ink);padding:14px 16px;margin-bottom:10px;text-decoration:none;background:var(--paper)}
+.dl .mono{color:var(--red)}.dl small{color:var(--mut);display:block}
+.ft{display:grid;grid-template-columns:1fr auto;border-top:1px solid var(--ink)}.ft div{padding:14px 16px}.ft div+div{border-left:1px solid var(--ink)}
+@media(max-width:860px){.sheet{margin:0;border-left:0;border-right:0}.hd,.inv,.docs,.g2{grid-template-columns:1fr}.hd .t{border-right:0;border-bottom:1px solid var(--ink);padding:32px 20px}.tb{grid-template-columns:1fr 1fr}.tb div:nth-child(2){border-right:0}.tb div:nth-child(-n+2){border-bottom:1px solid var(--ink)}.ks,.spec{grid-template-columns:1fr 1fr}.spec div:nth-child(2){border-right:0}.spec div:nth-child(-n+2){border-bottom:1px solid var(--ink)}.ks div:nth-child(2){border-right:0}.sec{padding:32px 20px}.inv>div:first-child{border-right:0;border-bottom:1px solid var(--ink)}.gr{grid-template-columns:110px repeat(4,1fr)}.tbl img{width:80px}}</style></head><body><div class="bar"><div class="w"><img src="../logo.png" alt="NWS"><span class="mono">Propuesta técnica · Rev. 0</span></div></div>
+<main class="sheet">
+<div class="tb"><div><small class="mono">Proyecto</small><b>Normalización de cableado estructurado</b></div><div><small class="mono">Cliente</small><b>Escuela Culinaria Francesa S.A.</b></div><div><small class="mono">Documento</small><b>NWS-COT-ECOLE-2026-02</b></div><div><small class="mono">Fecha</small><b>03-11-2026</b></div></div>
+<div class="hd"><div class="t"><span class="mono" style="color:var(--blue)">Av. Américo Vespucio Sur 930 · Las Condes</span>
+<h1>Cableado de red <u>canalizado, identificado</u> y documentado.</h1><p>Propuesta de NWS para ordenar la red de oficinas, salas, pasillos y exterior, con criterio de ingeniería y cero cables a la vista.</p></div>
+<div class="ba" style="--p:50%"><img src="../fotos/img/F22_antes.jpg" alt="Cornisa, estado actual"><div class="after"><img src="../fotos/img/F22_propuesta.jpg" alt="Cornisa con la propuesta"></div><span class="tg t1 mono">Actual</span><span class="tg t2 mono">Propuesta</span><span class="knob"></span><input type="range" min="0" max="100" value="50" aria-label="Comparar"></div></div>
+<div class="ks"><div><b>96 m</b><span>Bandeja PVC interior</span></div><div><b>20 m</b><span>Conduit exterior</span></div><div><b>3</b><span>Cajas estancas IP65</span></div><div><b>4 d</b><span>Plazo de ejecución</span></div></div>
+<div class="sec"><div class="sh"><span class="mono">§1</span><h2>Diagnóstico</h2></div>
+<table class="tbl"><tr><th>Ref.</th><th>Registro</th><th>Hallazgo</th><th>Prioridad</th></tr><tr class="rv"><td>H-01</td><td><img src="../fotos/img/F26_antes.jpg" alt="El nodo en el piso" loading="lazy"></td><td><b>El nodo en el piso</b><br><span style="color:var(--mut)">Cajas de paso apoyadas en el suelo bajo la escalera, una abierta.</span></td><td class="mono" style="color:var(--red)">Alta</td></tr><tr class="rv"><td>H-02</td><td><img src="../fotos/img/F01_antes.jpg" alt="Cables a la vista" loading="lazy"></td><td><b>Cables a la vista</b><br><span style="color:var(--mut)">Mazos sueltos en fachada, cornisas y escalera.</span></td><td class="mono" style="color:var(--red)">Alta</td></tr><tr class="rv"><td>H-03</td><td><img src="../fotos/img/F41_antes.jpg" alt="Datos junto a la energía" loading="lazy"></td><td><b>Datos junto a la energía</b><br><span style="color:var(--mut)">Cables de red mezclados con ductos de 220 V en el patio.</span></td><td class="mono" style="color:var(--red)">Alta</td></tr></table></div>
+<div class="sec"><div class="sh"><span class="mono">§2</span><h2>Antes y propuesta por sector</h2></div><div class="g2"><figure class="pi rv"><div class="ba" style="--p:50%;aspect-ratio:963/1280">
+<img src="../fotos/img/F01_antes.jpg" alt="Fachada, estado actual" loading="lazy">
+<div class="after"><img src="../fotos/img/F01_propuesta.jpg" alt="Fachada, con la propuesta" loading="lazy"></div>
+<span class="tg t1">Actual</span><span class="tg t2">Propuesta</span><span class="knob"></span>
+<input type="range" min="0" max="100" value="50" aria-label="Comparar Fachada"></div>
+<figcaption class="pc"><b>Fachada</b><span>Bajada en conduit PVC 32 mm pintado del color de la fachada, con caja estanca IP65.</span></figcaption></figure>
+<figure class="pi rv"><div class="ba" style="--p:50%;aspect-ratio:1280/963">
+<img src="../fotos/img/F32_antes.jpg" alt="Oficina del chef, estado actual" loading="lazy">
+<div class="after"><img src="../fotos/img/F32_propuesta.jpg" alt="Oficina del chef, con la propuesta" loading="lazy"></div>
+<span class="tg t1">Actual</span><span class="tg t2">Propuesta</span><span class="knob"></span>
+<input type="range" min="0" max="100" value="50" aria-label="Comparar Oficina del chef"></div>
+<figcaption class="pc"><b>Oficina del chef</b><span>Bandeja 40x16 en la cornisa y bajada 20x10 en la esquina.</span></figcaption></figure>
+<figure class="pi rv"><div class="ba" style="--p:50%;aspect-ratio:1280/963">
+<img src="../fotos/img/F26_antes.jpg" alt="Nodo bajo la escalera, estado actual" loading="lazy">
+<div class="after"><img src="../fotos/img/F26_propuesta.jpg" alt="Nodo bajo la escalera, con la propuesta" loading="lazy"></div>
+<span class="tg t1">Actual</span><span class="tg t2">Propuesta</span><span class="knob"></span>
+<input type="range" min="0" max="100" value="50" aria-label="Comparar Nodo bajo la escalera"></div>
+<figcaption class="pc"><b>Nodo bajo la escalera</b><span>Troncal en bandeja 100x50; cajas del nodo cerradas y fijadas al muro.</span></figcaption></figure>
+<figure class="pi rv"><div class="ba" style="--p:50%;aspect-ratio:1280/963">
+<img src="../fotos/img/F33_antes.jpg" alt="Escalera, estado actual" loading="lazy">
+<div class="after"><img src="../fotos/img/F33_propuesta.jpg" alt="Escalera, con la propuesta" loading="lazy"></div>
+<span class="tg t1">Actual</span><span class="tg t2">Propuesta</span><span class="knob"></span>
+<input type="range" min="0" max="100" value="50" aria-label="Comparar Escalera"></div>
+<figcaption class="pc"><b>Escalera</b><span>Bandeja 40x16 bajo el borde del descanso.</span></figcaption></figure>
+<figure class="pi rv"><div class="ba" style="--p:50%;aspect-ratio:963/1280">
+<img src="../fotos/img/F22_antes.jpg" alt="Pasillos y cornisas, estado actual" loading="lazy">
+<div class="after"><img src="../fotos/img/F22_propuesta.jpg" alt="Pasillos y cornisas, con la propuesta" loading="lazy"></div>
+<span class="tg t1">Actual</span><span class="tg t2">Propuesta</span><span class="knob"></span>
+<input type="range" min="0" max="100" value="50" aria-label="Comparar Pasillos y cornisas"></div>
+<figcaption class="pc"><b>Pasillos y cornisas</b><span>Un solo recorrido 40x16 en lugar de canaletas superpuestas.</span></figcaption></figure>
+<figure class="pi rv"><div class="ba" style="--p:50%;aspect-ratio:1280/963">
+<img src="../fotos/img/F16_antes.jpg" alt="Pasillo 2° piso, estado actual" loading="lazy">
+<div class="after"><img src="../fotos/img/F16_propuesta.jpg" alt="Pasillo 2° piso, con la propuesta" loading="lazy"></div>
+<span class="tg t1">Actual</span><span class="tg t2">Propuesta</span><span class="knob"></span>
+<input type="range" min="0" max="100" value="50" aria-label="Comparar Pasillo 2° piso"></div>
+<figcaption class="pc"><b>Pasillo 2° piso</b><span>Bandeja 40x16 en la esquina del cielo y bajada 20x10.</span></figcaption></figure>
+<figure class="pi rv"><div class="ba" style="--p:50%;aspect-ratio:1280/963">
+<img src="../fotos/img/F23_antes.jpg" alt="Acceso a oficinas, estado actual" loading="lazy">
+<div class="after"><img src="../fotos/img/F23_propuesta.jpg" alt="Acceso a oficinas, con la propuesta" loading="lazy"></div>
+<span class="tg t1">Actual</span><span class="tg t2">Propuesta</span><span class="knob"></span>
+<input type="range" min="0" max="100" value="50" aria-label="Comparar Acceso a oficinas"></div>
+<figcaption class="pc"><b>Acceso a oficinas</b><span>Bandeja 40x16 sobre el marco y en la unión muro-cielo.</span></figcaption></figure>
+<figure class="pi rv"><div class="ba" style="--p:50%;aspect-ratio:1280/963">
+<img src="../fotos/img/F41_antes.jpg" alt="Patio y alero, estado actual" loading="lazy">
+<div class="after"><img src="../fotos/img/F41_propuesta.jpg" alt="Patio y alero, con la propuesta" loading="lazy"></div>
+<span class="tg t1">Actual</span><span class="tg t2">Propuesta</span><span class="knob"></span>
+<input type="range" min="0" max="100" value="50" aria-label="Comparar Patio y alero"></div>
+<figcaption class="pc"><b>Patio y alero</b><span>Conduit 25 mm solo para datos, separado de 220 V, con caja IP65.</span></figcaption></figure></div></div>
+<div class="sec"><div class="sh"><span class="mono">§3</span><h2>Especificación de canalización</h2></div><div class="spec rv"><div><div class="ic"><i style="display:block;width:64px;height:32px;border:2px solid #0f1b2d;border-radius:3px"></i></div><b>100x50</b><em>14 m</em><p>Troncal desde el nodo</p></div><div><div class="ic"><i style="display:block;width:40px;height:16px;border:2px solid #0f1b2d;border-radius:3px"></i></div><b>40x16</b><em>42 m</em><p>Pasillos, cornisas y escalera</p></div><div><div class="ic"><i style="display:block;width:22px;height:11px;border:2px solid #0f1b2d;border-radius:3px"></i></div><b>20x10</b><em>40 m</em><p>Bajadas a cada punto</p></div><div><div class="ic"><i style="display:block;width:26px;height:26px;border:2px solid #0f1b2d;border-radius:50%"></i></div><b>Conduit</b><em>20 m</em><p>Exterior con cajas IP65</p></div></div>
+<div class="gantt rv"><div class="gr gh"><div>Actividad</div><div>Día 1</div><div>Día 2</div><div>Día 3</div><div>Día 4</div></div><div class="gr"><div>Nodo</div><div class="on2">■ Día 1</div><div class=""></div><div class=""></div><div class=""></div></div><div class="gr"><div>Escalera y pasillos</div><div class=""></div><div class="on2">■ Día 2</div><div class=""></div><div class=""></div></div><div class="gr"><div>Salas y exterior</div><div class=""></div><div class=""></div><div class="on2">■ Día 3</div><div class=""></div></div><div class="gr"><div>Entrega</div><div class=""></div><div class=""></div><div class=""></div><div class="on2">■ Día 4</div></div></div></div>
+<div class="sec"><div class="sh"><span class="mono">§4</span><h2>Inversión</h2></div><div class="inv rv"><div><span class="mono" style="color:var(--mut)">Total neto · NWS-COT-ECOLE-2026-02</span><div class="n">$1.123.950</div><div style="color:var(--mut);margin-bottom:16px">+ IVA 19 % = $1.337.501</div><div class="r"><span>Canalización interior</span><span>$365.100</span></div><div class="r"><span>Canalización exterior</span><span>$101.850</span></div><div class="r"><span>Fijaciones e identificación</span><span>$77.000</span></div><div class="r"><span>Mano de obra y documentación</span><span>$580.000</span></div><a class="btn" href="../NWS-COT-ECOLE-2026-02.pdf" target="_blank">Descargar cotización</a></div>
+<div><span class="mono" style="color:var(--mut)">Alcance incluido</span><ul class="chk"><li>96 m de bandeja PVC interior con accesorios</li><li>20 m de conduit PVC exterior y 3 cajas estancas IP65</li><li>Ordenamiento del cableado y retiro de cables en desuso</li><li>Etiquetado de cada cable y prueba de continuidad</li><li>Plano as-built y planilla de identificación</li></ul><p style="color:var(--mut);font-size:14px">4 días hábiles · pago a 30 días · garantía 90 días · validez 03-12-2026.</p></div></div></div>
+<div class="sec"><div class="sh"><span class="mono">§5</span><h2>Documentación</h2></div><div class="docs"><video class="rv" src="../NWS_Video_ECOLE.mp4" controls preload="metadata" playsinline poster="../fotos/img/F22_propuesta.jpg"></video><div class="dl rv"><a href="../NWS-COT-ECOLE-2026-02.pdf" target="_blank"><span class="mono">D-01</span><div><b>Cotización NWS-COT-ECOLE-2026-02</b><small>PDF · 2 páginas</small></div><span>↓</span></a><a href="../Informe-Levantamiento-ECOLE.pdf" target="_blank"><span class="mono">D-02</span><div><b>Informe de levantamiento</b><small>PDF · 8 páginas</small></div><span>↓</span></a><a href="../NWS_Video_ECOLE.mp4" target="_blank"><span class="mono">D-03</span><div><b>Video de la propuesta</b><small>MP4 · 1 minuto</small></div><span>↓</span></a></div></div></div>
+<div class="ft"><div class="mono">NetWatch Solutions SpA · RUT 77.859.162-6 · www.nws.cl</div><div class="mono">Jerry Lolandes · Jefe de Proyecto</div></div>
+</main><script>
+(function(){
+ var io='IntersectionObserver' in window?new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target)}})},{threshold:.1}):null;
+ document.querySelectorAll('.rv').forEach(function(el){io?io.observe(el):el.classList.add('on')});
+ document.querySelectorAll('.ba').forEach(function(b){var r=b.querySelector('input');function u(){b.style.setProperty('--p',r.value+'%')}r.addEventListener('input',u);u();});
+ var t=document.querySelector('[data-sticky]');if(t){var f=function(){t.classList.toggle('s',scrollY>40)};addEventListener('scroll',f,{passive:true});f();}
+})();
+</script></body></html>
