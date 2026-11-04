@@ -92,7 +92,7 @@ tbody tr:hover{background:var(--soft)}
 .pasos span{display:flex;align-items:center;gap:5px;padding-right:12px}
 .pasos span::before{content:"";width:9px;height:9px;border-radius:50%;background:var(--line)}
 .pasos span.ok{color:var(--good)}.pasos span.ok::before{background:var(--good)}
-.pasos span.ya{color:var(--ink)}.pasos span.ya::before{background:var(--cyan);box-shadow:0 0 0 3px var(--info-bg)}
+.pasos span.ya{color:var(--ink)}.pasos span.esp{color:var(--warn)}.pasos span.esp::before{background:var(--warn);box-shadow:0 0 0 3px var(--warn-bg)}.pasos span.ya::before{background:var(--cyan);box-shadow:0 0 0 3px var(--info-bg)}
 .alerta{background:var(--warn-bg);border:1px solid var(--warn);border-radius:14px;padding:14px 16px;margin-bottom:14px}
 .alerta h3{margin:0 0 8px;font-size:15px;color:var(--warn)}
 .alerta .item{background:var(--card);border-radius:10px;padding:10px 12px;margin-top:8px}
@@ -370,7 +370,7 @@ tbody tr:hover{background:var(--soft)}
   function cotCard(c) {
     var pf = c.pf && S.filas.find(function (f) { return f.id === c.pf; });
     var occ = c.oc_correo, fe = !pf && c.factura, apr = c.estado === 'Aceptada' || !!fe || !!(pf && /Emitida|Pagada/.test(pf.estado)), oc = (pf && pf.orden_compra) || (occ && occ.orden_compra), fac = (pf && (pf.estado === 'Emitida' || pf.estado === 'Pagada')) || !!fe, pag = (pf && pf.estado === 'Pagada') || (fe && /pagad/i.test(fe.estado_pago || ''));
-    var pasos = [['Cotizada', true], ['Aprobada', apr], ['OC', oc || (pf && !oc && fac)], ['Facturada', fac], ['Pagada', pag]];
+    var pasos = [['Cotizada', true], [apr ? 'Aprobada' : c.estado === 'Borrador' ? 'Sin enviar' : 'Esperando aprobación', apr], ['OC', oc || (pf && !oc && fac)], ['Facturada', fac], ['Pagada', pag]];
     var actual = pasos.findIndex(function (p) { return !p[1]; });
     var paso;
     if (c.estado === 'Rechazada') paso = '<span class="tag t-bad">Rechazada</span>';
@@ -383,14 +383,14 @@ tbody tr:hover{background:var(--soft)}
     return '<div class="fila"><div><div class="cli">' + esc(c.numero_cotizacion) + ' · ' + esc(c.cliente) + '<small>' + fch(c.fecha) + '</small></div></div>' +
       '<div class="monto"><b>' + clp(c.total) + '</b><small>' + clp(c.subtotal) + ' + IVA</small></div>' +
       '<div class="glosa">' + esc(String(c.project_description || '').split('\n')[0]) + '</div>' +
-      (c.estado !== 'Rechazada' ? '<div class="pasos">' + pasos.map(function (p, i) { return '<span class="' + (p[1] ? 'ok' : i === actual ? 'ya' : '') + '">' + p[0] + '</span>'; }).join('') + '</div>' : '') +
+      (c.estado !== 'Rechazada' ? '<div class="pasos">' + pasos.map(function (p, i) { return '<span class="' + (p[1] ? 'ok' : i === actual ? (i === 1 ? 'esp' : 'ya') : '') + '">' + p[0] + '</span>'; }).join('') + '</div>' : '') +
       ((c.estados || []).length ? '<div class="meta">' + c.estados.map(function (e) { return esc(e.estado) + ' ' + fch(e.fecha); }).join(' → ') + (c.estado === 'Enviada' ? ' · <b>' + dias(c.estados[c.estados.length - 1].fecha) + ' días esperando respuesta</b>' : '') + '</div>' : '') +
       docsHtml(c.docs, { cotizacion_id: c.id }) +
       '<div class="acc">' + paso + '<div class="der">' + selEstado(c) + '<button class="g" data-vercot="' + c.id + '">' + (det ? 'Ocultar detalle' : 'Ver detalle') + '</button></div></div>' +
       (det ? detalleHtml(det) : '') + '</div>';
   }
   function selEstado(c) {
-    var ops = [['Enviada', 'En espera'], ['Aceptada', 'Aprobada'], ['Rechazada', 'Rechazada']];
+    var ops = [['Enviada', 'En espera de aprobación'], ['Aceptada', 'Aprobada'], ['Rechazada', 'Rechazada']];
     if (c.estado === 'Borrador') ops.unshift(['Borrador', 'Sin enviar']);
     return '<label class="selest">Estado <select data-cest="' + c.id + '" aria-label="Estado de la cotización">' + ops.map(function (o) { return '<option value="' + o[0] + '"' + (c.estado === o[0] ? ' selected' : '') + '>' + o[1] + '</option>'; }).join('') + '</select></label>';
   }
