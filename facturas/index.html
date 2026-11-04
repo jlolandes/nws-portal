@@ -40,7 +40,7 @@ header{background:var(--brand);color:#fff;padding:12px max(16px,env(safe-area-in
 .top{display:flex;align-items:center;gap:12px;max-width:1360px;margin:0 auto}
 .top img{height:36px;width:auto;display:block}.top .sep{width:1px;height:30px;background:rgba(255,255,255,.28)}
 .top h1{font:800 17px Montserrat,sans-serif;margin:0;flex:1;letter-spacing:.02em;line-height:1.15}.top h1 small{display:block;font:500 11.5px "Public Sans",sans-serif;letter-spacing:.06em;text-transform:uppercase;opacity:.75;margin-top:2px}
-.quien{font-size:13px;opacity:.9}.quien button{background:none;border:0;color:#7dd3fc;text-decoration:underline;cursor:pointer;padding:0}
+.ayuda{color:#fff;font-weight:600;font-size:13px;text-decoration:none;border:1px solid rgba(255,255,255,.45);border-radius:9px;padding:6px 11px;white-space:nowrap}.ayuda:hover{background:rgba(255,255,255,.12)}.quien{font-size:13px;opacity:.9}.quien button{background:none;border:0;color:#7dd3fc;text-decoration:underline;cursor:pointer;padding:0}
 .shell{max-width:1360px;margin:0 auto;display:grid;grid-template-columns:210px minmax(0,1fr);gap:20px;padding:18px max(16px,env(safe-area-inset-right)) 40px max(16px,env(safe-area-inset-left))}
 nav{position:sticky;top:66px;align-self:start;display:flex;flex-direction:column;gap:4px}
 nav button{display:flex;align-items:center;gap:10px;border:0;background:none;padding:10px 12px;border-radius:10px;cursor:pointer;color:var(--gray);font-weight:600;text-align:left}
@@ -127,7 +127,7 @@ tbody tr:hover{background:var(--soft)}
 </style>
 </head>
 <body>
-<header><div class="top"><img src="logo-nws-blanco.png" alt="NWS · NetWatch Solutions" width="168" height="36"><span class="sep" aria-hidden="true"></span><h1>Facturas<small>Panel de facturación y cobranza</small></h1><div class="quien" id="quien"></div></div></header>
+<header><div class="top"><img src="logo-nws-blanco.png" alt="NWS · NetWatch Solutions" width="168" height="36"><span class="sep" aria-hidden="true"></span><h1>Facturas<small>Panel de facturación y cobranza</small></h1><a class="ayuda" href="manual.html">Manual</a><div class="quien" id="quien"></div></div></header>
 <div id="app"><p class="cargando">Cargando…</p></div>
 <div id="aviso" role="status"></div><div class="tip" id="tip"></div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>

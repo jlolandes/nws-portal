@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#0a3d62">
+<title>Manual · Facturas NWS</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Public+Sans:wght@400;500;600;700&display=swap">
+<style>
+:root{--bg:#eef4f8;--card:#fff;--soft:#f4f8fb;--ink:#0b1f3a;--ink2:#334155;--gray:#5b6b80;--line:#d9e4ec;--cyan:#0e8fc7;--cyan-d:#0b7fb3;--warn:#b45309;--warn-bg:#fff4e0;color-scheme:light}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 "Public Sans",system-ui,sans-serif}
+header{background:linear-gradient(100deg,#082f4d,#0a3d62 35%,#0e8fc7 75%,#38b6ee);background-size:220% 100%;animation:cielo 14s ease-in-out infinite alternate;color:#fff;padding:14px max(16px,env(safe-area-inset-right)) 14px max(16px,env(safe-area-inset-left));box-shadow:0 6px 24px rgba(10,61,98,.25)}
+@keyframes cielo{from{background-position:0 0}to{background-position:100% 0}}
+.top{display:flex;align-items:center;gap:12px;max-width:900px;margin:0 auto}
+.top img{height:36px;width:auto;display:block}.sep{width:1px;height:30px;background:rgba(255,255,255,.28)}
+.top h1{font:800 17px Montserrat,sans-serif;margin:0;flex:1;line-height:1.15}.top h1 small{display:block;font:500 11.5px "Public Sans",sans-serif;letter-spacing:.06em;text-transform:uppercase;opacity:.75;margin-top:2px}
+.top a{color:#fff;font-weight:600;font-size:14px;text-decoration:none;border:1px solid rgba(255,255,255,.45);border-radius:9px;padding:7px 12px}
+main{max-width:900px;margin:0 auto;padding:24px max(16px,env(safe-area-inset-right)) 60px max(16px,env(safe-area-inset-left))}
+.hero h2{font:800 28px Montserrat,sans-serif;margin:0 0 6px;text-wrap:balance}.hero p{color:var(--gray);margin:0 0 18px;max-width:65ch}
+.indice{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}.indice a{background:var(--card);border:1px solid var(--line);border-radius:999px;padding:6px 12px;color:var(--ink2);text-decoration:none;font-size:14px;font-weight:600}.indice a:hover{border-color:var(--cyan);color:var(--cyan-d)}
+section{background:var(--card);border:1px solid var(--line);border-top:4px solid var(--cyan);border-radius:14px;padding:20px 22px;margin-bottom:14px;animation:sube .5s cubic-bezier(.2,.7,.2,1) both}
+@keyframes sube{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+section h3{font:800 19px Montserrat,sans-serif;margin:0 0 10px;display:flex;align-items:center;gap:10px}
+section h3 span{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:50%;background:#0a3d62;color:#fff;font-size:14px;flex:none}
+section p,section li{max-width:70ch;color:var(--ink2)}section p{margin:0 0 10px}
+ol,ul{margin:0 0 10px;padding-left:22px}li{margin:5px 0}b{color:var(--ink)}
+.nota{background:var(--warn-bg);color:var(--warn);border-radius:10px;padding:10px 14px;font-size:15px}
+.tabla{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:15px}th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}th{font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:var(--gray)}
+kbd{background:var(--soft);border:1px solid var(--line);border-radius:6px;padding:1px 6px;font:600 14px "Public Sans",sans-serif}
+.pie{color:var(--gray);font-size:14px;text-align:center;margin-top:24px}
+@media (max-width:600px){.top img{height:28px}.sep,.top h1 small{display:none}.hero h2{font-size:23px}section{padding:16px}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}}
+</style>
+</head>
+<body>
+<header><div class="top"><img src="logo-nws-blanco.png" alt="NWS · NetWatch Solutions" width="168" height="36"><span class="sep" aria-hidden="true"></span><h1>Manual<small>Portal de facturas NWS</small></h1><a href="./">Ir al portal</a></div></header>
+<main>
+<div class="hero"><h2>Cómo usar el portal de facturas</h2><p>Aquí Jerry deja los trabajos listos para facturar y usted registra cada factura emitida y su pago. Todo queda sincronizado con el ERP de NetWatch Solutions.</p></div>
+<nav class="indice" aria-label="Contenido"><a href="#entrar">Entrar</a><a href="#menu">El menú</a><a href="#emitir">Emitir una factura</a><a href="#pagada">Marcar pagada</a><a href="#notas">Notas y documentos</a><a href="#faq">Preguntas frecuentes</a></nav>
+
+<section id="entrar"><h3><span>1</span>Cómo entrar</h3>
+<ol><li>Abra <b>portal.nws.cl/facturas/</b> en el navegador del computador o del celular.</li><li>Escriba el correo y la clave que le entregó Jerry y pulse <b>Entrar</b>.</li><li>La sesión queda abierta en ese navegador. Para salir, pulse <b>cerrar sesión</b> arriba a la derecha.</li></ol>
+<p>Si olvida la clave o el portal dice que su cuenta no tiene acceso, pídale a Jerry que la restablezca. No comparta la clave con otras personas.</p></section>
+
+<section id="menu"><h3><span>2</span>El menú</h3>
+<p>El menú está a la izquierda (en el celular, arriba). El número junto a cada sección indica cuántos pendientes hay.</p>
+<div class="tabla"><table><thead><tr><th>Sección</th><th>Qué muestra</th><th>Qué hace usted ahí</th></tr></thead><tbody>
+<tr><td><b>Resumen</b></td><td>Lo facturado, lo cobrado, lo que falta cobrar (en rojo lo vencido), la cobranza por antigüedad y los próximos cobros</td><td>Revisar el estado general; puede filtrar por empresa y período</td></tr>
+<tr><td><b>Por facturar</b></td><td>Los trabajos que Jerry pidió facturar y las facturas emitidas que esperan pago</td><td>Emitir y registrar facturas, subir el PDF, marcar pagos y dejar notas</td></tr>
+<tr><td><b>Facturas</b></td><td>Todas las facturas emitidas, con lo pagado y el saldo</td><td>Consultar folios, fechas y saldos</td></tr>
+</tbody></table></div></section>
+
+<section id="emitir"><h3><span>3</span>Emitir y registrar una factura</h3>
+<p>Cada trabajo por facturar aparece como una tarjeta con la etiqueta <b>Por facturar</b>.</p>
+<ol><li>Entre a <b>Por facturar</b> y ubique la tarjeta. Puede buscar por cliente, OC o glosa.</li>
+<li>Pulse <b>Copiar datos SII</b>: se copian razón social, RUT, forma de pago, glosa, neto, IVA, total y, si hay OC, la referencia.</li>
+<li>Emita la factura electrónica en el portal del SII con esos datos.</li>
+<li>Si la tarjeta muestra una OC («OC N° … referenciarla en la factura»), agréguela como referencia <b>Orden de Compra (801)</b> con su número y fecha. Algunos clientes, como KDM y Starco, la exigen. El PDF de la OC está en la misma tarjeta.</li>
+<li>De vuelta en el portal, escriba el <b>N° de folio</b>, revise la fecha de emisión y pulse <b>Facturada</b>.</li>
+<li>Pulse <b>Subir PDF factura</b> y elija el PDF que entrega el SII.</li></ol>
+<p class="nota">Si la tarjeta dice «Pago al contado, sin OC», emita la factura sin referencia de OC.</p></section>
+
+<section id="pagada"><h3><span>4</span>Marcar una factura pagada</h3>
+<ol><li>En <b>Por facturar</b>, ubique la tarjeta con la etiqueta «Facturada · folio …».</li><li>Ajuste la fecha en que llegó el pago.</li><li>Pulse <b>Marcar pagada</b>. El pago queda registrado en el ERP por el saldo completo.</li></ol>
+<p class="nota">Si el cliente pagó solo una parte, no la marque pagada: déjele una nota a Jerry con el monto recibido.</p></section>
+
+<section id="notas"><h3><span>5</span>Notas y documentos</h3>
+<ul><li><b>Notas:</b> pulse <b>Notas</b>, escriba (por ejemplo «falta el RUT» o «enviada al cliente») y pulse <b>Enviar</b>. Jerry la ve en la misma tarjeta.</li>
+<li><b>Adjuntar:</b> pulse <b>+ Adjuntar</b>, elija el tipo (Factura o Respaldo) y luego el archivo; sirve para notas de crédito o comprobantes de pago.</li>
+<li><b>Ver documentos:</b> los botones con el nombre del archivo (OC, factura, respaldo) lo abren en una pestaña nueva.</li></ul></section>
+
+<section id="faq"><h3><span>6</span>Preguntas frecuentes</h3>
+<ul><li><b>Anoté mal el folio.</b> Deje una nota con el folio correcto; Jerry lo corrige.</li>
+<li><b>El portal dice que la factura ya está registrada.</b> Ese folio ya existe en el ERP. Revise el número; si está bien, avise a Jerry.</li>
+<li><b>Falta el RUT o la glosa no corresponde.</b> No emita la factura: deje una nota y espere la corrección.</li>
+<li><b>No veo un trabajo que Jerry me pidió facturar.</b> Revise que el filtro diga «Todas las empresas» y que el buscador esté vacío.</li>
+<li><b>Los cambios no aparecen.</b> Recargue con <kbd>Ctrl</kbd> + <kbd>F5</kbd> (en el celular, deslice hacia abajo).</li></ul>
+<p>Contacto: Jerry Lolandes · jlolandes@nws.cl</p></section>
+<p class="pie">NetWatch Solutions SpA · www.nws.cl</p>
+</main>
+</body>
+</html>
