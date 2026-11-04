@@ -13,10 +13,6 @@
 :root{--bg:#eef4f8;--card:#fff;--soft:#f4f8fb;--ink:#0b1f3a;--ink2:#334155;--gray:#5b6b80;--muted:#8794a6;--line:#d9e4ec;--brand:#0a3d62;--cyan:#0e8fc7;--cyan-d:#0b7fb3;
 --s1:#2a78d6;--s2:#eb6834;--s3:#1baf7a;--s4:#eda100;
 --good:#047857;--good-bg:#e7f6ef;--warn:#b45309;--warn-bg:#fff4e0;--bad:#b91c1c;--bad-bg:#fdecec;--info:#0b7fb3;--info-bg:#e8f4fc;color-scheme:light}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e1622;--card:#152131;--soft:#1b2a3d;--ink:#eef2f7;--ink2:#cfd8e3;--gray:#9fb0c4;--muted:#7d8ea3;--line:#26364b;--cyan:#38b6ee;--cyan-d:#7cd0f5;
---s1:#3987e5;--s2:#d95926;--s3:#199e70;--s4:#c98500;--good:#4ade80;--good-bg:#12352a;--warn:#fbbf24;--warn-bg:#3a2c10;--bad:#f87171;--bad-bg:#3b1a1a;--info:#7cd0f5;--info-bg:#12304a;color-scheme:dark}}
-:root[data-theme="dark"]{--bg:#0e1622;--card:#152131;--soft:#1b2a3d;--ink:#eef2f7;--ink2:#cfd8e3;--gray:#9fb0c4;--muted:#7d8ea3;--line:#26364b;--cyan:#38b6ee;--cyan-d:#7cd0f5;
---s1:#3987e5;--s2:#d95926;--s3:#199e70;--s4:#c98500;--good:#4ade80;--good-bg:#12352a;--warn:#fbbf24;--warn-bg:#3a2c10;--bad:#f87171;--bad-bg:#3b1a1a;--info:#7cd0f5;--info-bg:#12304a;color-scheme:dark}
 *{box-sizing:border-box}
 header{background:linear-gradient(100deg,#082f4d,#0a3d62 35%,#0e8fc7 75%,#38b6ee)!important;background-size:220% 100%!important;animation:cielo 14s ease-in-out infinite alternate;box-shadow:0 6px 24px rgba(10,61,98,.25);padding-top:14px!important;padding-bottom:14px!important}
 @keyframes cielo{from{background-position:0 0}to{background-position:100% 0}}
@@ -97,7 +93,7 @@ tbody tr:hover{background:var(--soft)}
 .monto{text-align:right;grid-row:1/3;grid-column:2}.monto b{font:800 17px Montserrat,sans-serif;display:block}.monto small{color:var(--gray);font-size:12px}
 .meta{font-size:12px;color:var(--gray);display:flex;gap:6px;flex-wrap:wrap;align-items:center;grid-column:1/-1}
 .oc{grid-column:1/-1;font-size:13px;background:var(--info-bg);color:var(--info);border-radius:9px;padding:7px 11px;font-weight:600}
-.oc.falta{background:var(--warn-bg);color:var(--warn)}
+.oc.falta{background:var(--warn-bg);color:var(--warn)}.oc.sin{background:var(--soft);color:var(--gray);font-weight:500}.lnk{background:none;border:0;padding:0;color:var(--cyan-d);font-weight:600;cursor:pointer;text-decoration:underline}
 .docs{grid-column:1/-1;display:flex;gap:6px;flex-wrap:wrap;align-items:center;font-size:13px}
 .doc{border:1px solid var(--line);background:var(--soft);border-radius:9px;padding:4px 9px;cursor:pointer;font-size:13px}
 .doc i{font-style:normal;color:var(--gray);font-size:11px;font-weight:700;text-transform:uppercase;margin-right:4px}
@@ -387,7 +383,9 @@ tbody tr:hover{background:var(--soft)}
       : f.estado === 'Emitida' ? '<input type="date" value="' + hoy() + '" data-fp="' + f.id + '" aria-label="Fecha de pago"><button class="b" data-act="pagada" data-id="' + f.id + '">Marcar pagada</button>' : '';
     var n = f.notas.length, ult = f.notas[n - 1], ab = S.abiertas[f.id];
     var oc = f.orden_compra ? '<div class="oc">OC N° ' + esc(f.orden_compra) + (f.oc_fecha ? ' del ' + fch(f.oc_fecha) : '') + ' · referenciarla en la factura</div>'
-      : (S.admin && f.estado === 'Por facturar' ? '<div class="oc falta">Sin OC · <input type="text" placeholder="N° OC" data-oc="' + f.id + '" style="width:110px;padding:3px 6px"> <input type="date" value="' + hoy() + '" data-ocf="' + f.id + '" style="width:145px;padding:3px 6px"> <button class="g" data-act="oc" data-id="' + f.id + '">Guardar OC</button></div>' : '');
+      : (S.admin && f.estado === 'Por facturar' ? (S.ocAbierta === f.id
+        ? '<div class="oc falta">Agregar OC · <input type="text" placeholder="N° OC" data-oc="' + f.id + '" style="width:110px;padding:3px 6px"> <input type="date" value="' + hoy() + '" data-ocf="' + f.id + '" style="width:145px;padding:3px 6px"> <button class="g" data-act="oc" data-id="' + f.id + '">Guardar OC</button></div>'
+        : '<div class="oc sin">' + (/contado/i.test(f.forma_pago || '') ? 'Pago al contado, sin OC' : 'Sin OC') + ' · <button class="lnk" data-addoc="' + f.id + '">agregar OC</button></div>') : '');
     var det = S.admin && f.cotizacion_id && S.detalle['c' + f.cotizacion_id] ? detalleHtml(S.detalle['c' + f.cotizacion_id]) : '';
     return '<div class="fila' + (S.foco === f.id ? ' foco' : '') + '" id="pf-' + f.id + '"><div><div class="cli">' + esc(f.razon_social) + '<small>' + esc(f.rut || '') + '</small></div></div>' +
       '<div class="monto"><b>' + clp(f.total) + '</b><small>' + clp(f.neto) + ' + IVA</small></div>' +
@@ -517,6 +515,7 @@ tbody tr:hover{background:var(--soft)}
     });
     on('[data-doc]', function (b) { abrirUrl(api('ver_doc', { id: b.dataset.doc })); });
     on('[data-vercot]', function (b) { verCot(b.dataset.vercot); });
+    on('[data-addoc]', function (b) { S.ocAbierta = b.dataset.addoc; pintar(); var i = app.querySelector('[data-oc="' + S.ocAbierta + '"]'); if (i) i.focus(); });
     on('[data-ir]', function (b) { S.vista = 'pf'; S.foco = b.dataset.ir; pintar(); });
     on('[data-adj]', function (b) {
       var dueno = JSON.parse(b.dataset.adj);
