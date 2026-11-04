@@ -81,7 +81,7 @@ button.g{background:#fff;border:1px solid var(--line);border-radius:8px;color:va
   var sb = window.supabase.createClient('https://camuxwyvvldqlmsmfbju.supabase.co', 'sb_publishable_jeJlfqULfC7x6iUZrXjl8A_8zB5oVAm', { auth: { storageKey: 'nws-facturas-sesion', persistSession: true, autoRefreshToken: true } });
   var TOKEN = '';
   var app = document.getElementById('app');
-  var S = { filas: [], cots: [], admin: false, filtro: 'pend', q: '', abiertas: {}, detalle: {}, nueva: false, quien: '', foco: null };
+  var S = { filas: [], cots: [], ocs: [], admin: false, filtro: 'pend', q: '', abiertas: {}, detalle: {}, nueva: false, quien: '', foco: null };
   var clp = function (n) { return '$' + Math.round(Number(n) || 0).toLocaleString('es-CL'); };
   var fch = function (d) { return d ? String(d).slice(0, 10).split('-').reverse().join('-') : ''; };
   var hoy = function () { var d = new Date(Date.now() - new Date().getTimezoneOffset() * 6e4); return d.toISOString().slice(0, 10); };
@@ -91,7 +91,7 @@ button.g{background:#fff;border:1px solid var(--line);border-radius:8px;color:va
     return fetch(API, { method: 'POST', headers: { 'content-type': 'application/json', authorization: 'Bearer ' + TOKEN }, body: JSON.stringify(Object.assign({ accion: accion }, datos || {})) })
       .then(function (r) { return r.json().then(function (j) { if (j.login) { login(j.error); throw new Error(j.error); } if (!r.ok) throw new Error(j.error || 'Error'); return j; }); });
   }
-  function cargar() { return api('lista').then(function (j) { S.filas = j.filas || []; S.cots = j.cotizaciones || []; pintar(); }).catch(function (e) { if (S.quien) app.innerHTML = '<div class="bloq"><h2>No se pudo cargar</h2><p>' + esc(e.message) + '</p></div>'; }); }
+  function cargar() { return api('lista').then(function (j) { S.filas = j.filas || []; S.cots = j.cotizaciones || []; S.ocs = j.ocs || []; pintar(); }).catch(function (e) { if (S.quien) app.innerHTML = '<div class="bloq"><h2>No se pudo cargar</h2><p>' + esc(e.message) + '</p></div>'; }); }
   function abrirUrl(p) { var w = window.open('', '_blank'); p.then(function (j) { if (w) w.location.href = j.url; else location.href = j.url; }, function (e) { if (w) w.close(); aviso(e.message); }); }
   function elegirArchivo(accept, cb) { var i = document.createElement('input'); i.type = 'file'; if (accept) i.accept = accept; i.onchange = function () { if (i.files[0]) cb(i.files[0]); }; i.click(); }
   function put(url, file) { return fetch(url, { method: 'PUT', headers: { 'content-type': file.type || 'application/octet-stream', 'x-upsert': 'false' }, body: file }).then(function (r) { if (!r.ok) throw new Error('No se pudo subir el archivo.'); }); }
@@ -210,10 +210,22 @@ button.g{background:#fff;border:1px solid var(--line);border-radius:8px;color:va
       '<input type="search" id="q" placeholder="Buscar cliente, folio, OC…" value="' + esc(S.q) + '">' + (S.admin ? '<button class="b" id="nueva">+ Factura sin cotización</button>' : '') + '</div>' +
       (S.nueva ? formNueva() : '') +
       (S.filtro === 'cot'
-        ? (cots.length ? cots.map(cotCard).join('') : '<p class="vacio">No hay cotizaciones.</p>')
+        ? ocsHtml() + (cots.length ? cots.map(cotCard).join('') : '<p class="vacio">No hay cotizaciones.</p>')
         : (visibles().length ? visibles().map(fila).join('') : '<p class="vacio">' + (S.filtro === 'pag' ? 'Aún no hay facturas pagadas.' : 'No hay nada pendiente.') + '</p>'));
     enlazar();
     if (S.foco) { var el = document.getElementById('pf-' + S.foco); if (el) el.scrollIntoView({ block: 'center' }); S.foco = null; }
+  }
+  function ocsHtml() {
+    if (!S.ocs.length) return '';
+    var opciones = S.cots.filter(function (c) { return !c.pf; }).map(function (c) { return '<option value="' + c.id + '">' + esc(c.numero_cotizacion + ' · ' + c.cliente + ' · ' + clp(c.subtotal) + ' neto · ' + String(c.project_description || '').split('\n')[0].slice(0, 50)) + '</option>'; }).join('');
+    return '<div class="fila" style="border-color:var(--amber);background:var(--amber-bg)"><div class="cli" style="grid-column:1/-1">OC recibidas por correo sin asociar (' + S.ocs.length + ')</div>' +
+      S.ocs.map(function (o) {
+        return '<div class="panel" style="background:#fff"><b>OC ' + esc(o.orden_compra) + '</b> · ' + esc(o.razon_social || 'Cliente por confirmar') + ' · ' + (o.total ? clp(o.total) + ' IVA incl.' : 'monto no leído') + ' · ' + fch(o.oc_fecha || o.recibido) +
+          '<div style="color:var(--gray);font-size:13px;margin:2px 0 8px">' + esc(o.motivo || '') + '</div>' +
+          '<div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center"><select data-ocsel="' + o.id + '" style="flex:1;min-width:200px"><option value="">Elige la cotización…</option>' + opciones + '</select>' +
+          '<button class="b" data-ocact="asociar" data-id="' + o.id + '">Asociar</button>' + (o.pdf ? '<button class="g" data-ocact="ver" data-id="' + o.id + '">Ver OC</button>' : '') +
+          '<button class="g" data-ocact="descartar" data-id="' + o.id + '">Descartar</button></div></div>';
+      }).join('') + '</div>';
   }
   function formNueva() {
     return '<form class="nueva" id="fnueva"><label class="x2">Cliente (razón social)<input name="razon_social" required list="clientes"></label><label>RUT<input name="rut" placeholder="88.446.500-1"></label><label>Forma de pago<select name="forma_pago"><option>Contado</option><option selected>30 días</option><option>45 días</option><option>60 días</option></select></label>' +
@@ -262,6 +274,18 @@ button.g{background:#fff;border:1px solid var(--line);border-radius:8px;color:va
             subirDoc(dueño, sel.value, file, chk ? chk.checked : true).then(function () { aviso('Documento adjuntado.'); cargar(); }, function (e) { aviso(e.message); });
           });
         };
+      };
+    });
+    app.querySelectorAll('[data-ocact]').forEach(function (b) {
+      b.onclick = function () {
+        var id = b.dataset.id, act = b.dataset.ocact;
+        if (act === 'ver') { abrirUrl(api('ver_oc', { id: id })); return; }
+        if (act === 'descartar') {
+          if (!b.dataset.ok) { b.dataset.ok = '1'; b.textContent = '¿Seguro? Descartar'; b.style.color = 'var(--red)'; return; }
+          b.disabled = true; api('descartar_oc', { id: id }).then(function () { aviso('OC descartada.'); cargar(); }, function (e) { b.disabled = false; aviso(e.message); }); return;
+        }
+        var cot = app.querySelector('[data-ocsel="' + id + '"]').value; if (!cot) { aviso('Elige la cotización.'); return; }
+        b.disabled = true; api('asociar_oc', { id: id, cotizacion_id: cot }).then(function () { aviso('OC asociada. Pasó a «Por facturar» con su PDF.'); cargar(); }, function (e) { b.disabled = false; aviso(e.message); });
       };
     });
     app.querySelectorAll('[data-cact]').forEach(function (b) {
