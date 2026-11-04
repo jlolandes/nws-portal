@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Public+Sans:wght@400;500;600;700&display=swap">
 <style>
-:root{--bg:#f3f6fa;--card:#fff;--ink:#0b1f3a;--gray:#5b6b80;--line:#e2e8f0;--cyan:#1aa3e0;--cyan-d:#0b7fb3;--amber:#b45309;--amber-bg:#fff7e6;--green:#047857;--green-bg:#e8f8f0;--blue-bg:#eaf5fd;--red:#b91c1c}
+:root{--bg:#f3f6fa;--card:#fff;--ink:#0b1f3a;--gray:#5b6b80;--line:#e2e8f0;--cyan:#1aa3e0;--cyan-d:#0b7fb3;--amber:#b45309;--amber-bg:#fff7e6;--green:#047857;--green-bg:#e8f8f0;--blue-bg:#eaf5fd;--red:#b91c1c;--soft:#f8fafc}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 "Public Sans",system-ui,sans-serif}
 header{background:var(--ink);color:#fff;padding:14px max(16px,env(safe-area-inset-left)) 14px max(16px,env(safe-area-inset-right))}
@@ -20,32 +20,46 @@ header{background:var(--ink);color:#fff;padding:14px max(16px,env(safe-area-inse
 .top h1{font:800 18px Montserrat,sans-serif;margin:0;flex:1}
 .quien{font-size:13px;opacity:.85}.quien button{background:none;border:0;color:#7dd3fc;text-decoration:underline;cursor:pointer;font:inherit}
 main{padding:18px max(16px,env(safe-area-inset-left)) 40px max(16px,env(safe-area-inset-right))}
-.resumen{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
+.resumen{display:grid;grid-template-columns:repeat(var(--n,3),1fr);gap:10px;margin-bottom:14px}
 .kpi{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
 .kpi span{display:block;font-size:12px;color:var(--gray);text-transform:uppercase;letter-spacing:.04em;font-weight:600}
 .kpi b{font:800 20px Montserrat,sans-serif}
 .barra{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:12px}
-.chip{border:1px solid var(--line);background:var(--card);border-radius:999px;padding:6px 14px;font:600 14px inherit;font-family:inherit;color:var(--gray);cursor:pointer}
+.chip{border:1px solid var(--line);background:var(--card);border-radius:999px;padding:6px 14px;font:600 14px "Public Sans",sans-serif;color:var(--gray);cursor:pointer}
 .chip[aria-pressed=true]{background:var(--ink);color:#fff;border-color:var(--ink)}
 .barra input{flex:1;min-width:140px}
 input,select,textarea{font:inherit;border:1px solid var(--line);border-radius:8px;padding:8px 10px;background:#fff;color:var(--ink);min-width:0}
 button.b{font:600 14px "Public Sans",sans-serif;border:0;border-radius:8px;padding:8px 12px;cursor:pointer;background:var(--cyan);color:#fff;white-space:nowrap}
 button.b:hover{background:var(--cyan-d)}button.b:disabled{opacity:.5;cursor:default}
-button.s{background:#fff;color:var(--ink);border:1px solid var(--line)}button.s:hover{background:#f8fafc}
+button.s{background:#fff;color:var(--ink);border:1px solid var(--line)}button.s:hover{background:var(--soft)}
 button.g{background:#fff;border:1px solid var(--line);border-radius:8px;color:var(--gray);padding:6px 10px;font:600 13px "Public Sans",sans-serif;cursor:pointer}button.g:hover{background:#eef2f6;color:var(--ink)}
 .fila{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin-bottom:8px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 16px}
+.fila.foco{box-shadow:0 0 0 2px var(--cyan)}
 .cli{font-weight:700}.cli small{font-weight:400;color:var(--gray);margin-left:6px}
 .glosa{font-size:14px;color:#334155;grid-column:1}
 .monto{text-align:right;grid-row:1/3;grid-column:2}.monto b{font:800 17px Montserrat,sans-serif;display:block}.monto small{color:var(--gray);font-size:12px}
-.meta{font-size:12px;color:var(--gray);display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.meta{font-size:12px;color:var(--gray);display:flex;gap:6px;flex-wrap:wrap;align-items:center;grid-column:1/-1}
 .tag{border-radius:999px;padding:1px 9px;font-weight:600;font-size:12px}
-.t-por{background:var(--amber-bg);color:var(--amber)}.t-emi{background:var(--blue-bg);color:var(--cyan-d)}.t-pag{background:var(--green-bg);color:var(--green)}
+.t-por{background:var(--amber-bg);color:var(--amber)}.t-emi{background:var(--blue-bg);color:var(--cyan-d)}.t-pag{background:var(--green-bg);color:var(--green)}.t-gris{background:#eef2f6;color:var(--gray)}
+.oc{grid-column:1/-1;font-size:13px;background:var(--blue-bg);color:var(--cyan-d);border-radius:8px;padding:6px 10px;font-weight:600}
+.oc.falta{background:var(--amber-bg);color:var(--amber)}
+.docs{grid-column:1/-1;display:flex;gap:6px;flex-wrap:wrap;align-items:center;font-size:13px}
+.doc{border:1px solid var(--line);background:var(--soft);border-radius:8px;padding:4px 9px;cursor:pointer;font:500 13px "Public Sans",sans-serif;color:var(--ink)}
+.doc i{font-style:normal;color:var(--gray);font-size:11px;font-weight:700;text-transform:uppercase;margin-right:4px}
 .acc{grid-column:1/-1;display:flex;gap:8px;flex-wrap:wrap;align-items:center;border-top:1px solid var(--line);padding-top:10px;margin-top:4px}
-.acc input[type=text]{width:110px}.acc input[type=date]{width:150px}
+.acc input[type=text]{width:120px}.acc input[type=date]{width:150px}
 .acc .der{margin-left:auto;display:flex;gap:4px;flex-wrap:wrap}
-.notas{grid-column:1/-1;background:#f8fafc;border-radius:8px;padding:10px;font-size:14px}
+.panel{grid-column:1/-1;background:var(--soft);border-radius:8px;padding:10px;font-size:14px}
+.panel h4{margin:0 0 6px;font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:var(--gray)}
+.panel table{width:100%;border-collapse:collapse;font-size:13px}.panel td,.panel th{padding:5px 6px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}.panel th{color:var(--gray);font-weight:600}.panel .n{text-align:right;white-space:nowrap}
+.tabla{overflow-x:auto}
 .nota{margin-bottom:6px}.nota b{font-size:12px;color:var(--gray)}
-.notas form{display:flex;gap:6px;margin-top:6px}.notas form input{flex:1}
+.panel form{display:flex;gap:6px;margin-top:6px;flex-wrap:wrap}.panel form input[type=text],.panel form input:not([type]){flex:1;min-width:160px}
+.pasos{grid-column:1/-1;display:flex;gap:0;align-items:center;font-size:12px;font-weight:600;color:var(--gray);flex-wrap:wrap}
+.pasos span{display:flex;align-items:center;gap:5px;padding-right:10px}
+.pasos span::before{content:"";width:9px;height:9px;border-radius:50%;background:var(--line)}
+.pasos span.ok{color:var(--green)}.pasos span.ok::before{background:var(--green)}
+.pasos span.ya{color:var(--ink)}.pasos span.ya::before{background:var(--cyan);box-shadow:0 0 0 3px var(--blue-bg)}
 .nueva{background:var(--card);border:1px solid var(--cyan);border-radius:12px;padding:14px;margin-bottom:12px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
 .nueva label{font-size:12px;font-weight:600;color:var(--gray);display:flex;flex-direction:column;gap:4px}
 .nueva input,.nueva select,.nueva textarea{width:100%}.nueva .x2{grid-column:span 2}.nueva .x4{grid-column:1/-1}
@@ -53,8 +67,7 @@ button.g{background:#fff;border:1px solid var(--line);border-radius:8px;color:va
 #aviso{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:var(--ink);color:#fff;padding:10px 16px;border-radius:10px;font-size:14px;display:none;z-index:9;max-width:90vw}
 .bloq{max-width:420px;margin:60px auto;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:24px;text-align:center}
 .bloq h2{font:800 20px Montserrat,sans-serif;margin:0 0 6px}
-.bloq .opts{display:flex;gap:8px;justify-content:center;margin-top:14px;flex-wrap:wrap}
-@media (max-width:700px){.resumen{grid-template-columns:1fr 1fr 1fr}.kpi b{font-size:15px}.fila{grid-template-columns:1fr}.monto{grid-row:auto;grid-column:1;text-align:left}.nueva{grid-template-columns:1fr 1fr}.nueva .x2{grid-column:1/-1}.acc .der{margin-left:0}}
+@media (max-width:700px){.resumen[style*="--n:4"]{grid-template-columns:1fr 1fr}.kpi b{font-size:15px}.kpi{padding:10px}.fila{grid-template-columns:1fr}.monto{grid-row:auto;grid-column:1;text-align:left}.nueva{grid-template-columns:1fr 1fr}.nueva .x2{grid-column:1/-1}.acc .der{margin-left:0}}
 </style>
 </head>
 <body>
@@ -68,11 +81,9 @@ button.g{background:#fff;border:1px solid var(--line);border-radius:8px;color:va
   var sb = window.supabase.createClient('https://camuxwyvvldqlmsmfbju.supabase.co', 'sb_publishable_jeJlfqULfC7x6iUZrXjl8A_8zB5oVAm', { auth: { storageKey: 'nws-facturas-sesion', persistSession: true, autoRefreshToken: true } });
   var TOKEN = '';
   var app = document.getElementById('app');
-  var guardar = function (k, v) { try { localStorage.setItem(k, v); } catch (e) {} };
-  var leer = function (k) { try { return localStorage.getItem(k) || ''; } catch (e) { return ''; } };
-  var S = { filas: [], filtro: 'pend', q: '', abiertas: {}, nueva: false, quien: '' };
+  var S = { filas: [], cots: [], admin: false, filtro: 'pend', q: '', abiertas: {}, detalle: {}, nueva: false, quien: '', foco: null };
   var clp = function (n) { return '$' + Math.round(Number(n) || 0).toLocaleString('es-CL'); };
-  var fch = function (d) { return d ? d.slice(0, 10).split('-').reverse().join('-') : ''; };
+  var fch = function (d) { return d ? String(d).slice(0, 10).split('-').reverse().join('-') : ''; };
   var hoy = function () { var d = new Date(Date.now() - new Date().getTimezoneOffset() * 6e4); return d.toISOString().slice(0, 10); };
   var esc = function (s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); };
   function aviso(t) { var a = document.getElementById('aviso'); a.textContent = t; a.style.display = 'block'; clearTimeout(aviso.t); aviso.t = setTimeout(function () { a.style.display = 'none'; }, 3200); }
@@ -80,10 +91,19 @@ button.g{background:#fff;border:1px solid var(--line);border-radius:8px;color:va
     return fetch(API, { method: 'POST', headers: { 'content-type': 'application/json', authorization: 'Bearer ' + TOKEN }, body: JSON.stringify(Object.assign({ accion: accion }, datos || {})) })
       .then(function (r) { return r.json().then(function (j) { if (j.login) { login(j.error); throw new Error(j.error); } if (!r.ok) throw new Error(j.error || 'Error'); return j; }); });
   }
-  function cargar() { return api('lista').then(function (j) { S.filas = j.filas; pintar(); }).catch(function (e) { app.innerHTML = '<div class="bloq"><h2>No se pudo abrir</h2><p>' + esc(e.message) + '</p></div>'; }); }
+  function cargar() { return api('lista').then(function (j) { S.filas = j.filas || []; S.cots = j.cotizaciones || []; pintar(); }).catch(function (e) { if (S.quien) app.innerHTML = '<div class="bloq"><h2>No se pudo cargar</h2><p>' + esc(e.message) + '</p></div>'; }); }
+  function abrirUrl(p) { var w = window.open('', '_blank'); p.then(function (j) { if (w) w.location.href = j.url; else location.href = j.url; }, function (e) { if (w) w.close(); aviso(e.message); }); }
+  function elegirArchivo(accept, cb) { var i = document.createElement('input'); i.type = 'file'; if (accept) i.accept = accept; i.onchange = function () { if (i.files[0]) cb(i.files[0]); }; i.click(); }
+  function put(url, file) { return fetch(url, { method: 'PUT', headers: { 'content-type': file.type || 'application/octet-stream', 'x-upsert': 'false' }, body: file }).then(function (r) { if (!r.ok) throw new Error('No se pudo subir el archivo.'); }); }
+  function subirDoc(dueño, tipo, file, visible) {
+    var base = Object.assign({ tipo: tipo, nombre: file.name }, dueño);
+    return api('subir_doc', base).then(function (j) { return put(j.url, file).then(function () { return api('doc_listo', Object.assign({ path: j.path, visible_contador: visible }, base)); }); });
+  }
+
+  // ---------- Sesión ----------
   function pintarQuien() {
     document.getElementById('quien').innerHTML = S.quien ? esc(S.quien) + ' · <button id="salir">cerrar sesión</button>' : '';
-    var c = document.getElementById('salir'); if (c) c.onclick = function () { sb.auth.signOut().then(function () { S.quien = ''; TOKEN = ''; login(); }); };
+    var c = document.getElementById('salir'); if (c) c.onclick = function () { sb.auth.signOut().then(function () { TOKEN = ''; login(); }); };
   }
   function login(msg) {
     S.quien = ''; pintarQuien();
@@ -102,81 +122,159 @@ button.g{background:#fff;border:1px solid var(--line);border-radius:8px;color:va
       });
     };
   }
-  function entrar() {
-    api('yo').then(function (j) { S.quien = j.nombre; pintarQuien(); cargar(); }).catch(function () {});
-  }
-  function inicio() {
-    sb.auth.onAuthStateChange(function (ev, ses) { TOKEN = ses ? ses.access_token : ''; });
-    sb.auth.getSession().then(function (r) { var ses = r.data.session; if (ses) { TOKEN = ses.access_token; entrar(); } else login(); });
-  }
+  function entrar() { api('yo').then(function (j) { S.quien = j.nombre; S.admin = !!j.admin; if (S.admin && S.filtro === 'pend' && !entrar.ya) S.filtro = 'cot'; entrar.ya = 1; pintarQuien(); cargar(); }).catch(function () {}); }
+
+  // ---------- Vistas ----------
   function visibles() {
     var q = S.q.toLowerCase();
     return S.filas.filter(function (f) {
       if (S.filtro === 'pend' && f.estado === 'Pagada') return false;
       if (S.filtro === 'pag' && f.estado !== 'Pagada') return false;
-      return !q || [f.razon_social, f.glosa, f.folio, f.referencia, f.rut].join(' ').toLowerCase().indexOf(q) >= 0;
+      return !q || [f.razon_social, f.glosa, f.folio, f.referencia, f.rut, f.orden_compra].join(' ').toLowerCase().indexOf(q) >= 0;
     });
   }
   function textoSII(f) {
-    return ['Razón social: ' + f.razon_social, 'RUT: ' + (f.rut || 'pendiente'), f.orden_compra ? 'Orden de compra: ' + f.orden_compra : null, 'Forma de pago: ' + f.forma_pago,
-      'Glosa: ' + f.glosa, 'Neto: ' + clp(f.neto) + ' · IVA: ' + clp(f.iva) + ' · Total: ' + clp(f.total), f.referencia ? 'Referencia: ' + f.referencia : null].filter(Boolean).join('\n');
+    return ['Razón social: ' + f.razon_social, 'RUT: ' + (f.rut || 'pendiente'), 'Forma de pago: ' + f.forma_pago, 'Glosa: ' + f.glosa,
+      'Neto: ' + clp(f.neto) + ' · IVA: ' + clp(f.iva) + ' · Total: ' + clp(f.total),
+      f.orden_compra ? 'Referencia SII: Orden de Compra (801) N° ' + f.orden_compra + (f.oc_fecha ? ', fecha ' + fch(f.oc_fecha) : '') : null].filter(Boolean).join('\n');
+  }
+  function docsHtml(docs, dueño) {
+    return '<div class="docs">' + docs.map(function (d) { return '<button class="doc" data-doc="' + d.id + '" title="Subido por ' + esc(d.subido_por || '') + '"><i>' + esc(d.tipo) + '</i>' + esc(d.nombre) + (S.admin && !d.visible_contador ? ' 🔒' : '') + '</button>'; }).join('') +
+      '<button class="g" data-adj="' + esc(JSON.stringify(dueño)) + '">+ Adjuntar</button></div>';
   }
   function fila(f) {
     var tag = f.estado === 'Pagada' ? '<span class="tag t-pag">Pagada ' + fch(f.fecha_pago) + '</span>' : f.estado === 'Emitida' ? '<span class="tag t-emi">Facturada · folio ' + esc(f.folio) + '</span>' : '<span class="tag t-por">Por facturar</span>';
     var paso = f.estado === 'Por facturar'
       ? '<input type="text" inputmode="numeric" placeholder="N° folio" data-folio="' + f.id + '" aria-label="Folio"><input type="date" value="' + hoy() + '" data-fe="' + f.id + '" aria-label="Fecha de emisión"><button class="b" data-act="folio" data-id="' + f.id + '">Facturada</button>'
-      : f.estado === 'Emitida'
-        ? '<input type="date" value="' + hoy() + '" data-fp="' + f.id + '" aria-label="Fecha de pago"><button class="b" data-act="pagada" data-id="' + f.id + '">Marcar pagada</button>'
-        : '';
-    var n = f.notas.length, ult = f.notas[n - 1];
-    var notas = S.abiertas[f.id] ? '<div class="notas">' + (n ? f.notas.map(function (x) { return '<div class="nota"><b>' + esc(x.autor_nombre) + ' · ' + fch(x.created_at) + '</b><br>' + esc(x.texto) + '</div>'; }).join('') : '<div class="nota" style="color:var(--gray)">Sin notas.</div>') +
-      '<form data-nota="' + f.id + '"><input name="t" placeholder="Escribe una nota (ej.: falta OC, enviada al cliente)" autocomplete="off"><button class="b">Enviar</button></form></div>' : '';
-    return '<div class="fila"><div><div class="cli">' + esc(f.razon_social) + '<small>' + esc(f.rut || '') + '</small></div></div>' +
+      : f.estado === 'Emitida' ? '<input type="date" value="' + hoy() + '" data-fp="' + f.id + '" aria-label="Fecha de pago"><button class="b" data-act="pagada" data-id="' + f.id + '">Marcar pagada</button>' : '';
+    var n = f.notas.length, ult = f.notas[n - 1], ab = S.abiertas[f.id];
+    var oc = f.orden_compra ? '<div class="oc">OC N° ' + esc(f.orden_compra) + (f.oc_fecha ? ' del ' + fch(f.oc_fecha) : '') + ' · referenciarla en la factura</div>'
+      : (S.admin && f.estado === 'Por facturar' ? '<div class="oc falta">Sin OC · <input type="text" placeholder="N° OC" data-oc="' + f.id + '" style="width:110px;padding:3px 6px"> <input type="date" value="' + hoy() + '" data-ocf="' + f.id + '" style="width:140px;padding:3px 6px"> <button class="g" data-act="oc" data-id="' + f.id + '">Guardar OC</button></div>' : '');
+    var det = S.admin && f.cotizacion_id && S.detalle['c' + f.cotizacion_id] ? detalleHtml(S.detalle['c' + f.cotizacion_id]) : '';
+    return '<div class="fila' + (S.foco === f.id ? ' foco' : '') + '" id="pf-' + f.id + '"><div><div class="cli">' + esc(f.razon_social) + '<small>' + esc(f.rut || '') + '</small></div></div>' +
       '<div class="monto"><b>' + clp(f.total) + '</b><small>' + clp(f.neto) + ' + IVA</small></div>' +
       '<div class="glosa">' + esc(f.glosa) + '</div>' +
-      '<div class="meta">' + tag + '<span>' + esc(f.forma_pago) + '</span>' + (f.orden_compra ? '<span>· OC ' + esc(f.orden_compra) + '</span>' : '') + (f.referencia ? '<span>· ' + esc(f.referencia) + '</span>' : '') +
-      (f.fecha_emision ? '<span>· emitida ' + fch(f.fecha_emision) + '</span>' : '') + (ult && !S.abiertas[f.id] ? '<span>· <b>' + esc(ult.autor_nombre) + ':</b> ' + esc(ult.texto.slice(0, 60)) + '</span>' : '') + '</div>' +
+      '<div class="meta">' + tag + '<span>' + esc(f.forma_pago) + '</span>' + (S.admin && f.referencia ? '<span>· ' + esc(f.referencia) + '</span>' : '') +
+      (f.fecha_emision ? '<span>· emitida ' + fch(f.fecha_emision) + '</span>' : '') + (ult && !ab ? '<span>· <b>' + esc(ult.autor_nombre) + ':</b> ' + esc(ult.texto.slice(0, 60)) + '</span>' : '') + '</div>' +
+      oc + docsHtml(f.docs, { por_facturar_id: f.id }) +
       '<div class="acc">' + paso + '<div class="der">' +
-      (f.pdf ? '<button class="g" data-act="ver" data-id="' + f.id + '">Ver PDF</button>' : '') +
-      '<button class="g" data-act="pdf" data-id="' + f.id + '">' + (f.pdf ? 'Cambiar PDF' : 'Subir PDF') + '</button>' +
-      '<button class="g" data-act="copiar" data-id="' + f.id + '">Copiar datos</button>' +
+      (f.pdf ? '<button class="g" data-act="ver" data-id="' + f.id + '">Ver factura PDF</button>' : '') +
+      '<button class="g" data-act="pdf" data-id="' + f.id + '">' + (f.pdf ? 'Cambiar PDF factura' : 'Subir PDF factura') + '</button>' +
+      '<button class="g" data-act="copiar" data-id="' + f.id + '">Copiar datos SII</button>' +
       '<button class="g" data-act="notas" data-id="' + f.id + '">Notas' + (n ? ' (' + n + ')' : '') + '</button>' +
-      (f.estado === 'Por facturar' ? '<button class="g" data-act="quitar" data-id="' + f.id + '">Quitar</button>' : '') +
-      '</div></div>' + notas + '</div>';
+      (S.admin && f.cotizacion_id ? '<button class="g" data-vercot="' + f.cotizacion_id + '">' + (det ? 'Ocultar cotización' : 'Ver cotización') + '</button>' : '') +
+      (S.admin && f.estado === 'Por facturar' ? '<button class="g" data-act="quitar" data-id="' + f.id + '">Quitar</button>' : '') +
+      '</div></div>' + det +
+      (ab ? '<div class="panel"><h4>Notas</h4>' + (n ? f.notas.map(function (x) { return '<div class="nota"><b>' + esc(x.autor_nombre) + ' · ' + fch(x.created_at) + '</b><br>' + esc(x.texto) + '</div>'; }).join('') : '<div class="nota" style="color:var(--gray)">Sin notas.</div>') +
+        '<form data-nota="' + f.id + '"><input name="t" placeholder="Escribe una nota (ej.: falta OC, enviada al cliente)" autocomplete="off"><button class="b">Enviar</button></form></div>' : '') + '</div>';
+  }
+  function detalleHtml(d) {
+    if (d === 'cargando') return '<div class="panel">Cargando cotización…</div>';
+    var c = d.cotizacion || {};
+    return '<div class="panel"><h4>Cotización ' + esc(c.numero_cotizacion) + ' · ' + fch(c.fecha) + ' · ' + esc(c.estado) + '</h4><div class="tabla"><table><tr><th>Ítem</th><th class="n">Cant.</th><th class="n">Unit.</th><th class="n">Total</th></tr>' +
+      d.items.map(function (i) { return '<tr><td>' + esc(i.descripcion) + '</td><td class="n">' + esc(i.cantidad) + '</td><td class="n">' + clp(i.valor_unitario) + '</td><td class="n">' + clp(i.subtotal) + '</td></tr>'; }).join('') +
+      '<tr><td colspan="3" class="n">Neto</td><td class="n"><b>' + clp(c.subtotal) + '</b></td></tr><tr><td colspan="3" class="n">IVA</td><td class="n">' + clp(c.impuesto) + '</td></tr><tr><td colspan="3" class="n">Total</td><td class="n"><b>' + clp(c.total) + '</b></td></tr></table></div>' +
+      (c.observaciones ? '<p style="white-space:pre-wrap;color:var(--gray);font-size:13px;margin:8px 0 0">' + esc(c.observaciones) + '</p>' : '') + '</div>';
+  }
+  function cotCard(c) {
+    var pf = c.pf && S.filas.find(function (f) { return f.id === c.pf; });
+    var apr = c.estado === 'Aceptada' || !!pf, oc = pf && pf.orden_compra, fac = pf && (pf.estado === 'Emitida' || pf.estado === 'Pagada'), pag = pf && pf.estado === 'Pagada';
+    var pasos = [['Cotizada', true], ['Aprobada', apr], ['OC', oc || (pf && !oc && fac)], ['Facturada', fac], ['Pagada', pag]];
+    var actual = pasos.findIndex(function (p) { return !p[1]; });
+    var paso;
+    if (!apr) paso = '<button class="b" data-cact="aprobar" data-id="' + c.id + '">Marcar aprobada</button><span style="color:var(--gray);font-size:13px">Estado en el ERP: ' + esc(c.estado) + '</span>';
+    else if (!pf) paso = '<input type="text" placeholder="N° OC" data-coc="' + c.id + '"><input type="date" value="' + hoy() + '" data-cocf="' + c.id + '" aria-label="Fecha OC"><button class="b" data-cact="oc" data-id="' + c.id + '">Llegó la OC</button><button class="g" data-cact="sinoc" data-id="' + c.id + '">Facturar sin OC</button>';
+    else paso = '<span class="tag ' + (pag ? 't-pag' : fac ? 't-emi' : 't-por') + '">' + (pag ? 'Pagada ' + fch(pf.fecha_pago) : fac ? 'Facturada · folio ' + esc(pf.folio) : 'En «Por facturar»' + (oc ? ' · OC ' + esc(pf.orden_compra) : '')) + '</span><button class="g" data-ir="' + pf.id + '">Ir a la factura</button>';
+    var det = S.detalle['c' + c.id];
+    return '<div class="fila"><div><div class="cli">' + esc(c.numero_cotizacion) + ' · ' + esc(c.cliente) + '<small>' + fch(c.fecha) + '</small></div></div>' +
+      '<div class="monto"><b>' + clp(c.total) + '</b><small>' + clp(c.subtotal) + ' + IVA</small></div>' +
+      '<div class="glosa">' + esc(String(c.project_description || '').split('\n')[0]) + '</div>' +
+      '<div class="pasos">' + pasos.map(function (p, i) { return '<span class="' + (p[1] ? 'ok' : i === actual ? 'ya' : '') + '">' + p[0] + '</span>'; }).join('') + '</div>' +
+      docsHtml(c.docs, { cotizacion_id: c.id }) +
+      '<div class="acc">' + paso + '<div class="der"><button class="g" data-vercot="' + c.id + '">' + (det ? 'Ocultar detalle' : 'Ver detalle') + '</button></div></div>' +
+      (det ? detalleHtml(det) : '') + '</div>';
   }
   function pintar() {
     var por = S.filas.filter(function (f) { return f.estado === 'Por facturar'; }), emi = S.filas.filter(function (f) { return f.estado === 'Emitida'; });
     var mes = hoy().slice(0, 7), pag = S.filas.filter(function (f) { return f.estado === 'Pagada' && String(f.fecha_pago).slice(0, 7) === mes; });
     var suma = function (l) { return clp(l.reduce(function (s, f) { return s + Number(f.total); }, 0)); };
-    var v = visibles();
+    var espera = S.cots.filter(function (c) { return !c.pf && c.estado === 'Aceptada'; });
+    var q = S.q.toLowerCase();
+    var cots = S.cots.filter(function (c) { return !q || [c.numero_cotizacion, c.cliente, c.project_description].join(' ').toLowerCase().indexOf(q) >= 0; });
+    var chips = (S.admin ? [['cot', 'Cotizaciones']] : []).concat([['pend', 'Por facturar y cobrar'], ['pag', 'Pagadas'], ['todas', 'Todas']]);
     app.innerHTML =
-      '<div class="resumen"><div class="kpi"><span>Por facturar (' + por.length + ')</span><b>' + suma(por) + '</b></div><div class="kpi"><span>Por cobrar (' + emi.length + ')</span><b>' + suma(emi) + '</b></div><div class="kpi"><span>Pagado este mes</span><b>' + suma(pag) + '</b></div></div>' +
-      '<div class="barra"><button class="chip" data-f="pend" aria-pressed="' + (S.filtro === 'pend') + '">Pendientes</button><button class="chip" data-f="pag" aria-pressed="' + (S.filtro === 'pag') + '">Pagadas</button><button class="chip" data-f="todas" aria-pressed="' + (S.filtro === 'todas') + '">Todas</button>' +
-      '<input type="search" id="q" placeholder="Buscar cliente, folio, glosa…" value="' + esc(S.q) + '"><button class="b" id="nueva">+ Agregar factura</button></div>' +
-      (S.nueva ? '<form class="nueva" id="fnueva"><label class="x2">Cliente (razón social)<input name="razon_social" required list="clientes"></label><label>RUT<input name="rut" placeholder="88.446.500-1"></label><label>Forma de pago<select name="forma_pago"><option>Contado</option><option selected>30 días</option><option>45 días</option><option>60 días</option></select></label>' +
-        '<label class="x4">Glosa (lo que dice la factura)<textarea name="glosa" rows="2" required></textarea></label><label>Neto $<input name="neto" type="number" min="1" required inputmode="numeric"></label><label>OC<input name="orden_compra"></label><label class="x2">Referencia<input name="referencia" placeholder="N° cotización, contrato"></label>' +
-        '<div class="x4" style="display:flex;gap:8px;justify-content:flex-end"><button type="button" class="b s" id="cancelar">Cancelar</button><button class="b">Agregar</button></div>' +
-        '<datalist id="clientes">' + Array.from(new Set(S.filas.map(function (f) { return f.razon_social; }))).map(function (c) { return '<option value="' + esc(c) + '">'; }).join('') + '</datalist></form>' : '') +
-      (v.length ? v.map(fila).join('') : '<p class="vacio">' + (S.filtro === 'pag' ? 'Aún no hay facturas pagadas.' : 'No hay nada pendiente. 🎉') + '</p>');
+      '<div class="resumen" style="--n:' + (S.admin ? 4 : 3) + '">' + (S.admin ? '<div class="kpi"><span>Aprobadas sin facturar (' + espera.length + ')</span><b>' + suma(espera) + '</b></div>' : '') +
+      '<div class="kpi"><span>Por facturar (' + por.length + ')</span><b>' + suma(por) + '</b></div><div class="kpi"><span>Por cobrar (' + emi.length + ')</span><b>' + suma(emi) + '</b></div><div class="kpi"><span>Pagado este mes</span><b>' + suma(pag) + '</b></div></div>' +
+      '<div class="barra">' + chips.map(function (c) { return '<button class="chip" data-f="' + c[0] + '" aria-pressed="' + (S.filtro === c[0]) + '">' + c[1] + '</button>'; }).join('') +
+      '<input type="search" id="q" placeholder="Buscar cliente, folio, OC…" value="' + esc(S.q) + '">' + (S.admin ? '<button class="b" id="nueva">+ Factura sin cotización</button>' : '') + '</div>' +
+      (S.nueva ? formNueva() : '') +
+      (S.filtro === 'cot'
+        ? (cots.length ? cots.map(cotCard).join('') : '<p class="vacio">No hay cotizaciones.</p>')
+        : (visibles().length ? visibles().map(fila).join('') : '<p class="vacio">' + (S.filtro === 'pag' ? 'Aún no hay facturas pagadas.' : 'No hay nada pendiente.') + '</p>'));
     enlazar();
+    if (S.foco) { var el = document.getElementById('pf-' + S.foco); if (el) el.scrollIntoView({ block: 'center' }); S.foco = null; }
+  }
+  function formNueva() {
+    return '<form class="nueva" id="fnueva"><label class="x2">Cliente (razón social)<input name="razon_social" required list="clientes"></label><label>RUT<input name="rut" placeholder="88.446.500-1"></label><label>Forma de pago<select name="forma_pago"><option>Contado</option><option selected>30 días</option><option>45 días</option><option>60 días</option></select></label>' +
+      '<label class="x4">Glosa (lo que dice la factura)<textarea name="glosa" rows="2" required></textarea></label><label>Neto $<input name="neto" type="number" min="1" required inputmode="numeric"></label><label>N° OC<input name="orden_compra"></label><label>Fecha OC<input name="oc_fecha" type="date"></label><label>Referencia<input name="referencia" placeholder="Contrato, EP"></label>' +
+      '<div class="x4" style="display:flex;gap:8px;justify-content:flex-end"><button type="button" class="b s" id="cancelar">Cancelar</button><button class="b">Agregar</button></div>' +
+      '<datalist id="clientes">' + Array.from(new Set(S.filas.map(function (f) { return f.razon_social; }))).map(function (c) { return '<option value="' + esc(c) + '">'; }).join('') + '</datalist></form>';
+  }
+  function verCot(id) {
+    var k = 'c' + id;
+    if (S.detalle[k]) { delete S.detalle[k]; pintar(); return; }
+    S.detalle[k] = 'cargando'; pintar();
+    api('cotizacion', { id: id }).then(function (j) { S.detalle[k] = j; pintar(); }, function (e) { delete S.detalle[k]; aviso(e.message); pintar(); });
   }
   function enlazar() {
     app.querySelectorAll('[data-f]').forEach(function (b) { b.onclick = function () { S.filtro = b.dataset.f; pintar(); }; });
     var q = document.getElementById('q'); q.oninput = function () { S.q = q.value; var p = q.selectionStart; pintar(); var n = document.getElementById('q'); n.focus(); n.setSelectionRange(p, p); };
-    document.getElementById('nueva').onclick = function () { S.nueva = !S.nueva; pintar(); };
+    var nb = document.getElementById('nueva'); if (nb) nb.onclick = function () { S.nueva = !S.nueva; pintar(); };
     var fn = document.getElementById('fnueva');
     if (fn) {
       document.getElementById('cancelar').onclick = function () { S.nueva = false; pintar(); };
       fn.onsubmit = function (e) {
         e.preventDefault(); var d = Object.fromEntries(new FormData(fn));
-        var rut = S.filas.find(function (f) { return f.razon_social === d.razon_social && f.rut; }); if (!d.rut && rut) d.rut = rut.rut;
-        api('agregar', d).then(function () { S.nueva = false; aviso('Agregada a «Por facturar».'); cargar(); }).catch(function (e) { aviso(e.message); });
+        var r = S.filas.find(function (f) { return f.razon_social === d.razon_social && f.rut; }); if (!d.rut && r) d.rut = r.rut;
+        api('agregar', d).then(function () { S.nueva = false; S.filtro = 'pend'; aviso('Agregada a «Por facturar».'); cargar(); }).catch(function (e) { aviso(e.message); });
       };
     }
     app.querySelectorAll('form[data-nota]').forEach(function (f) {
-      f.onsubmit = function (e) {
-        e.preventDefault(); var t = f.t.value.trim(); if (!t) return;
-        api('nota', { id: f.dataset.nota, texto: t }).then(function () { aviso('Nota guardada.'); cargar(); }).catch(function (e) { aviso(e.message); });
+      f.onsubmit = function (e) { e.preventDefault(); var t = f.t.value.trim(); if (!t) return; api('nota', { id: f.dataset.nota, texto: t }).then(function () { aviso('Nota guardada.'); cargar(); }).catch(function (e) { aviso(e.message); }); };
+    });
+    app.querySelectorAll('[data-doc]').forEach(function (b) { b.onclick = function () { abrirUrl(api('ver_doc', { id: b.dataset.doc })); }; });
+    app.querySelectorAll('[data-vercot]').forEach(function (b) { b.onclick = function () { verCot(b.dataset.vercot); }; });
+    app.querySelectorAll('[data-ir]').forEach(function (b) { b.onclick = function () { S.filtro = 'todas'; S.foco = b.dataset.ir; pintar(); }; });
+    app.querySelectorAll('[data-adj]').forEach(function (b) {
+      b.onclick = function () {
+        var dueño = JSON.parse(b.dataset.adj);
+        var tipos = S.admin ? (dueño.cotizacion_id ? ['OC', 'Cotización', 'Respaldo'] : ['OC', 'Factura', 'Respaldo', 'Cotización']) : ['Factura', 'Respaldo'];
+        var box = document.createElement('span');
+        box.innerHTML = '<select aria-label="Tipo de documento">' + tipos.map(function (t) { return '<option>' + t + '</option>'; }).join('') + '</select>' +
+          (S.admin ? ' <label style="font-size:12px;color:var(--gray)"><input type="checkbox" checked> lo ve el contador</label>' : '') + ' <button class="b">Elegir archivo</button>';
+        b.replaceWith(box);
+        var sel = box.querySelector('select'), chk = box.querySelector('input[type=checkbox]');
+        sel.onchange = function () { if (chk) chk.checked = sel.value !== 'Cotización'; };
+        box.querySelector('button').onclick = function () {
+          elegirArchivo('application/pdf,image/*,.xlsx,.xls,.doc,.docx', function (file) {
+            aviso('Subiendo ' + file.name + '…');
+            subirDoc(dueño, sel.value, file, chk ? chk.checked : true).then(function () { aviso('Documento adjuntado.'); cargar(); }, function (e) { aviso(e.message); });
+          });
+        };
+      };
+    });
+    app.querySelectorAll('[data-cact]').forEach(function (b) {
+      b.onclick = function () {
+        var id = b.dataset.id, act = b.dataset.cact, ok = function (t) { return function () { aviso(t); cargar(); }; }, mal = function (e) { b.disabled = false; aviso(e.message); };
+        b.disabled = true;
+        if (act === 'aprobar') api('aprobar', { id: id }).then(ok('Cotización aprobada. Ahora registra la OC cuando llegue.'), mal);
+        if (act === 'sinoc') api('facturar_sin_oc', { cotizacion_id: id }).then(ok('Pasó a «Por facturar».'), mal);
+        if (act === 'oc') {
+          var n = app.querySelector('[data-coc="' + id + '"]').value.trim(); if (!n) { b.disabled = false; aviso('Escribe el N° de OC.'); return; }
+          api('registrar_oc', { cotizacion_id: id, orden_compra: n, oc_fecha: app.querySelector('[data-cocf="' + id + '"]').value }).then(function (j) {
+            aviso('OC registrada. Pasó a «Por facturar». Adjunta el PDF de la OC con «+ Adjuntar».'); cargar();
+          }, mal);
+        }
       };
     });
     app.querySelectorAll('[data-act]').forEach(function (b) {
@@ -189,26 +287,27 @@ button.g{background:#fff;border:1px solid var(--line);border-radius:8px;color:va
           var folio = app.querySelector('[data-folio="' + id + '"]').value.trim(); if (!folio) { aviso('Escribe el N° de folio.'); return; }
           b.disabled = true; api('folio', { id: id, folio: folio, fecha_emision: app.querySelector('[data-fe="' + id + '"]').value }).then(hecho('Factura ' + folio + ' registrada.'), mal); return;
         }
+        if (act === 'oc') {
+          var n = app.querySelector('[data-oc="' + id + '"]').value.trim(); if (!n) { aviso('Escribe el N° de OC.'); return; }
+          b.disabled = true; api('registrar_oc', { pf: id, orden_compra: n, oc_fecha: app.querySelector('[data-ocf="' + id + '"]').value }).then(hecho('OC guardada.'), mal); return;
+        }
         if (act === 'pagada') { b.disabled = true; api('pagada', { id: id, fecha_pago: app.querySelector('[data-fp="' + id + '"]').value }).then(hecho('Marcada como pagada.'), mal); return; }
         if (act === 'quitar') {
           if (b.dataset.ok) { b.disabled = true; api('anular', { id: id }).then(hecho('Quitada de la lista.'), mal); return; }
           b.dataset.ok = '1'; b.textContent = '¿Seguro? Quitar'; b.style.color = 'var(--red)'; return;
         }
-        if (act === 'ver') { var w = window.open('', '_blank'); api('ver_pdf', { id: id }).then(function (j) { if (w) w.location.href = j.url; else location.href = j.url; }, function (e) { if (w) w.close(); aviso(e.message); }); return; }
+        if (act === 'ver') { abrirUrl(api('ver_pdf', { id: id })); return; }
         if (act === 'pdf') {
-          var inp = document.createElement('input'); inp.type = 'file'; inp.accept = 'application/pdf';
-          inp.onchange = function () {
-            var file = inp.files[0]; if (!file) return; aviso('Subiendo PDF…');
-            api('subir_pdf', { id: id }).then(function (j) {
-              return fetch(j.url, { method: 'PUT', headers: { 'content-type': 'application/pdf', 'x-upsert': 'false' }, body: file }).then(function (r) { if (!r.ok) throw new Error('No se pudo subir el PDF.'); return api('pdf_listo', { id: id, path: j.path }); });
-            }).then(hecho('PDF subido.'), mal);
-          };
-          inp.click();
+          elegirArchivo('application/pdf', function (file) {
+            aviso('Subiendo PDF…');
+            api('subir_pdf', { id: id }).then(function (j) { return put(j.url, file).then(function () { return api('pdf_listo', { id: id, path: j.path }); }); }).then(hecho('PDF de la factura subido.'), mal);
+          });
         }
       };
     });
   }
-  inicio();
+  sb.auth.onAuthStateChange(function (ev, ses) { TOKEN = ses ? ses.access_token : ''; });
+  sb.auth.getSession().then(function (r) { var ses = r.data.session; if (ses) { TOKEN = ses.access_token; entrar(); } else login(); });
 })();
 </script>
 </body>
