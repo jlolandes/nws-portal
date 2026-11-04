@@ -190,6 +190,7 @@ button.g{background:#fff;border:1px solid var(--line);border-radius:8px;color:va
       '<div class="monto"><b>' + clp(c.total) + '</b><small>' + clp(c.subtotal) + ' + IVA</small></div>' +
       '<div class="glosa">' + esc(String(c.project_description || '').split('\n')[0]) + '</div>' +
       '<div class="pasos">' + pasos.map(function (p, i) { return '<span class="' + (p[1] ? 'ok' : i === actual ? 'ya' : '') + '">' + p[0] + '</span>'; }).join('') + '</div>' +
+      ((c.estados || []).length ? '<div class="meta">' + c.estados.map(function (e) { return esc(e.estado) + ' ' + fch(e.fecha); }).join(' → ') + (c.estado === 'Enviada' ? ' · <b>' + Math.floor((Date.now() - new Date(c.estados[c.estados.length - 1].fecha)) / 864e5) + ' días esperando respuesta</b>' : '') + '</div>' : '') +
       docsHtml(c.docs, { cotizacion_id: c.id }) +
       '<div class="acc">' + paso + '<div class="der"><button class="g" data-vercot="' + c.id + '">' + (det ? 'Ocultar detalle' : 'Ver detalle') + '</button></div></div>' +
       (det ? detalleHtml(det) : '') + '</div>';
