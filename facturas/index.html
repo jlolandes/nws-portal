@@ -61,37 +61,53 @@ button.g{background:#fff;border:1px solid var(--line);border-radius:8px;color:va
 <header><div class="wrap top"><img src="../sinthesi-cctv/logo.png" alt="NWS"><h1>Facturas</h1><div class="quien" id="quien"></div></div></header>
 <main class="wrap" id="app"><p class="vacio">Cargando…</p></main>
 <div id="aviso" role="status"></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
 <script>
 (function () {
   var API = 'https://camuxwyvvldqlmsmfbju.supabase.co/functions/v1/facturas-contador';
-  var K = (location.hash.match(/k=([\w-]+)/) || [])[1] || '';
+  var sb = window.supabase.createClient('https://camuxwyvvldqlmsmfbju.supabase.co', 'sb_publishable_jeJlfqULfC7x6iUZrXjl8A_8zB5oVAm', { auth: { storageKey: 'nws-facturas-sesion', persistSession: true, autoRefreshToken: true } });
+  var TOKEN = '';
   var app = document.getElementById('app');
   var guardar = function (k, v) { try { localStorage.setItem(k, v); } catch (e) {} };
   var leer = function (k) { try { return localStorage.getItem(k) || ''; } catch (e) { return ''; } };
-  var S = { filas: [], filtro: 'pend', q: '', abiertas: {}, nueva: false, quien: leer('nws-fact-quien') };
+  var S = { filas: [], filtro: 'pend', q: '', abiertas: {}, nueva: false, quien: '' };
   var clp = function (n) { return '$' + Math.round(Number(n) || 0).toLocaleString('es-CL'); };
   var fch = function (d) { return d ? d.slice(0, 10).split('-').reverse().join('-') : ''; };
   var hoy = function () { var d = new Date(Date.now() - new Date().getTimezoneOffset() * 6e4); return d.toISOString().slice(0, 10); };
   var esc = function (s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); };
   function aviso(t) { var a = document.getElementById('aviso'); a.textContent = t; a.style.display = 'block'; clearTimeout(aviso.t); aviso.t = setTimeout(function () { a.style.display = 'none'; }, 3200); }
   function api(accion, datos) {
-    return fetch(API, { method: 'POST', headers: { 'content-type': 'application/json', 'x-clave': K }, body: JSON.stringify(Object.assign({ accion: accion, quien: S.quien }, datos || {})) })
-      .then(function (r) { return r.json().then(function (j) { if (!r.ok) throw new Error(j.error || 'Error'); return j; }); });
+    return fetch(API, { method: 'POST', headers: { 'content-type': 'application/json', authorization: 'Bearer ' + TOKEN }, body: JSON.stringify(Object.assign({ accion: accion }, datos || {})) })
+      .then(function (r) { return r.json().then(function (j) { if (j.login) { login(j.error); throw new Error(j.error); } if (!r.ok) throw new Error(j.error || 'Error'); return j; }); });
   }
   function cargar() { return api('lista').then(function (j) { S.filas = j.filas; pintar(); }).catch(function (e) { app.innerHTML = '<div class="bloq"><h2>No se pudo abrir</h2><p>' + esc(e.message) + '</p></div>'; }); }
   function pintarQuien() {
-    document.getElementById('quien').innerHTML = S.quien ? 'Hola, ' + esc(S.quien) + ' · <button id="cambiar">cambiar</button>' : '';
-    var c = document.getElementById('cambiar'); if (c) c.onclick = function () { S.quien = ''; guardar('nws-fact-quien', ''); inicio(); };
+    document.getElementById('quien').innerHTML = S.quien ? esc(S.quien) + ' · <button id="salir">cerrar sesión</button>' : '';
+    var c = document.getElementById('salir'); if (c) c.onclick = function () { sb.auth.signOut().then(function () { S.quien = ''; TOKEN = ''; login(); }); };
+  }
+  function login(msg) {
+    S.quien = ''; pintarQuien();
+    app.innerHTML = '<form class="bloq" id="flogin"><h2>Facturas NWS</h2><p style="color:var(--gray);margin:0 0 14px">Entra con tu cuenta.</p>' +
+      (msg && msg !== 'Inicia sesión.' ? '<p style="color:var(--red)">' + esc(msg) + '</p>' : '') +
+      '<div style="display:grid;gap:10px;text-align:left"><label style="font-size:13px;font-weight:600;color:var(--gray)">Correo<input name="email" type="email" autocomplete="username" required style="width:100%;margin-top:4px"></label>' +
+      '<label style="font-size:13px;font-weight:600;color:var(--gray)">Clave<input name="password" type="password" autocomplete="current-password" required style="width:100%;margin-top:4px"></label>' +
+      '<button class="b" style="padding:11px">Entrar</button><p id="lerr" style="color:var(--red);margin:0;font-size:14px"></p>' +
+      '<p style="color:var(--gray);font-size:13px;margin:0">¿Olvidaste tu clave? Pídele a Jerry que te la restablezca.</p></div></form>';
+    var f = document.getElementById('flogin');
+    f.onsubmit = function (e) {
+      e.preventDefault(); var btn = f.querySelector('button'); btn.disabled = true; btn.textContent = 'Entrando…';
+      sb.auth.signInWithPassword({ email: f.email.value.trim(), password: f.password.value }).then(function (r) {
+        if (r.error) { btn.disabled = false; btn.textContent = 'Entrar'; document.getElementById('lerr').textContent = /invalid/i.test(r.error.message) ? 'Correo o clave incorrectos.' : r.error.message; return; }
+        TOKEN = r.data.session.access_token; entrar();
+      });
+    };
+  }
+  function entrar() {
+    api('yo').then(function (j) { S.quien = j.nombre; pintarQuien(); cargar(); }).catch(function () {});
   }
   function inicio() {
-    pintarQuien();
-    if (!K) { app.innerHTML = '<div class="bloq"><h2>Link incompleto</h2><p>Abre el link completo que te envió NWS.</p></div>'; return; }
-    if (!S.quien) {
-      app.innerHTML = '<div class="bloq"><h2>¿Quién eres?</h2><p>Para firmar las notas y los cambios.</p><div class="opts"><button class="b" data-q="Jerry">Jerry</button><button class="b" data-q="Contador">Contador</button></div></div>';
-      app.querySelectorAll('[data-q]').forEach(function (b) { b.onclick = function () { S.quien = b.dataset.q; guardar('nws-fact-quien', S.quien); pintarQuien(); cargar(); }; });
-      return;
-    }
-    cargar();
+    sb.auth.onAuthStateChange(function (ev, ses) { TOKEN = ses ? ses.access_token : ''; });
+    sb.auth.getSession().then(function (r) { var ses = r.data.session; if (ses) { TOKEN = ses.access_token; entrar(); } else login(); });
   }
   function visibles() {
     var q = S.q.toLowerCase();
