@@ -178,11 +178,13 @@ button.g{background:#fff;border:1px solid var(--line);border-radius:8px;color:va
   }
   function cotCard(c) {
     var pf = c.pf && S.filas.find(function (f) { return f.id === c.pf; });
-    var apr = c.estado === 'Aceptada' || !!pf, oc = pf && pf.orden_compra, fac = pf && (pf.estado === 'Emitida' || pf.estado === 'Pagada'), pag = pf && pf.estado === 'Pagada';
+    var occ = c.oc_correo, fe = !pf && c.factura, apr = c.estado === 'Aceptada' || !!pf || !!occ || !!fe, oc = (pf && pf.orden_compra) || (occ && occ.orden_compra), fac = (pf && (pf.estado === 'Emitida' || pf.estado === 'Pagada')) || !!fe, pag = (pf && pf.estado === 'Pagada') || (fe && /pagad/i.test(fe.estado_pago || ''));
     var pasos = [['Cotizada', true], ['Aprobada', apr], ['OC', oc || (pf && !oc && fac)], ['Facturada', fac], ['Pagada', pag]];
     var actual = pasos.findIndex(function (p) { return !p[1]; });
     var paso;
     if (!apr) paso = '<button class="b" data-cact="aprobar" data-id="' + c.id + '">Marcar aprobada</button><span style="color:var(--gray);font-size:13px">Estado en el ERP: ' + esc(c.estado) + '</span>';
+    else if (fe) paso = '<span class="tag ' + (pag ? 't-pag' : 't-emi') + '">' + (pag ? 'Pagada' : 'Facturada') + ' · factura ' + esc(fe.numero_factura) + (oc ? ' · OC ' + esc(oc) : '') + '</span><span style="color:var(--gray);font-size:13px">Registrada en Cobranza del ERP</span>';
+    else if (!pf && occ) paso = '<span class="tag t-emi">OC ' + esc(occ.orden_compra) + (occ.oc_fecha ? ' del ' + fch(occ.oc_fecha) : '') + ' · recibida por correo</span><input type="hidden" data-coc="' + c.id + '" value="' + esc(occ.orden_compra) + '"><input type="hidden" data-cocf="' + c.id + '" value="' + esc(occ.oc_fecha || hoy()) + '"><button class="g" data-cact="oc" data-id="' + c.id + '">Pasar a «Por facturar»</button>';
     else if (!pf) paso = '<input type="text" placeholder="N° OC" data-coc="' + c.id + '"><input type="date" value="' + hoy() + '" data-cocf="' + c.id + '" aria-label="Fecha OC"><button class="b" data-cact="oc" data-id="' + c.id + '">Llegó la OC</button><button class="g" data-cact="sinoc" data-id="' + c.id + '">Facturar sin OC</button>';
     else paso = '<span class="tag ' + (pag ? 't-pag' : fac ? 't-emi' : 't-por') + '">' + (pag ? 'Pagada ' + fch(pf.fecha_pago) : fac ? 'Facturada · folio ' + esc(pf.folio) : 'En «Por facturar»' + (oc ? ' · OC ' + esc(pf.orden_compra) : '')) + '</span><button class="g" data-ir="' + pf.id + '">Ir a la factura</button>';
     var det = S.detalle['c' + c.id];
