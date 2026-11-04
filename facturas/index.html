@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="robots" content="noindex,nofollow">
 <meta name="referrer" content="no-referrer">
-<meta name="theme-color" content="#0b1f3a">
+<meta name="theme-color" content="#0a3d62">
 <title>Facturas NWS</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Public+Sans:wght@400;500;600;700&display=swap">
@@ -18,15 +18,32 @@
 :root[data-theme="dark"]{--bg:#0e1622;--card:#152131;--soft:#1b2a3d;--ink:#eef2f7;--ink2:#cfd8e3;--gray:#9fb0c4;--muted:#7d8ea3;--line:#26364b;--cyan:#38b6ee;--cyan-d:#7cd0f5;
 --s1:#3987e5;--s2:#d95926;--s3:#199e70;--s4:#c98500;--good:#4ade80;--good-bg:#12352a;--warn:#fbbf24;--warn-bg:#3a2c10;--bad:#f87171;--bad-bg:#3b1a1a;--info:#7cd0f5;--info-bg:#12304a;color-scheme:dark}
 *{box-sizing:border-box}
-header{background:linear-gradient(90deg,#0a3d62,#0e8fc7)!important}
+header{background:linear-gradient(100deg,#082f4d,#0a3d62 35%,#0e8fc7 75%,#38b6ee)!important;background-size:220% 100%!important;animation:cielo 14s ease-in-out infinite alternate;box-shadow:0 6px 24px rgba(10,61,98,.25);padding-top:14px!important;padding-bottom:14px!important}
+@keyframes cielo{from{background-position:0 0}to{background-position:100% 0}}
+@keyframes sube{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@keyframes crece{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+@keyframes ancho{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes entra{from{opacity:0;transform:translateY(10px) scale(.98)}to{opacity:1;transform:none}}
+.entra .ttl,.entra .filtros,.entra .kpi,.entra .panel,.entra .fila,.entra .alerta{animation:sube .55s cubic-bezier(.2,.7,.2,1) both;animation-delay:calc(var(--i,0) * 50ms)}
+.entra .chart path{transform-box:fill-box;transform-origin:50% 100%;animation:crece .8s cubic-bezier(.2,.7,.2,1) both;animation-delay:calc(250ms + var(--j,0) * 25ms)}
+.entra .ht i{transform-origin:0 50%;animation:ancho .9s cubic-bezier(.2,.7,.2,1) both;animation-delay:calc(250ms + var(--j,0) * 60ms)}
+.bloq{animation:entra .5s cubic-bezier(.2,.7,.2,1) both}
+.kpi,.panel,.fila{transition:transform .2s,box-shadow .2s,border-color .2s}
+.kpi:hover,.panel:hover{transform:translateY(-2px);box-shadow:0 10px 26px rgba(10,61,98,.12);border-color:rgba(14,143,199,.45)}
+.fila:hover{box-shadow:0 8px 22px rgba(10,61,98,.10);border-color:rgba(14,143,199,.4)}
+nav button{transition:background .2s,color .2s,transform .15s}nav button:hover{transform:translateX(3px)}
+button.b,button.g,.seg button{transition:background .15s,color .15s,transform .1s,box-shadow .15s}button.b:hover{box-shadow:0 4px 12px rgba(14,143,199,.35)}button.b:active,button.g:active{transform:scale(.97)}
+.cargando::after{content:"";display:block;width:34px;height:34px;margin:14px auto 0;border-radius:50%;border:3px solid var(--line);border-top-color:var(--cyan);animation:gira .8s linear infinite}
+@keyframes gira{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 nav button[aria-current=page]{background:#0a3d62!important;color:#fff!important}nav button[aria-current=page] .n{background:rgba(255,255,255,.2)!important;color:#fff!important}
 .kpi{border-top:4px solid var(--cyan)!important}
 body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 "Public Sans",system-ui,sans-serif}
 button,input,select,textarea{font:inherit;color:inherit}
 header{background:var(--brand);color:#fff;padding:12px max(16px,env(safe-area-inset-right)) 12px max(16px,env(safe-area-inset-left));position:sticky;top:0;z-index:5}
 .top{display:flex;align-items:center;gap:12px;max-width:1360px;margin:0 auto}
-.top img{height:24px;background:#fff;border-radius:4px;padding:2px 4px}
-.top h1{font:800 17px Montserrat,sans-serif;margin:0;flex:1;letter-spacing:.01em}
+.top img{height:36px;width:auto;display:block}.top .sep{width:1px;height:30px;background:rgba(255,255,255,.28)}
+.top h1{font:800 17px Montserrat,sans-serif;margin:0;flex:1;letter-spacing:.02em;line-height:1.15}.top h1 small{display:block;font:500 11.5px "Public Sans",sans-serif;letter-spacing:.06em;text-transform:uppercase;opacity:.75;margin-top:2px}
 .quien{font-size:13px;opacity:.9}.quien button{background:none;border:0;color:#7dd3fc;text-decoration:underline;cursor:pointer;padding:0}
 .shell{max-width:1360px;margin:0 auto;display:grid;grid-template-columns:210px minmax(0,1fr);gap:20px;padding:18px max(16px,env(safe-area-inset-right)) 40px max(16px,env(safe-area-inset-left))}
 nav{position:sticky;top:66px;align-self:start;display:flex;flex-direction:column;gap:4px}
@@ -110,10 +127,11 @@ tbody tr:hover{background:var(--soft)}
 @media (max-width:1100px){.grid2{grid-template-columns:1fr}}
 @media (max-width:820px){.shell{grid-template-columns:1fr;gap:12px}nav{position:static;flex-direction:row;overflow-x:auto;gap:6px;padding-bottom:4px}nav button{white-space:nowrap;padding:8px 11px;background:var(--card);border:1px solid var(--line)}nav button[aria-current=page]{border-color:var(--brand)}
 .kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.kpi b{font-size:18px}.fila{grid-template-columns:1fr}.monto{grid-row:auto;grid-column:1;text-align:left}.nueva{grid-template-columns:1fr 1fr}.nueva .x2{grid-column:1/-1}.acc .der{margin-left:0}td,th{padding:7px 6px}table{font-size:12.5px}}
+@media (max-width:600px){.top img{height:28px}.top .sep,.top h1 small{display:none}.top h1{font-size:15px}.quien{font-size:12px;text-align:right}}
 </style>
 </head>
 <body>
-<header><div class="top"><img src="../sinthesi-cctv/logo.png" alt="NWS"><h1>Facturas</h1><div class="quien" id="quien"></div></div></header>
+<header><div class="top"><img src="logo-nws-blanco.png" alt="NWS · NetWatch Solutions" width="168" height="36"><span class="sep" aria-hidden="true"></span><h1>Facturas<small>Panel de facturación y cobranza</small></h1><div class="quien" id="quien"></div></div></header>
 <div id="app"><p class="cargando">Cargando…</p></div>
 <div id="aviso" role="status"></div><div class="tip" id="tip"></div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
@@ -246,6 +264,22 @@ tbody tr:hover{background:var(--soft)}
     fac: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2h12v20l-3-2-3 2-3-2-3 2z"/><path d="M9 7h6M9 11h6M9 15h3"/></svg>',
     oc: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4z"/><path d="m4 7 8 6 8-6"/></svg>'
   };
+  // Entrada animada al cambiar de sección o filtro (no al escribir en el buscador ni al guardar).
+  function animar() {
+    var m = app.querySelector('main'); if (!m) return;
+    m.classList.add('entra');
+    m.querySelectorAll('.ttl,.filtros,.kpi,.panel,.fila,.alerta').forEach(function (el, i) { el.style.setProperty('--i', Math.min(i, 14)); });
+    m.querySelectorAll('.chart').forEach(function (c) { c.querySelectorAll('path').forEach(function (p, j) { p.style.setProperty('--j', j); }); });
+    m.querySelectorAll('.hbars').forEach(function (h) { h.querySelectorAll('.ht i').forEach(function (b, j) { b.style.setProperty('--j', j); }); });
+    var red = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!red) m.querySelectorAll('.kpi b').forEach(function (b) {
+      var t = b.textContent, mm = t.match(/^(\$?)([\d.]+)(.*)$/); if (!mm) return;
+      var fin = Number(mm[2].replace(/\./g, '')), t0 = performance.now(); if (!fin) return;
+      (function paso(ahora) { var k = Math.min(1, (ahora - t0) / 900), e = 1 - Math.pow(1 - k, 3);
+        b.textContent = mm[1] + Math.round(fin * e).toLocaleString('es-CL') + mm[3]; if (k < 1) requestAnimationFrame(paso); else b.textContent = t; })(t0);
+    });
+    setTimeout(function () { m.classList.remove('entra'); }, 1800);
+  }
   function pintar() {
     var pend = S.filas.filter(function (f) { return f.estado !== 'Pagada'; }).length;
     var vistas = [['resumen', 'Resumen', '']].concat(S.admin ? [['cot', 'Cotizaciones', S.cots.filter(function (c) { return c.estado === 'Aceptada' && !c.pf && !c.factura; }).length || '']] : [])
@@ -253,6 +287,8 @@ tbody tr:hover{background:var(--soft)}
     if (!vistas.some(function (v) { return v[0] === S.vista; })) S.vista = 'resumen';
     var cuerpo = S.vista === 'resumen' ? vResumen() : S.vista === 'cot' ? vCot() : S.vista === 'pf' ? vPf() : S.vista === 'fac' ? vFac() : vOc();
     app.innerHTML = '<div class="shell"><nav aria-label="Secciones">' + vistas.map(function (v) { return '<button data-vista="' + v[0] + '"' + (S.vista === v[0] ? ' aria-current="page"' : '') + '>' + ICON[v[0]] + v[1] + (v[2] !== '' ? '<span class="n">' + v[2] + '</span>' : '') + '</button>'; }).join('') + '</nav><main>' + cuerpo + '</main></div>';
+    var llave = S.vista + '|' + S.emp + '|' + S.per + '|' + S.estF;
+    if (llave !== pintar.ult) { pintar.ult = llave; animar(); }
     enlazar();
     if (S.foco) { var el = document.getElementById('pf-' + S.foco); if (el) el.scrollIntoView({ block: 'center' }); S.foco = null; }
   }
