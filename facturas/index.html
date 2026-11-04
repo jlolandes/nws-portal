@@ -37,11 +37,11 @@ main{min-width:0}
 .ttl{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:14px}
 .ttl h2{font:800 22px Montserrat,sans-serif;margin:0}.ttl p{margin:2px 0 0;color:var(--gray);font-size:14px}
 .filtros{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:16px}
-.seg{display:inline-flex;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:3px}
+.seg{display:inline-flex;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:3px;max-width:100%;overflow-x:auto}.seg button{flex:none}
 .seg button{border:0;background:none;border-radius:7px;padding:5px 11px;font-size:13px;font-weight:600;color:var(--gray);cursor:pointer}
 .seg button[aria-pressed=true]{background:var(--brand);color:#fff}
 select,input,textarea{border:1px solid var(--line);border-radius:10px;padding:8px 11px;background:var(--card);min-width:0}
-.filtros select{font-weight:600}.filtros input[type=search]{flex:1;min-width:160px}
+.filtros select{font-weight:600}.selest{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--gray)}.selest select{padding:4px 8px;font-weight:600;color:var(--ink)}.filtros input[type=search]{flex:1;min-width:160px}
 button.b{font-weight:600;border:0;border-radius:10px;padding:9px 14px;cursor:pointer;background:var(--cyan);color:#fff;white-space:nowrap}
 button.b:hover{background:var(--cyan-d)}button.b:disabled{opacity:.5;cursor:default}
 button.s{background:var(--card);color:var(--ink);border:1px solid var(--line)}
@@ -369,14 +369,14 @@ tbody tr:hover{background:var(--soft)}
   }
   function cotCard(c) {
     var pf = c.pf && S.filas.find(function (f) { return f.id === c.pf; });
-    var occ = c.oc_correo, fe = !pf && c.factura, apr = c.estado === 'Aceptada' || !!pf || !!occ || !!fe, oc = (pf && pf.orden_compra) || (occ && occ.orden_compra), fac = (pf && (pf.estado === 'Emitida' || pf.estado === 'Pagada')) || !!fe, pag = (pf && pf.estado === 'Pagada') || (fe && /pagad/i.test(fe.estado_pago || ''));
+    var occ = c.oc_correo, fe = !pf && c.factura, apr = c.estado === 'Aceptada' || !!fe || !!(pf && /Emitida|Pagada/.test(pf.estado)), oc = (pf && pf.orden_compra) || (occ && occ.orden_compra), fac = (pf && (pf.estado === 'Emitida' || pf.estado === 'Pagada')) || !!fe, pag = (pf && pf.estado === 'Pagada') || (fe && /pagad/i.test(fe.estado_pago || ''));
     var pasos = [['Cotizada', true], ['Aprobada', apr], ['OC', oc || (pf && !oc && fac)], ['Facturada', fac], ['Pagada', pag]];
     var actual = pasos.findIndex(function (p) { return !p[1]; });
     var paso;
     if (c.estado === 'Rechazada') paso = '<span class="tag t-bad">Rechazada</span>';
     else if (fe) paso = '<span class="tag ' + (pag ? 't-pag' : 't-emi') + '">' + (pag ? 'Pagada' : 'Facturada') + ' · factura ' + esc(fe.numero_factura) + (oc ? ' · OC ' + esc(oc) : '') + '</span><span style="color:var(--gray);font-size:13px">Registrada en Cobranza del ERP</span>';
-    else if (!apr) paso = '<button class="b" data-cact="aprobar" data-id="' + c.id + '">Marcar aprobada</button><span style="color:var(--gray);font-size:13px">Estado en el ERP: ' + esc(c.estado) + '</span>';
-    else if (!pf && occ) paso = '<span class="tag t-emi">OC ' + esc(occ.orden_compra) + (occ.oc_fecha ? ' del ' + fch(occ.oc_fecha) : '') + ' · recibida por correo</span><input type="hidden" data-coc="' + c.id + '" value="' + esc(occ.orden_compra) + '"><input type="hidden" data-cocf="' + c.id + '" value="' + esc(occ.oc_fecha || hoy()) + '"><button class="g" data-cact="oc" data-id="' + c.id + '">Pasar a «Por facturar»</button>';
+    else if (!apr) paso = '<span class="tag t-por">' + (c.estado === 'Borrador' ? 'Sin enviar' : 'En espera del cliente') + '</span><span style="color:var(--gray);font-size:13px">Cuando el cliente responda, cámbiala en «Estado».</span>';
+    else if (!pf && occ) paso = '<span class="tag t-emi">OC ' + esc(occ.orden_compra) + (occ.oc_fecha ? ' del ' + fch(occ.oc_fecha) : '') + ' · recibida por correo</span><input type="hidden" data-coc="' + c.id + '" value="' + esc(occ.orden_compra) + '"><input type="hidden" data-cocf="' + c.id + '" value="' + esc(occ.oc_fecha || hoy()) + '"><button class="b" data-cact="oc" data-id="' + c.id + '">Pasar a «Por facturar»</button><span style="color:var(--gray);font-size:13px">La OC ya está en el ERP y se adjunta sola.</span>';
     else if (!pf) paso = '<input type="text" placeholder="N° OC" data-coc="' + c.id + '"><input type="date" value="' + hoy() + '" data-cocf="' + c.id + '" aria-label="Fecha OC"><button class="b" data-cact="oc" data-id="' + c.id + '">Llegó la OC</button><button class="g" data-cact="sinoc" data-id="' + c.id + '">Facturar sin OC</button>';
     else paso = '<span class="tag ' + (pag ? 't-pag' : fac ? 't-emi' : 't-por') + '">' + (pag ? 'Pagada ' + fch(pf.fecha_pago) : fac ? 'Facturada · folio ' + esc(pf.folio) : 'En «Por facturar»' + (oc ? ' · OC ' + esc(pf.orden_compra) : '')) + '</span><button class="g" data-ir="' + pf.id + '">Ir a la factura</button>';
     var det = S.detalle['c' + c.id];
@@ -386,8 +386,13 @@ tbody tr:hover{background:var(--soft)}
       (c.estado !== 'Rechazada' ? '<div class="pasos">' + pasos.map(function (p, i) { return '<span class="' + (p[1] ? 'ok' : i === actual ? 'ya' : '') + '">' + p[0] + '</span>'; }).join('') + '</div>' : '') +
       ((c.estados || []).length ? '<div class="meta">' + c.estados.map(function (e) { return esc(e.estado) + ' ' + fch(e.fecha); }).join(' → ') + (c.estado === 'Enviada' ? ' · <b>' + dias(c.estados[c.estados.length - 1].fecha) + ' días esperando respuesta</b>' : '') + '</div>' : '') +
       docsHtml(c.docs, { cotizacion_id: c.id }) +
-      '<div class="acc">' + paso + '<div class="der"><button class="g" data-vercot="' + c.id + '">' + (det ? 'Ocultar detalle' : 'Ver detalle') + '</button></div></div>' +
+      '<div class="acc">' + paso + '<div class="der">' + selEstado(c) + '<button class="g" data-vercot="' + c.id + '">' + (det ? 'Ocultar detalle' : 'Ver detalle') + '</button></div></div>' +
       (det ? detalleHtml(det) : '') + '</div>';
+  }
+  function selEstado(c) {
+    var ops = [['Enviada', 'En espera'], ['Aceptada', 'Aprobada'], ['Rechazada', 'Rechazada']];
+    if (c.estado === 'Borrador') ops.unshift(['Borrador', 'Sin enviar']);
+    return '<label class="selest">Estado <select data-cest="' + c.id + '" aria-label="Estado de la cotización">' + ops.map(function (o) { return '<option value="' + o[0] + '"' + (c.estado === o[0] ? ' selected' : '') + '>' + o[1] + '</option>'; }).join('') + '</select></label>';
   }
   function ocsHtml() {
     if (!S.ocs.length) return '';
@@ -412,7 +417,7 @@ tbody tr:hover{background:var(--soft)}
       return true;
     });
     return '<div class="ttl"><div><h2>Cotizaciones</h2><p>Cotizada → aprobada → OC → facturada → pagada. Solo tú ves esta sección.</p></div></div>' + barraFiltros(false, true) +
-      '<div class="filtros"><div class="seg" role="group" aria-label="Estado">' + [['pend', 'En curso'], ['env', 'Enviadas'], ['acep', 'Aprobadas'], ['rech', 'Rechazadas'], ['todas', 'Todas']].map(function (p) { return '<button data-estf="' + p[0] + '" aria-pressed="' + (est === p[0]) + '">' + p[1] + '</button>'; }).join('') + '</div><span style="color:var(--gray);font-size:13px">' + lista.length + ' cotizaciones</span></div>' +
+      '<div class="filtros"><div class="seg" role="group" aria-label="Estado">' + [['pend', 'En curso'], ['env', 'En espera'], ['acep', 'Aprobadas'], ['rech', 'Rechazadas'], ['todas', 'Todas']].map(function (p) { return '<button data-estf="' + p[0] + '" aria-pressed="' + (est === p[0]) + '">' + p[1] + '</button>'; }).join('') + '</div><span style="color:var(--gray);font-size:13px">' + lista.length + ' cotizaciones</span></div>' +
       (lista.length ? lista.slice(0, S.verCot).map(cotCard).join('') + (lista.length > S.verCot ? '<button class="g mas" id="verMas">Ver ' + Math.min(30, lista.length - S.verCot) + ' más</button>' : '') : '<p class="vacio">No hay cotizaciones con estos filtros.</p>');
   }
   function vPf() {
@@ -499,6 +504,14 @@ tbody tr:hover{background:var(--soft)}
       }
       var cot = app.querySelector('[data-ocsel="' + id + '"]').value; if (!cot) { aviso('Elige la cotización.'); return; }
       b.disabled = true; api('asociar_oc', { id: id, cotizacion_id: cot }).then(function () { aviso('OC asociada. Pasó a «Por facturar» con su PDF.'); cargar(); }, function (e) { b.disabled = false; aviso(e.message); });
+    });
+    app.querySelectorAll('[data-cest]').forEach(function (s) {
+      s.onchange = function () {
+        var c = S.cots.find(function (x) { return x.id === s.dataset.cest; }), antes = c.estado, nuevo = s.value;
+        s.disabled = true; c.estado = nuevo;
+        api('estado', { id: c.id, estado: nuevo }).then(function () { aviso(c.numero_cotizacion + ': ' + s.options[s.selectedIndex].text.toLowerCase() + '.'); cargar(); },
+          function (e) { c.estado = antes; s.disabled = false; s.value = antes; aviso(e.message); });
+      };
     });
     on('[data-cact]', function (b) {
       var id = b.dataset.id, act = b.dataset.cact, ok = function (t) { return function () { aviso(t); cargar(); }; }, mal = function (e) { b.disabled = false; aviso(e.message); };
