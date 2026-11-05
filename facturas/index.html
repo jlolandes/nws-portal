@@ -468,9 +468,9 @@ tbody tr:hover{background:var(--soft)}
     var tot = l.reduce(function (s, f) { return s + f.total; }, 0), sal = l.reduce(function (s, f) { return s + f.saldo; }, 0);
     var pagadasPf = S.filas.filter(function (f) { return f.estado === 'Pagada' && enEmp(f); });
     return '<div class="ttl"><div><h2>Facturas</h2><p>' + l.length + ' facturas · ' + clp(tot) + ' facturado · ' + clp(sal) + ' por cobrar</p></div></div>' + barraFiltros(true, true) +
-      '<div class="panel"><div class="tabla"><table><thead><tr><th>Folio</th><th>Cliente</th><th>Emisión</th><th>Vence</th><th class="n">Total</th><th class="n">Saldo</th><th>Estado</th></tr></thead><tbody>' +
+      '<div class="panel"><div class="tabla"><table><thead><tr><th>Folio</th><th>Cliente</th><th>Emisión</th><th>Vence</th><th class="n">Total</th><th class="n">Saldo</th><th>Estado</th><th>PDF</th></tr></thead><tbody>' +
       (l.length ? l.map(function (f) { var v = f.saldo > 0 && f.vence < hoy(); var e = f.saldo <= 0 ? ['t-pag', 'Pagada'] : v ? ['t-bad', 'Vencida ' + dias(f.vence) + ' d'] : f.pagado > 0 ? ['t-por', 'Pago parcial'] : ['t-emi', 'Por cobrar'];
-        return '<tr><td><b>' + esc(f.folio) + '</b></td><td>' + esc(f.cliente) + '</td><td>' + fch(f.emision) + '</td><td>' + fch(f.vence) + '</td><td class="n">' + clp(f.total) + '</td><td class="n">' + (f.saldo ? '<b>' + clp(f.saldo) + '</b>' : '—') + '</td><td><span class="tag ' + e[0] + '">' + e[1] + '</span></td></tr>'; }).join('') : '<tr><td colspan="7" class="vacio">No hay facturas con estos filtros.</td></tr>') +
+        return '<tr><td><b>' + esc(f.folio) + '</b></td><td>' + esc(f.cliente) + '</td><td>' + fch(f.emision) + '</td><td>' + fch(f.vence) + '</td><td class="n">' + clp(f.total) + '</td><td class="n">' + (f.saldo ? '<b>' + clp(f.saldo) + '</b>' : '—') + '</td><td><span class="tag ' + e[0] + '">' + e[1] + '</span></td><td style="white-space:nowrap">' + (f.pdf ? '<button class="g" data-fver="' + f.id + '">Ver</button> <button class="g" data-fbaj="' + f.id + '">Descargar</button>' : '<span style="color:var(--gray)">Sin PDF</span>') + '</td></tr>'; }).join('') : '<tr><td colspan="8" class="vacio">No hay facturas con estos filtros.</td></tr>') +
       '</tbody></table></div></div>' + (pagadasPf.length ? '<p style="color:var(--gray);font-size:13px;margin-top:10px">Las facturas que se marcan pagadas en «Por facturar y cobrar» también aparecen aquí.</p>' : '');
   }
   function vOc() {
@@ -514,6 +514,8 @@ tbody tr:hover{background:var(--soft)}
       f.onsubmit = function (e) { e.preventDefault(); var t = f.t.value.trim(); if (!t) return; api('nota', { id: f.dataset.nota, texto: t }).then(function () { aviso('Nota guardada.'); cargar(); }).catch(function (e) { aviso(e.message); }); };
     });
     on('[data-doc]', function (b) { abrirUrl(api('ver_doc', { id: b.dataset.doc })); });
+    on('[data-fver]', function (b) { abrirUrl(api('ver_factura', { id: b.dataset.fver })); });
+    on('[data-fbaj]', function (b) { api('ver_factura', { id: b.dataset.fbaj, descargar: true }).then(function (j) { location.href = j.url; }, function (e) { aviso(e.message); }); });
     on('[data-vercot]', function (b) { verCot(b.dataset.vercot); });
     on('[data-addoc]', function (b) { S.ocAbierta = b.dataset.addoc; pintar(); var i = app.querySelector('[data-oc="' + S.ocAbierta + '"]'); if (i) i.focus(); });
     on('[data-ir]', function (b) { S.vista = 'pf'; S.foco = b.dataset.ir; pintar(); });
