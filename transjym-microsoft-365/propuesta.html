@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#0b1f3a">
+<title>Propuesta NWS · Transportes J y M</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Public+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="../_propuesta/propuesta.css">
+</head>
+<body>
+<script>
+window.PROPUESTA = {
+  numero: 'NWS-COT-TJYM-2026-01',
+  fecha: '3 de noviembre de 2026', validez: '3 de diciembre de 2026',
+  cliente: 'Transportes J & M SpA · RUT 77.212.978-5', contacto_cliente: 'Gonzalo Ignacio Ferrer',
+  linea: 'Microsoft 365 · Soporte TI',
+  titulo: 'El correo y Office de todo su equipo, en Microsoft 365 y con soporte NWS.',
+  bajada: 'Migramos el correo de cPanel a Microsoft 365 para 15 usuarios con el dominio tjym.cl, y seguimos a cargo de las licencias y el soporte cada mes.',
+  resumen: [
+    { t: 'Lo que necesitaba', d: 'Dejar el correo del servidor cPanel y pasar a una plataforma profesional para todo el equipo, sin perder los correos históricos.' },
+    { t: 'Lo que hicimos', d: 'Migración completa a Microsoft 365 Business Standard: buzones, dominio tjym.cl, Office en los equipos y verificación en dos pasos.' },
+    { t: 'Lo que sigue', d: 'Licencias y soporte mensual: altas y bajas de usuarios, configuración de equipos nuevos y ayuda remota cuando la necesiten.' }
+  ],
+  solucion: {
+    titulo: '15 usuarios en Microsoft 365',
+    bajada: 'La implementación ya está operativa desde octubre de 2026. Esta propuesta formaliza el servicio mensual.',
+    bloques: [
+      { nombre: 'Implementación', sub: 'Ejecutada en octubre de 2026 · aprox. 2 semanas', cifra: '✓', unidad: 'entregada',
+        incluye: ['Diagnóstico de cuentas cPanel y del tenant Microsoft 365', 'Consolidación del dominio transjym.cl → tjym.cl y DNS', 'Migración de buzones y correos históricos', 'Office, Outlook, OneDrive y Teams en cada equipo', 'Verificación en dos pasos (Microsoft Authenticator)'] },
+      { nombre: 'Licencias', sub: 'Microsoft 365 Business Standard', cifra: 15, unidad: 'usuarios',
+        incluye: ['Correo corporativo con dominio tjym.cl', 'Office de escritorio y móvil', 'OneDrive, Teams y SharePoint', 'Facturación mensual por usuario'] },
+      { nombre: 'Soporte mensual', sub: 'Administración de la plataforma', cifra: '1', unidad: 'responsable NWS',
+        incluye: ['Soporte remoto a usuarios', 'Altas, bajas y gestión de licencias', 'Ayuda con Outlook, OneDrive y Teams', 'Configuración de equipos nuevos'] }
+    ]
+  },
+  plan_titulo: 'Dónde estamos',
+  plan: [
+    { t: 'Diagnóstico', d: 'Cuentas cPanel y tenant existente.', estado: 'hecho' },
+    { t: 'Migración', d: 'Buzones, dominio y correos históricos.', estado: 'hecho' },
+    { t: 'Puesta en marcha', d: 'Office en los equipos y entrega de accesos (oct 2026).', estado: 'hecho' },
+    { t: 'Contrato de servicio', d: 'Aceptación y firma del servicio mensual.', estado: 'ahora' },
+    { t: 'Soporte mensual', d: 'Desde noviembre, factura mes a mes.' }
+  ],
+  inversion: {
+    titulo: 'Inversión',
+    bajada: 'Ajuste la cantidad de usuarios para ver cómo cambia la mensualidad. Valores netos en pesos chilenos.',
+    grupos: [
+      { id: 'impl', nombre: 'Implementación y migración', detalle: 'Servicio ya ejecutado y entregado', pago: 'unico',
+        items: [['Diagnóstico de cuentas cPanel y tenant Microsoft 365', 1, 0], ['Configuración del tenant y asignación de licencias', 1, 0], ['Consolidación de dominio transjym.cl → tjym.cl y DNS', 1, 0], ['Migración de buzones y correos históricos', 1, 0], ['Configuración de equipos: Office, Outlook, OneDrive y Teams', 1, 0], ['Verificación en dos pasos, pruebas y entrega de credenciales', 1, 0], ['Servicio de implementación NWS (valor acordado)', 1, 180000]] },
+      { id: 'lic', nombre: 'Licencias Microsoft 365 Business Standard', detalle: '$13.833 neto por usuario al mes', pago: 'mensual',
+        cantidad: { etiqueta: 'usuarios', valor: 15, min: 1, item: 0 },
+        items: [['Microsoft 365 Business Standard (usuario/mes)', 15, 13833]] },
+      { id: 'sop', nombre: 'Soporte y administración', detalle: 'Soporte remoto, usuarios, licencias y equipos nuevos', pago: 'mensual',
+        items: [['Plan de soporte y administración Microsoft 365', 1, 120000]] }
+    ],
+    nota_mensual: 'La primera factura (octubre 2026) suma implementación y mensualidad: $507.495 neto ($603.919 con IVA).'
+  },
+  porque: [
+    { v: '16 años', d: 'en TI, telecomunicaciones y redes' },
+    { v: '300+', d: 'usuarios con soporte a nivel nacional' },
+    { v: 'Microsoft', d: 'partner tecnológico de NWS' },
+    { v: '90 días', d: 'de garantía sobre la configuración realizada' }
+  ],
+  condiciones: [
+    ['Forma de pago', '30 días. Implementación en factura única; licencias y soporte en factura mensual por mes vencido.'],
+    ['Vigencia', 'Desde el 1 de octubre de 2026, por 12 meses, renovable automáticamente salvo aviso con 30 días.'],
+    ['Usuarios adicionales', '$13.833 + IVA por usuario al mes, desde el mes de su activación.'],
+    ['Garantía', '90 días sobre la configuración realizada.'],
+    ['No incluye', 'Computadores o hardware, red o cableado y otras migraciones; se cotizan por separado.'],
+    ['Validez', '30 días desde la emisión. Valores en pesos chilenos, netos más IVA.']
+  ],
+  documentos: [
+    { nombre: 'Cotización en PDF', url: 'NWS-COT-TJYM-2026-01.pdf' },
+    { nombre: 'Contrato de servicio', url: 'Contrato_Servicio_M365_TJyM.pdf' },
+    { nombre: 'Informe de implementación', url: 'Informe_Implementacion_M365_TJyM.pdf' },
+    { nombre: 'Guía de usuario', url: 'Guia_Usuario_Microsoft365_TJyM.pdf' }
+  ],
+  aceptar_texto: 'Datos de facturación ya recibidos: Transportes J & M SpA, RUT 77.212.978-5, Los Corraleros 2731, 228, Lampa. Confirme la aceptación por WhatsApp o correo y firmamos el contrato de servicio mensual.',
+  nws: { nombre: 'Jerry Lolandes', cargo: 'Jefe de Proyecto', email: 'jlolandes@nws.cl', fono: '+56 9 9327 5874', wa: '56993275874' }
+};
+</script>
+<script src="../_propuesta/propuesta.js"></script>
+</body>
+</html>
