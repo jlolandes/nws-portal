@@ -2302,16 +2302,16 @@ function fitDist(t,el,az){const c=V3.cam.clone(),corners=[[0,0],[IW,0],[IW,IH],[
   return 600;}
 function tourStops(){const st=[],sum=S.cams.length,ra=S.links.filter(l=>l.type==='radio'),fo=S.links.filter(l=>l.type==='fibra');
   const pose=(x,y,dist,el,az)=>{const[X,Z]=to3(x,y);return{t:new THREE.Vector3(X,0,Z),dist,el,az};};
-  st.push({name:'Vista general',text:`${sum} cámaras en ${Object.keys(S.sectors).length} sectores, conectadas por ${ra.length} radioenlaces${fo.length?` y ${fmtM(fo.reduce((s,l)=>s+linkLen(l),0))} de fibra óptica`:''}.`,pose:(()=>{const q=pose(IW/2,IH/2,0,55,-14);q.dist=fitDist(q.t,55,-14)*1.02;return q;})(),orbit:20,dur:7});
-  const c0=nodeById('C0');if(c0)st.push({name:c0.name,text:`Nodo central: punto de concentración de la red, donde llega la fibra óptica${S.cams.filter(c=>c.via==='C0').length?` de ${S.cams.filter(c=>c.via==='C0').length} cámaras`:''}. ${(()=>{const am=S.nodes.find(n=>/multipunto/i.test(n.name));return am?`Los ${ra.length} radioenlaces salen desde la ${am.name.toLowerCase()}.`:`Desde aquí salen ${ra.length} radioenlaces.`;})()}`,pose:pose(c0.x,c0.y,70,38,25),orbit:30,dur:6.5});
+  st.push({name:'Vista general',text:`${sum} cámaras Hikvision ColorVu en ${Object.keys(S.sectors).length} sectores independientes, cada uno con su grabador NVR de 16 canales.`,pose:(()=>{const q=pose(IW/2,IH/2,0,55,-14);q.dist=fitDist(q.t,55,-14)*1.02;return q;})(),orbit:20,dur:7});
+  const c0=nodeById('C0');if(c0)st.push({name:c0.name,text:'Sala de comunicaciones del edificio: NVR de 16 canales PoE con disco de 8 TB, gabinete y UPS. Recibe 13 cámaras cableadas y 3 por Wi-Fi.',pose:pose(c0.x,c0.y,70,38,25),orbit:30,dur:6.5});
   for(const k of ['A','F','B','E','C','D']){const s=S.sectors[k];if(!s)continue;const[x,y,w,h]=s.r,cams=S.cams.filter(c=>c.sec===k),cv=coverage(k);
-    const vias=[...new Set(cams.map(c=>c.via).filter(Boolean))].map(v=>v==='C0'?'fibra al nodo central':(nodeById(v)?nodeById(v).name.toLowerCase():'')).filter(Boolean);
+    const vias=[];const mts={A:'283 m',B:'636 m',C:'765 m'}[k];
     const span=Math.max(w,h)/S.geo.ppm;
-    st.push({name:s.name,text:`${cams.length} cámaras${vias.length?', enlace por '+vias.join(' y '):''}. ${cv.pct==null?'Cobertura por levantar: faltan orientaciones.':`Cobertura estimada ${cv.pct}% del sector${cams.some(c=>c.azEst)?', con orientaciones propuestas':''}.`}`,pose:pose(x+w/2,y+h/2,span*1.25+25,42,15),orbit:28,dur:6.5});}
+    st.push({name:s.name,text:`${cams.length} cámaras conectadas a su propio NVR, con ${mts} de cable Cat6. Orientaciones según el plano del cliente.`,pose:pose(x+w/2,y+h/2,span*1.25+25,42,15),orbit:28,dur:6.5});}
   for(const n of S.nodes.filter(n=>n.type==='ext')){const p=pathToCentral(n.id),m=p?p.reduce((s,l)=>s+linkLen(l),0):0;
     st.push({name:n.name,text:p?`${n.name} conectado al nodo central por ${fmtM(m)} de ${[...new Set(p.map(l=>LTYPE[l.type].l.toLowerCase()))].join(' y ')}.`:`${n.name} sin enlace al nodo central.`,pose:pose(n.x,n.y,85,36,-20),orbit:26,dur:6.5});}
   const noSec=S.cams.filter(c=>!c.sec);if(noSec.length){const cx=noSec.reduce((s,c)=>s+c.x,0)/noSec.length,cy=noSec.reduce((s,c)=>s+c.y,0)/noSec.length;st.push({name:'Por revisar',text:`Cámaras ${listN(noSec.map(c=>c.n))} fuera de sector y sin punto de enlace.`,pose:pose(cx,cy,75,40,0),orbit:24,dur:6});}
-  st.push({name:'Vista final',text:'Red CCTV completa sobre el recinto. Norte hacia arriba.',pose:(()=>{const q=pose(IW/2,IH/2,0,62,18);q.dist=fitDist(q.t,62,18);return q;})(),orbit:14,dur:7});
+  st.push({name:'Vista final',text:'Sistema CCTV completo: 48 cámaras y 3 NVR. Disposición esquemática, a confirmar en la visita a terreno.',pose:(()=>{const q=pose(IW/2,IH/2,0,62,18);q.dist=fitDist(q.t,62,18);return q;})(),orbit:14,dur:7});
   let t=0;for(const s of st){s.t0=t;t+=s.dur;}V3.total=t;return st;}
 function renderStory3(){const el2=$('v3story');el2.innerHTML=V3.stops.map((s,i)=>`<button class="seg3" data-i="${i}" style="flex-grow:${s.dur}" aria-label="Escena ${i+1}: ${esc(s.name)}"><span class="nm">${esc(s.name)}</span><span class="bar"><i></i></span></button>`).join('');
   el2.querySelectorAll('.seg3').forEach(b=>b.onclick=()=>{if(V3.rec)return;exitPov3();setFree3(false);V3.T=V3.stops[+b.dataset.i].t0+.01;setPlay3(true);});V3.lastScene=-1;}
