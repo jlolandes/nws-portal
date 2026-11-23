@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#0b1f3a">
+<title>Propuesta NWS · FastSoluciones</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Public+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="../_propuesta/propuesta.css">
+</head>
+<body>
+<script>
+window.PROPUESTA = {
+  numero: 'NWS-COT-FAST-2026-01', erp: 'COT-2026-9898',
+  fecha: '23 de noviembre de 2026', validez: '23 de diciembre de 2026',
+  cliente: 'FastSoluciones', contacto_cliente: 'Ricardo Aldunate Allegro',
+  linea: 'Seguridad · CCTV',
+  titulo: 'Edificio, bodega y flota vigilados a color, las 24 horas.',
+  bajada: 'Sistema de 48 cámaras IP Hikvision ColorVu para la zona de Independencia, con grabación local en tres sectores independientes, instalado y documentado por NWS.',
+  resumen: [
+    { t: 'Lo que necesita', d: 'Cubrir el edificio principal, la bodega y la flota con cámaras ColorVu, grabación local por NVR, cableado canalizado y respaldo eléctrico.' },
+    { t: 'Lo que proponemos', d: '48 cámaras en tres sistemas de 16 canales, uno por sector, cada uno con su grabador, gabinete y UPS.' },
+    { t: 'Lo que obtiene', d: 'Grabación continua 24/7 en H.265, puntos identificados y trazables, plano as-built y garantía por escrito.' }
+  ],
+  solucion: {
+    titulo: '48 cámaras en 3 sectores',
+    bajada: 'Cada sector graba en su propio NVR: si uno falla, los otros dos siguen operando.',
+    bloques: [
+      { nombre: 'Edificio principal', sub: 'NVR-01 · sala de comunicaciones', cifra: 16, unidad: 'cámaras',
+        incluye: ['11 cámaras interiores ColorVu 2 MP', '2 cámaras exteriores ColorVu 4 MP cableadas', '3 cámaras exteriores Wi-Fi en el sector caseta', '283 m de cable Cat6'] },
+      { nombre: 'Bodega · galpón central', sub: 'NVR-02 · distribución de bodega', cifra: 16, unidad: 'cámaras',
+        incluye: ['16 cámaras exteriores ColorVu 4 MP', 'Grabador de 16 canales PoE con disco de 8 TB', 'Gabinete de 600 mm y UPS de 1 kVA', '636 m de cable Cat6'] },
+      { nombre: 'Flota · galpón final', sub: 'NVR-03 · distribución de flota', cifra: 16, unidad: 'cámaras',
+        incluye: ['16 cámaras exteriores ColorVu 4 MP', 'Grabador de 16 canales PoE con disco de 8 TB', 'Gabinete de 600 mm y UPS de 1 kVA', '765 m de cable Cat6'] }
+    ]
+  },
+  plan: [
+    { t: 'Solicitud', d: 'Requerimiento y plano de posicionamiento del cliente.', estado: 'hecho' },
+    { t: 'Propuesta', d: 'Esta propuesta, con cantidades según su plano.', estado: 'ahora' },
+    { t: 'Visita a terreno', d: 'Confirmación de recorridos, canalización y ubicación de gabinetes.' },
+    { t: 'Instalación', d: '9 días hábiles desde la orden de compra, con alza hombre.' },
+    { t: 'Entrega', d: 'Recepción conforme por sector, as-built y matriz de trazabilidad.' }
+  ],
+  inversion: {
+    titulo: 'Detalle de la inversión',
+    bajada: 'Valores netos en pesos chilenos. Equipos sujetos a stock y tipo de cambio; la canalización es estimada y se confirma en la visita a terreno.',
+    grupos: [
+      { id: "cam", nombre: "Cámaras Hikvision ColorVu", detalle: "48 cámaras: 34 exteriores 4 MP, 11 interiores 2 MP y 3 Wi-Fi", pago: 'unico',
+        items: [["Cámara IP bullet Hikvision ColorVu 3.0 4 MP exterior — DS-2CD1047G3-LIU", 34, 70847], ["Cámara IP turret Hikvision ColorVu 2 MP interior — DS-2CD1327G2H-LIU", 11, 42712], ["Cámara IP Wi-Fi Hikvision 4 MP exterior a color — DS-2CV1043G2-LIDWF", 3, 32502], ["Access point exterior para el enlace de las cámaras Wi-Fi", 1, 95000]] },
+      { id: "grab", nombre: "Grabación y almacenamiento", detalle: "3 NVR de 16 canales con disco de 8 TB", pago: 'unico',
+        items: [["Grabador NVR Hikvision 16 canales, 16 PoE, 4 bahías — DS-7716NXI-I4/16P/S(E)", 3, 679799], ["Disco duro 8 TB videovigilancia 24/7 Seagate SkyHawk", 3, 223000]] },
+      { id: "gab", nombre: "Gabinetes y respaldo eléctrico", detalle: "3 gabinetes de 600 mm y 4 UPS de 1 kVA", pago: 'unico',
+        items: [["Gabinete rack mural 12U, profundidad 600 mm", 3, 201230], ["UPS interactiva Hikvision 1 kVA — DS-UPS1000", 4, 50658], ["Patch panel Cat6 24 puertos", 3, 65000], ["PDU de 12 enchufes 10 A para rack", 3, 41700], ["Patch cord Cat6 1 m", 48, 1300]] },
+      { id: "cab", nombre: "Cableado estructurado y canalizaciones", detalle: "1.684 m de Cat6, conduit y cajas estancas IP66", pago: 'unico',
+        items: [["Cable UTP Cat6 exterior 305 m, 100 % cobre sólido", 7, 155845], ["Canalización en conduit PVC con fijaciones (m, estimado)", 600, 3500], ["Caja estanca IP66 con conos de entrada", 48, 3500], ["Conectores RJ45 Cat6, capuchones, amarras y rotulado", 1, 240000]] },
+      { id: "mo", nombre: "Mano de obra y servicios", detalle: "Instalación, configuración, alza hombre y documentación", pago: 'unico',
+        items: [["Tendido de cableado UTP Cat6 (m)", 1684, 2500], ["Instalación, orientación y configuración de cámara", 48, 65000], ["Instalación de gabinete y montaje de equipos", 3, 180000], ["Configuración de NVR: grabación 24/7 en H.265", 3, 250000], ["Enlace Wi-Fi de caseta e integración al NVR-01", 1, 120000], ["Arriendo de alza hombre (días hábiles)", 9, 85000], ["Traslado del alza hombre: entrega y retiro", 1, 180000], ["Documentación: as-built, matriz de trazabilidad y planilla IP", 1, 250000]] }
+    ]
+  },
+  porque: [
+    { v: '16 años', d: 'en telecomunicaciones, redes y seguridad' },
+    { v: 'En terreno', d: 'diseñamos, instalamos y mantenemos donde está su operación' },
+    { v: 'Hikvision', d: 'equipos de marca con soporte y repuestos en Chile' },
+    { v: '12 meses', d: 'de garantía en equipos, gestionada por NWS' }
+  ],
+  condiciones: [
+    ['Forma de pago', '30 días.'],
+    ['Plazo', '9 días hábiles desde la orden de compra, con equipos sujetos a stock.'],
+    ['Garantía', '12 meses en NVR, cámaras, discos y UPS; 90 días en instalación y configuración. Rige desde la recepción conforme de cada sector.'],
+    ['Soporte', 'Respuesta dentro de 1 día hábil y visita a terreno dentro de 3 días hábiles.'],
+    ['No incluye', 'Puntos eléctricos de 220 V, obras civiles, postes, puesta a tierra ni enlace de datos entre sectores.'],
+    ['Validez', '30 días desde la emisión. Valores en pesos chilenos, netos más IVA.']
+  ],
+  documentos: [{ nombre: 'Cotización en PDF', url: 'NWS-COT-FAST-2026-01.pdf' }, { nombre: 'Presentación animada', url: 'presentacion/' }],
+  nws: { nombre: 'Jerry Lolandes', cargo: 'Jefe de Proyecto', email: 'jlolandes@nws.cl', fono: '+56 9 9327 5874', wa: '56993275874' }
+};
+</script>
+<script src="../_propuesta/propuesta.js"></script>
+</body>
+</html>
